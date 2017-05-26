@@ -1,6 +1,6 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player;
 
-import org.academiadecodigo.bootcamp8.topdownshooter.Direction;
+import org.academiadecodigo.bootcamp8.topdownshooter.field.Direction;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;

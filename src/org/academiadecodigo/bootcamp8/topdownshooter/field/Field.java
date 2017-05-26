@@ -1,6 +1,6 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.field;
 
-import org.academiadecodigo.bootcamp8.topdownshooter.representable.Representation;
+import org.academiadecodigo.bootcamp8.topdownshooter.field.position.Representation;
 
 /**
  * Created by codecadet on 25/05/17.

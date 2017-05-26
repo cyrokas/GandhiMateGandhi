@@ -1,8 +1,10 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
-import org.academiadecodigo.bootcamp8.topdownshooter.representable.Representation;
+import org.academiadecodigo.bootcamp8.topdownshooter.field.position.Representation;
+import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
 /**
@@ -40,9 +42,41 @@ public class SimpleGFXField implements Field {
         return rows;
     }
 
+    public int getWidth(){
+        return columns*CELL_SIZE;
+    }
+
+    public int getHeight(){
+        return rows*CELL_SIZE;
+    }
+
+    public int getCELL_SIZE(){
+        return CELL_SIZE;
+    }
+
+    public int getX(){
+        return PADDING;
+    }
+
+    public int getY(){
+        return PADDING;
+    }
+
+    public int columntoX(int col){
+        return PADDING+col*CELL_SIZE;
+    }
+
+    public int rowToY(int row){
+        return PADDING+row*CELL_SIZE;
+    }
+
     @Override
     public Representation createRepresentation() {
-        return new SimpleGFXRepresentation();
+        return new SimpleGFXRepresentation(this);
+    }
+
+    public Representation createRepresentation(int row, int col){
+        return new SimpleGFXRepresentation(row,col,this);
     }
 
 }
