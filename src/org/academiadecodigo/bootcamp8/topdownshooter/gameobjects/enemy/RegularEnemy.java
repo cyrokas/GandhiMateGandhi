@@ -7,8 +7,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPositio
  */
 public class RegularEnemy extends Enemy {
 
-    public RegularEnemy(FieldPosition pos){
+    public RegularEnemy( FieldPosition pos){
         super(100, pos);
-
     }
 }

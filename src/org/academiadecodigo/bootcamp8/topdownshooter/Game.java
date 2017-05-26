@@ -5,6 +5,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldFactory;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldType;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObjectFactory;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.Enemy;
 
 import java.util.LinkedList;
 
@@ -23,7 +24,8 @@ public class Game {
     private final int DELAY;
 
     //Testing
-    private GameObject reg1;
+    private Enemy reg1;
+    private Enemy reg2;
 
     //Constructor
     public Game(int rows, int columns, int delay, FieldType fieldType) {
@@ -39,17 +41,20 @@ public class Game {
         field.setup();
 
         //Test
-        reg1= GameObjectFactory.getNewEnemy(field);
+        reg1= GameObjectFactory.getNewRegularEnemy(field);
+        reg2= GameObjectFactory.getNewRegularEnemy(field);
     }
 
     //Game Loop
     public void gameLoop() throws InterruptedException {
 
-        while (true) {                                                      //maybe change to playerAlive OR lastBoss dead
+        while (true) {     //maybe change to playerAlive OR lastBoss dead
 
             Thread.sleep(DELAY);
 
-            gameRound();
+            //gameRound();
+
+            reg1.move(reg1.chooseDirection(reg2.getPos()),1);
         }
 
     }

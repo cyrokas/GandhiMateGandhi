@@ -7,7 +7,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldType;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException{
 
         int columns = 80;
         int rows = 30;
@@ -16,6 +16,6 @@ public class Main {
         Game game = new Game(rows, columns, delay, FieldType.SIMPLE_GFX);
         game.setup();
 
-
+        game.gameLoop();
     }
 }

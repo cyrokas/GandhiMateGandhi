@@ -1,6 +1,7 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
+import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.Enemy;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.RegularEnemy;
 
@@ -9,8 +10,12 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.RegularEn
  */
 public class GameObjectFactory {
 
-    public static Enemy getNewEnemy(Field field){
-        return new RegularEnemy(field.createRepresentation());
+    public static Enemy getNewRegularEnemy(Field field){
+        FieldPosition pos=field.createRepresentation();
+        while (!pos.isEdge()){
+            pos=field.createRepresentation();
+        }
+        return new RegularEnemy(pos);
     }
 
 }

@@ -26,7 +26,6 @@ public abstract class AbstractPosition implements FieldPosition{
     public void setPos(int row, int col){
         this.row=row;
         this.col=col;
-        show();
     }
 
     @Override
@@ -75,6 +74,7 @@ public abstract class AbstractPosition implements FieldPosition{
         }
 
         setPos( getRow()-maxRowsUp, getCol());
+        show();
     }
 
     public void moveDown(int dist){
@@ -89,6 +89,7 @@ public abstract class AbstractPosition implements FieldPosition{
         }
 
         setPos( getRow()+maxRowsDown, getCol());
+        show();
     }
 
     public void moveLeft(int dist){
@@ -103,6 +104,7 @@ public abstract class AbstractPosition implements FieldPosition{
         }
 
         setPos(getRow(),getCol()-maxRowsLeft);
+        show();
     }
 
     public void moveRight(int dist){
@@ -117,5 +119,14 @@ public abstract class AbstractPosition implements FieldPosition{
         }
 
         setPos(getRow(),getCol() + maxRowsRight);
+        show();
     }
+
+    public boolean isEdge(){
+        if(col == 0 || col==field.getColumns()-1 || row==0 || row==field.getRows()-1){
+            return true;
+        } return false;
+    }
+
+
 }

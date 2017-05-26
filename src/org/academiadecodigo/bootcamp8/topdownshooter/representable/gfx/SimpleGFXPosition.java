@@ -18,7 +18,9 @@ public class SimpleGFXPosition extends AbstractPosition {
     public SimpleGFXPosition(SimpleGFXField field){
 
         super((int)(Math.random()*field.getRows()), (int)(Math.random()*field.getColumns()), field);
-
+        while (!this.isEdge()){
+            this.setPos((int)(Math.random()*field.getRows()), (int)(Math.random()*field.getColumns()));
+        }
         simpleGFXField = field;
         rectangle = new Rectangle(field.columntoX(super.getCol()),
                 field.rowToY(super.getRow()), field.getCELL_SIZE(), field.getCELL_SIZE());

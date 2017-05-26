@@ -1,6 +1,7 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Direction;
+import org.academiadecodigo.bootcamp8.topdownshooter.field.position.AbstractPosition;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.Hittable;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.Mobile;
@@ -24,8 +25,9 @@ public abstract class Enemy extends GameObject implements Mobile, Hittable{
         this.health = health;
         dead = false;
 
-        currentDirection = Direction.values()[(int)Math.random()*Direction.values().length];
+        currentDirection = Direction.values()[(int)(Math.random()*Direction.values().length)];
 
+        //test
         System.out.println(currentDirection.toString());
         System.out.println("health "+health);
     }
@@ -74,17 +76,49 @@ public abstract class Enemy extends GameObject implements Mobile, Hittable{
     //implement method depending on player position
     @Override
     public Direction chooseDirection(){
-        Direction newDirection= currentDirection;
+        return null;}
 
-        return currentDirection;
+
+    public Direction chooseDirection(FieldPosition playerpos){
+
+        Direction vertical=null;
+
+        Direction horiz=null;
+
+        if (playerpos.getCol() > pos.getCol()   ){
+
+            horiz=Direction.RIGHT;
+
+        } else if (playerpos.getCol() < pos.getCol()){
+            horiz=Direction.LEFT;
+        }
+        if (playerpos.getRow() > pos.getRow()){
+            vertical=Direction.DOWN;
+
+        } else if (playerpos.getRow() < pos.getRow()){
+            vertical=Direction.UP;
+        }
+        if(horiz == null) {
+            return vertical;}
+
+        if(vertical== null){
+            return horiz;}
+
+        int rnd=(int)(Math.random()*2);
+
+        switch (rnd){
+            case 0:
+                return horiz;
+            case 1:
+                return vertical;
+        }
+        return null;
     }
+
 
     @Override
     public void move(Direction direction, int speed){
-        switch (direction){
-            case UP:
-
-        }
+        pos.moveInDirection(direction,speed);
     }
 
 }

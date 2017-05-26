@@ -2,6 +2,7 @@ package org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.AbstractPosition;
+import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 
@@ -69,11 +70,11 @@ public class SimpleGFXField implements Field {
     }
 
     @Override
-    public AbstractPosition createRepresentation() {
+    public FieldPosition createRepresentation() {
         return new SimpleGFXPosition(this);
     }
 
-    public AbstractPosition createRepresentation(int row, int col){
+    public FieldPosition createRepresentation(int row, int col){
         return new SimpleGFXPosition(row,col,this);
     }
 
