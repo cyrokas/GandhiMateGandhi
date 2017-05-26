@@ -3,27 +3,30 @@ package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Direction;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.Hittable;
-import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.Movable;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.Mobile;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;
 
 /**
  * Created by codecadet on 24/05/17.
  */
-public abstract class Enemy extends GameObject implements Movable, Hittable{
+public abstract class Enemy extends GameObject implements Mobile, Hittable{
     private int health;
-    private boolean isDead;
-    private Direction currentDir;
+    private boolean dead;
+    private Direction currentDirection;
     private FieldPosition pos;
     private Field field;
     private EnemyType enemyType;
 
     public Enemy(int health, FieldPosition pos){
-        this.pos=pos;
-        this.health=health;
-        isDead=false;
-        currentDir=Direction.values()[(int)Math.random()*Direction.values().length];
-        System.out.println(currentDir.toString());
+
+        this.pos = pos;
+        this.health = health;
+        dead = false;
+
+        currentDirection = Direction.values()[(int)Math.random()*Direction.values().length];
+
+        System.out.println(currentDirection.toString());
         System.out.println("health "+health);
     }
 
@@ -33,8 +36,8 @@ public abstract class Enemy extends GameObject implements Movable, Hittable{
         return health;
     }
 
-    public Direction getCurrentDir(){
-        return currentDir;
+    public Direction getCurrentDirection(){
+        return currentDirection;
     }
 
     public FieldPosition getPos(){
@@ -47,31 +50,37 @@ public abstract class Enemy extends GameObject implements Movable, Hittable{
 
     @Override
     public boolean isDead(){
-        return isDead;
+        return dead;
     }
 
-    //What is this
-    //void play();
+    @Override
+    public void playRound(){
+
+
+
+    }
 
     @Override
     public void hit(int damage){
-        if(!isDead){
-            health =health-damage;}
-        if(health <=0){
-            isDead=true;
+
+        if(!dead){
+            health -= damage;
+        }
+        if(health <= 0){
+            dead = true;
         }
     }
 
     //implement method depending on player position
     @Override
     public Direction chooseDirection(){
-        Direction newDir=currentDir;
+        Direction newDirection= currentDirection;
 
-        return currentDir;
+        return currentDirection;
     }
 
     @Override
-    public void move(Direction direction, int speed1){
+    public void move(Direction direction, int speed){
         switch (direction){
             case UP:
 

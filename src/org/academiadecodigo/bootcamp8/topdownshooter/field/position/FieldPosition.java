@@ -5,16 +5,17 @@ package org.academiadecodigo.bootcamp8.topdownshooter.field.position;
  */
 public interface FieldPosition {
 
-    public int getCol();
 
-    public int getRow();
+    int getCol();
 
-    public void setPos(int row, int col);
+    int getRow();
 
-    public void show();
+    void setPos(int row, int col);
 
-    public void hide();
+    void show();
 
-    public boolean equals(FieldPosition position);
+    void hide();
+
+    boolean equals(FieldPosition position);
 
 }

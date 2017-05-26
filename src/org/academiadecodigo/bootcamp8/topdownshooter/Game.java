@@ -1,11 +1,10 @@
 package org.academiadecodigo.bootcamp8.topdownshooter;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
+import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldFactory;
+import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldType;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObjectFactory;
-import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.Enemy;
-import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.RegularEnemy;
-import org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx.SimpleGFXField;
 
 import java.util.LinkedList;
 
@@ -23,11 +22,13 @@ public class Game {
     //Game delay
     private final int DELAY;
 
+    //Testing
     private GameObject reg1;
 
     //Constructor
-    public Game(int rows, int columns, int delay) {
-        field = new SimpleGFXField(rows, columns);
+    public Game(int rows, int columns, int delay, FieldType fieldType) {
+
+        field = FieldFactory.getNewField(fieldType, rows, columns);
         DELAY = delay;
 
     }
