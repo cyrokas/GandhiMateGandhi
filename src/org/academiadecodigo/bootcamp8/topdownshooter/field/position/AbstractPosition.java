@@ -6,41 +6,48 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 /**
  * Created by codecadet on 25/05/17.
  */
-public abstract class AbstractPosition implements FieldPosition{
+public abstract class AbstractPosition implements FieldPosition {
 
     private int col;
     private int row;
+
     private Field field;
 
-    public AbstractPosition(int row, int col, Field field){
-        this.row=row;
-        this.col=col;
-        this.field=field;
+    public AbstractPosition(int row, int col, Field field) {
+
+        this.row = row;
+        this.col = col;
+
+        this.field = field;
+
     }
 
-    public Field getField(){
+    public Field getField() {
         return field;
     }
 
     @Override
-    public void setPos(int row, int col){
-        this.row=row;
-        this.col=col;
+    public void setPos(int row, int col) {
+
+        this.row = row;
+        this.col = col;
+
         show();
     }
 
     @Override
-    public int getCol(){
+    public int getCol() {
         return col;
     }
 
     @Override
-    public int getRow(){
+    public int getRow() {
         return row;
     }
 
-    public void moveInDirection(Direction direction, int distance){
-        switch (direction){
+    @Override
+    public void moveInDirection(Direction direction, int distance) {
+        switch (direction) {
             case UP:
                 moveUp(distance);
                 break;
@@ -53,69 +60,154 @@ public abstract class AbstractPosition implements FieldPosition{
             case RIGHT:
                 moveRight(distance);
                 break;
+            case DOWN_RIGHT:
+                moveDownRight(distance);
+                break;
+            case DOWN_LEFT:
+                moveDownLeft(distance);
+                break;
+            case UP_RIGHT:
+                moveUpRight(distance);
+                break;
+            case UP_LEFT:
+                moveUpLeft(distance);
+                break;
         }
     }
 
     @Override
-    public boolean equals(FieldPosition pos){
+    public boolean equals(FieldPosition pos) {
 
-        return (col==pos.getCol() && row==pos.getRow());
+        return (col == pos.getCol() && row == pos.getRow());
 
     }
 
-    public void moveUp(int dist){
+    public void moveDownRight(int distance) {
+
+        int maxDiagonal = 0 ;
+
+        if (col + distance < field.getColumns() && row + distance < field.getRows()) {
+            maxDiagonal = distance;
+        }
+        else if (col + distance < field.getColumns()) {
+            moveRight(distance);
+            return;
+        }
+        else if (row + distance < field.getRows()) {
+            moveDown(distance);
+            return;
+        }
+
+        setPos(row + maxDiagonal, col + maxDiagonal);
+
+    }
+
+    public void moveDownLeft(int distance) {
+
+        int maxDiagonal = 0;
+
+        if (col - distance >= 0 && row + distance < field.getRows()) {
+            maxDiagonal = distance;
+        }
+        else if (col - distance >= 0) {
+            moveLeft(distance);
+            return;
+        }
+        else if (row + distance < field.getRows()) {
+            moveDown(distance);
+            return;
+        }
+
+        setPos(row + maxDiagonal, col - maxDiagonal);
+    }
+
+    public void moveUpRight(int distance) {
+
+        int maxDiagonal = 0;
+
+        if (col + distance < field.getColumns() && row - distance >= 0) {
+            maxDiagonal = distance;
+        }
+        else if (col + distance < field.getColumns()) {
+            moveRight(distance);
+            return;
+        }
+        else if (row - distance >= 0) {
+            moveUp(distance);
+            return;
+        }
+
+        setPos(row - maxDiagonal, col + maxDiagonal);
+    }
+
+    public void moveUpLeft(int distance) {
+
+        int maxDiagonal = 0;
+
+        if (col - distance >= 0 && row - distance >= 0) {
+            maxDiagonal = distance;
+        }
+        else if (col - distance >= 0) {
+            moveLeft(distance);
+            return;
+        }
+        else if (row - distance >= 0) {
+            moveUp(distance);
+            return;
+        }
+
+        setPos(row - maxDiagonal, col - maxDiagonal);
+    }
+
+    public void moveUp(int distance) {
 
         int maxRowsUp;
 
-        if(dist<getRow()){
-            maxRowsUp=dist;
-        }
-        else {
-            maxRowsUp=getRow();
+        if (distance < getRow()) {
+            maxRowsUp = distance;
+        } else {
+            maxRowsUp = getRow();
         }
 
-        setPos( getRow()-maxRowsUp, getCol());
+        setPos(getRow() - maxRowsUp, getCol());
     }
 
-    public void moveDown(int dist){
+    public void moveDown(int distance) {
 
         int maxRowsDown;
 
-        if(dist>getField().getRows()-(getRow()+1)){
-            maxRowsDown=getField().getRows()-(getRow()+1);
-        }
-        else {
-            maxRowsDown=dist;
+        if (distance > getField().getRows() - (getRow() + 1)) {
+            maxRowsDown = getField().getRows() - (getRow() + 1);
+        } else {
+            maxRowsDown = distance;
         }
 
-        setPos( getRow()+maxRowsDown, getCol());
+        setPos(getRow() + maxRowsDown, getCol());
     }
 
-    public void moveLeft(int dist){
+    public void moveLeft(int distance) {
 
         int maxRowsLeft;
 
-        if(dist<getCol()){
-            maxRowsLeft=dist;
-        }
-        else {
-            maxRowsLeft=getCol();
+        if (distance < getCol()) {
+            maxRowsLeft = distance;
+        } else {
+            maxRowsLeft = getCol();
         }
 
-        setPos(getRow(),getCol()-maxRowsLeft);
+        setPos(getRow(), getCol() - maxRowsLeft);
     }
 
-    public void moveRight(int dist){
+    public void moveRight(int distance) {
 
         int maxRowsRight;
 
-        if(dist>getField().getColumns()-(getCol()+1)){
-            maxRowsRight=getField().getColumns()-(getCol()+1);
-        }
-        else {
-            maxRowsRight=dist;
+        if (distance > getField().getColumns() - (getCol() + 1)) {
+            maxRowsRight = getField().getColumns() - (getCol() + 1);
+        } else {
+            maxRowsRight = distance;
         }
 
-        setPos(getRow(),getCol() + maxRowsRight);
+        setPos(getRow(), getCol() + maxRowsRight);
     }
 }

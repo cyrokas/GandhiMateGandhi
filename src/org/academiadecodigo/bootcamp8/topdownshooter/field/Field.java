@@ -8,8 +8,11 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.position.AbstractPosi
 public interface Field {
 
     void setup();
+
     int getColumns();
+
     int getRows();
+
     AbstractPosition createRepresentation();
 
 }

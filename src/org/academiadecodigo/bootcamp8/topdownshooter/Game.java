@@ -5,6 +5,8 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldFactory;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldType;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObjectFactory;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.PlayerNumber;
 
 import java.util.LinkedList;
 
@@ -24,6 +26,7 @@ public class Game {
 
     //Testing
     private GameObject reg1;
+    private Player playerOne;
 
     //Constructor
     public Game(int rows, int columns, int delay, FieldType fieldType) {
@@ -34,12 +37,14 @@ public class Game {
     }
 
     //Game setup
-    public void setup(){
+    public void setup() {
 
         field.setup();
 
         //Test
-        reg1= GameObjectFactory.getNewEnemy(field);
+        reg1 = GameObjectFactory.getNewEnemy(field);
+        playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
+
     }
 
     //Game Loop
@@ -55,13 +60,10 @@ public class Game {
     }
 
     //Game Round
-    public  void gameRound() {
+    public void gameRound() {
 
-        //throw new UnsupportedOperationException();
-
+        playerOne.playRound();
     }
-
-
 
 
 }
