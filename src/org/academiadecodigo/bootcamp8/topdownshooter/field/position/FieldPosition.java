@@ -7,14 +7,13 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.Direction;
  */
 public interface FieldPosition {
 
-
-    int getCol();
+    int getColumn();
 
     int getRow();
 
     void setPos(int row, int col);
 
-    void moveInDirection(Direction direction, int distance);
+    void moveInDirection(Direction direction, int speed);
 
     void show();
 
@@ -23,5 +22,9 @@ public interface FieldPosition {
     boolean equals(FieldPosition position);
 
     boolean isEdge();
+
+    int getHeight();
+
+    int getWidth();
 
 }

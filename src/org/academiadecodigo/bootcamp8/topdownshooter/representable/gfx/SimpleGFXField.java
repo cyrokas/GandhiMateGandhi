@@ -2,7 +2,6 @@ package org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.AbstractPosition;
-import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 
@@ -15,7 +14,7 @@ public class SimpleGFXField implements Field {
     private int columns;
     private int rows;
     private Rectangle field;
-    private final int CELL_SIZE = 20;                             //for testing
+    private final int CELL_SIZE = 1;                             //for testing
 
 
     public SimpleGFXField(int rows, int columns) {
@@ -70,12 +69,13 @@ public class SimpleGFXField implements Field {
     }
 
     @Override
-    public FieldPosition createRepresentation() {
-        return new SimpleGFXPosition(this);
+    public AbstractPosition createRepresentation(String image) {
+        return new SimpleGFXPosition(image, this);
     }
 
-    public FieldPosition createRepresentation(int row, int col){
-        return new SimpleGFXPosition(row,col,this);
+    @Override
+    public AbstractPosition createRepresentation(int row, int col, String image){
+        return new SimpleGFXPosition(row,col,image, this);
     }
 
 }

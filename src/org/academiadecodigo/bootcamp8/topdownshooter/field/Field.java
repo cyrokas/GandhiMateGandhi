@@ -1,7 +1,6 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.field;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.AbstractPosition;
-import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;
 
 /**
  * Created by codecadet on 25/05/17.
@@ -9,8 +8,12 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPositio
 public interface Field {
 
     void setup();
-    int getColumns();
-    int getRows();
-    FieldPosition createRepresentation();
 
+    int getColumns();
+
+    int getRows();
+
+    AbstractPosition createRepresentation(String image);
+
+    AbstractPosition createRepresentation(int x, int y, String image);
 }

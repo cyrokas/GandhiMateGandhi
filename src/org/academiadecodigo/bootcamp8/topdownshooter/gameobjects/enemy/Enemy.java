@@ -15,11 +15,11 @@ public abstract class Enemy extends GameObject implements Mobile, Hittable{
     private int health;
     private boolean dead;
     private Direction currentDirection;
-    private FieldPosition pos;
+    private AbstractPosition pos;
     private Field field;
     private EnemyType enemyType;
 
-    public Enemy(int health, FieldPosition pos){
+    public Enemy(int health, AbstractPosition pos){
 
         this.pos = pos;
         this.health = health;
@@ -42,7 +42,7 @@ public abstract class Enemy extends GameObject implements Mobile, Hittable{
         return currentDirection;
     }
 
-    public FieldPosition getPos(){
+    public AbstractPosition getPos(){
         return pos;
     }
 
@@ -79,17 +79,17 @@ public abstract class Enemy extends GameObject implements Mobile, Hittable{
         return null;}
 
 
-    public Direction chooseDirection(FieldPosition playerpos){
+    public Direction chooseDirection(AbstractPosition playerpos){
 
         Direction vertical=null;
 
         Direction horiz=null;
 
-        if (playerpos.getCol() > pos.getCol()   ){
+        if (playerpos.getColumn() > pos.getColumn()   ){
 
             horiz=Direction.RIGHT;
 
-        } else if (playerpos.getCol() < pos.getCol()){
+        } else if (playerpos.getColumn() < pos.getColumn()){
             horiz=Direction.LEFT;
         }
         if (playerpos.getRow() > pos.getRow()){

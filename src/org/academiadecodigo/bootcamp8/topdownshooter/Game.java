@@ -8,6 +8,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObjectFacto
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.bonus.Bonus;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.Enemy;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.PlayerNumber;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.Projectile;
 
 import java.util.LinkedList;
@@ -21,17 +22,14 @@ public class Game {
     private Field field;
 
     //GameObjects list
-    private LinkedList<GameObject> gameObjectList;   //subject to change
-    private LinkedList<Enemy> enemyLinkedList;
-    private LinkedList<Projectile> projectileLinkedList;
-    private Player player;
-    private LinkedList<Bonus> bonusLinkedList;
-
+    private LinkedList<GameObject> gameObjectList;                           //subject to change
 
     //Game delay
     private final int DELAY;
 
     //Testing
+    //private GameObject reg1;
+    private Player playerOne;
     private Enemy reg1;
     private Enemy reg2;
 
@@ -44,11 +42,14 @@ public class Game {
     }
 
     //Game setup
-    public void setup(){
+    public void setup() {
 
         field.setup();
 
         //Test
+        //reg1 = GameObjectFactory.getNewEnemy(field);
+        playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
+
         reg1= GameObjectFactory.getNewRegularEnemy(field);
         reg2= GameObjectFactory.getNewRegularEnemy(field);
     }
@@ -56,25 +57,24 @@ public class Game {
     //Game Loop
     public void gameLoop() throws InterruptedException {
 
-        while (true) {     //maybe change to playerAlive OR lastBoss dead
+        while (true) {                                                      //maybe change to playerAlive OR lastBoss dead
 
             Thread.sleep(DELAY);
 
-            //gameRound();
+            gameRound();
 
-            reg1.move(reg1.chooseDirection(reg2.getPos()),1);
+
         }
 
     }
 
     //Game Round
-    public  void gameRound() {
+    public void gameRound() {
 
-        //throw new UnsupportedOperationException();
+        playerOne.playRound();
 
+        reg1.move(reg1.chooseDirection(reg2.getPos()),1);
     }
-
-
 
 
 }
