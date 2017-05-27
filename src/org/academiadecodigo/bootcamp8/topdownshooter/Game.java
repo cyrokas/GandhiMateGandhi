@@ -5,7 +5,10 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldFactory;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldType;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObjectFactory;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.bonus.Bonus;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.Enemy;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.Projectile;
 
 import java.util.LinkedList;
 
@@ -18,7 +21,12 @@ public class Game {
     private Field field;
 
     //GameObjects list
-    private LinkedList<GameObject> gameObjectList;                           //subject to change
+    private LinkedList<GameObject> gameObjectList;   //subject to change
+    private LinkedList<Enemy> enemyLinkedList;
+    private LinkedList<Projectile> projectileLinkedList;
+    private Player player;
+    private LinkedList<Bonus> bonusLinkedList;
+
 
     //Game delay
     private final int DELAY;
