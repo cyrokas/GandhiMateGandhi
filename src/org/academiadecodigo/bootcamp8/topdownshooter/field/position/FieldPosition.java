@@ -7,7 +7,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.Direction;
  */
 public interface FieldPosition {
 
-    int getCol();
+    int getColumn();
 
     int getRow();
 
@@ -20,5 +20,9 @@ public interface FieldPosition {
     void hide();
 
     boolean equals(FieldPosition position);
+
+    int getHeight();
+
+    int getWidth();
 
 }

@@ -48,5 +48,4 @@ public enum Direction {
 
         return opposite;
     }
-
 }

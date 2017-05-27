@@ -10,53 +10,78 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
  */
 public class SimpleGFXPosition extends AbstractPosition {
 
-    private Rectangle rectangle;
+    //private Rectangle rectangle;
     private SimpleGFXField simpleGFXField;
     private Picture picture; //future implementation
 
+    private final int HEIGHT;
+    private final int WIDTH;
 
-    public SimpleGFXPosition(SimpleGFXField field){
 
-        super((int)(Math.random()*field.getRows()), (int)(Math.random()*field.getColumns()), field);
+
+    public SimpleGFXPosition(String image, SimpleGFXField field ) {
+
+        super((int) (Math.random() * field.getRows()), (int) (Math.random() * field.getColumns()), field);
 
         simpleGFXField = field;
-        rectangle = new Rectangle(field.columntoX(super.getCol()),
-                field.rowToY(super.getRow()), field.getCELL_SIZE(), field.getCELL_SIZE());
+        //rectangle = new Rectangle(field.columntoX(super.getColumn()),
+        //        field.rowToY(super.getRow()), field.getCELL_SIZE(), field.getCELL_SIZE());
+
+        picture = new Picture(0, 0, image);
+        HEIGHT = picture.getHeight();
+        WIDTH = picture.getWidth();
+
         show();
     }
 
-    public SimpleGFXPosition(int row, int col, SimpleGFXField field){
+    public SimpleGFXPosition(int row, int col, String image, SimpleGFXField field) {
+
         super(row, col, field);
-        simpleGFXField=field;
-        rectangle=new Rectangle(field.columntoX(col), field.rowToY(row), field.getCELL_SIZE(),
-                field.getCELL_SIZE());
+
+        simpleGFXField = field;
+        //rectangle = new Rectangle(field.columntoX(col), field.rowToY(row), field.getCELL_SIZE(),
+        //        field.getCELL_SIZE());
+
+        picture = new Picture(field.columntoX(col), field.rowToY(row), image);
+        HEIGHT = picture.getHeight();
+        WIDTH = picture.getWidth();
         show();
     }
 
 
     @Override
-    public void show(){
-        rectangle.draw();
-        //picture.draw();
+    public void show() {
+        //rectangle.draw();
+        picture.draw();
     }
 
     @Override
-    public void hide(){
-        rectangle.delete();
+    public void hide() {
+        //rectangle.delete();
     }
 
     @Override
-    public void moveInDirection(Direction direction, int distance){
+    public void moveInDirection(Direction direction, int distance) {
 
-        int initialColumn=simpleGFXField.columntoX(super.getCol());
-        int initialRow=simpleGFXField.rowToY(super.getRow());
+        int initialColumn = simpleGFXField.columntoX(super.getColumn());
+        int initialRow = simpleGFXField.rowToY(super.getRow());
 
-        super.moveInDirection(direction,distance);
+        super.moveInDirection(direction, distance);
 
-        int finalColumn=simpleGFXField.columntoX(super.getCol());
-        int finalRow=simpleGFXField.rowToY(super.getRow());
+        int finalColumn = simpleGFXField.columntoX(super.getColumn());
+        int finalRow = simpleGFXField.rowToY(super.getRow());
 
-        rectangle.translate(finalColumn-initialColumn, finalRow-initialRow);
+        //rectangle.translate(finalColumn - initialColumn, finalRow - initialRow);
+        picture.translate(finalColumn - initialColumn, finalRow - initialRow);
     }
 
+    @Override
+    public int getHeight() {
+        return HEIGHT;
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
 }

@@ -10,12 +10,10 @@ public class FieldFactory {
     public static Field getNewField(FieldType fieldType, int rows, int columns) {
 
         switch (fieldType) {
-
             case SIMPLE_GFX:
                 return new SimpleGFXField(rows, columns);
             default:
                 return null;
         }
-
     }
 }

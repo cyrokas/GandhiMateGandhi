@@ -9,9 +9,9 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
-        int columns = 80;
-        int rows = 30;
-        int delay = 200;
+        int columns = 460;
+        int rows = 300;
+        int delay = 100;
 
         Game game = new Game(rows, columns, delay, FieldType.SIMPLE_GFX);
         game.setup();

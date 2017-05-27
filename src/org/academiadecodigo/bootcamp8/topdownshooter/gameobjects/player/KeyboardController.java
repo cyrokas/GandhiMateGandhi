@@ -24,7 +24,6 @@ public class KeyboardController implements KeyboardHandler {
 
         k = new Keyboard(this);
         keyMap = new int[] {upKey, downKey, leftKey, rightKey};
-
     }
 
     public void keyMapConfiguration() {
@@ -68,7 +67,6 @@ public class KeyboardController implements KeyboardHandler {
         releaseRight.setKey(keyMap[3]);
         releaseRight.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
         k.addEventListener(releaseRight);
-
     }
 
     @Override
@@ -77,26 +75,19 @@ public class KeyboardController implements KeyboardHandler {
         moving = true;
 
         if (e.getKey() == keyMap[0]) {
-           //direction = Direction.UP;
             pressedKeys[0] = true;
         }
         if (e.getKey() == keyMap[1]) {
-            //direction = Direction.DOWN;
             pressedKeys[1] = true;
         }
         if (e.getKey() == keyMap[2]) {
-            //direction = Direction.LEFT;
             pressedKeys[2] = true;
         }
         if (e.getKey() == keyMap[3]) {
-            //direction = Direction.RIGHT;
             pressedKeys[3] = true;
         }
 
         direction = pressedDirection();
-
-
-
     }
 
     @Override
@@ -120,7 +111,6 @@ public class KeyboardController implements KeyboardHandler {
         if(direction == Direction.STOPPED) {
             moving = false;
         }
-
     }
 
     private Direction pressedDirection() {
@@ -150,7 +140,6 @@ public class KeyboardController implements KeyboardHandler {
             return Direction.RIGHT;
         }
         return Direction.STOPPED;
-
     }
 
     public Direction getDirection() {

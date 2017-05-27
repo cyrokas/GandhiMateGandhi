@@ -13,6 +13,7 @@ public interface Field {
 
     int getRows();
 
-    AbstractPosition createRepresentation();
+    AbstractPosition createRepresentation(String image);
 
+    AbstractPosition createRepresentation(int x, int y, String image);
 }

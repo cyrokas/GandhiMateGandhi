@@ -12,13 +12,11 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.PlayerNu
 public class GameObjectFactory {
 
     public static Enemy getNewEnemy(Field field){
-        return new RegularEnemy(field.createRepresentation());
+        return new RegularEnemy(field.createRepresentation("/Users/codecadet/Desktop/TopDownShooter/src/org/academiadecodigo/bootcamp8/topdownshooter/gameobjects/player/1571779_k_152.jpg"));
     }
 
     public static Player createNewPlayer(Field field, PlayerNumber playerNumber) {
-
-        return new Player(field.createRepresentation(), playerNumber);
-
+        return new Player(field, playerNumber);
     }
 
 }
