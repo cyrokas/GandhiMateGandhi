@@ -10,6 +10,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.Enemy;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.PlayerNumber;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.Projectile;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.ProjectileType;
 
 import java.util.LinkedList;
 
@@ -32,6 +33,7 @@ public class Game {
     private Player playerOne;
     private Enemy reg1;
     private Enemy reg2;
+    private Projectile p1;
 
     //Constructor
     public Game(int rows, int columns, int delay, FieldType fieldType) {
@@ -52,6 +54,7 @@ public class Game {
 
         reg1= GameObjectFactory.getNewRegularEnemy(field);
         reg2= GameObjectFactory.getNewRegularEnemy(field);
+        //p1 = new Projectile(playerOne, ProjectileType.FIRE);
     }
 
     //Game Loop
@@ -63,7 +66,6 @@ public class Game {
 
             gameRound();
 
-
         }
 
     }
@@ -73,7 +75,9 @@ public class Game {
 
         playerOne.playRound();
 
-        reg1.move(reg1.chooseDirection(reg2.getPos()),1);
+        //reg1.move(reg1.chooseDirection(reg2.getPos()),1);
+
+        //p1.playRound();
     }
 
 

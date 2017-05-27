@@ -13,17 +13,18 @@ public class KeyboardController implements KeyboardHandler {
 
     private Direction direction;
     private boolean moving;
+    private boolean shooting = false;
 
     private int[] keyMap;
     private boolean[] pressedKeys = new boolean[4];
     Keyboard k;
 
-    public KeyboardController(Direction direction, int upKey, int downKey, int leftKey, int rightKey) {
+    public KeyboardController(Direction direction, int upKey, int downKey, int leftKey, int rightKey, int shoot) {
 
         this.direction = direction;
 
         k = new Keyboard(this);
-        keyMap = new int[] {upKey, downKey, leftKey, rightKey};
+        keyMap = new int[] {upKey, downKey, leftKey, rightKey, shoot};
     }
 
     public void keyMapConfiguration() {
@@ -67,6 +68,17 @@ public class KeyboardController implements KeyboardHandler {
         releaseRight.setKey(keyMap[3]);
         releaseRight.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
         k.addEventListener(releaseRight);
+
+        KeyboardEvent pressShoot = new KeyboardEvent();
+        pressShoot.setKey(keyMap[4]);
+        pressShoot.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        k.addEventListener(pressShoot);
+
+        KeyboardEvent releaseShoot = new KeyboardEvent();
+        releaseShoot.setKey(keyMap[4]);
+        releaseShoot.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        k.addEventListener(releaseShoot);
+
     }
 
     @Override
@@ -86,6 +98,9 @@ public class KeyboardController implements KeyboardHandler {
         if (e.getKey() == keyMap[3]) {
             pressedKeys[3] = true;
         }
+        if (e.getKey() == keyMap[4]) {
+            shooting = true;
+        }
 
         direction = pressedDirection();
     }
@@ -104,6 +119,9 @@ public class KeyboardController implements KeyboardHandler {
         }
         if (e.getKey() == keyMap[3]) {
             pressedKeys[3] = false;
+        }
+        if (e.getKey() == keyMap[4]) {
+            shooting = false;
         }
 
         direction = pressedDirection();
@@ -148,6 +166,10 @@ public class KeyboardController implements KeyboardHandler {
 
     public boolean isMoving() {
         return moving;
+    }
+
+    public boolean isShooting(){
+        return shooting;
     }
 
 }

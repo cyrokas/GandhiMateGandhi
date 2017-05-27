@@ -185,10 +185,11 @@ public abstract class AbstractPosition implements FieldPosition {
         }
     }
 
-    public boolean isEdge(){
-        if(column == 0 || column==field.getColumns()-1 || row==0 || row==field.getRows()-1){
+    public boolean isEdge() {
+        if (column == 0 || column == field.getColumns() - 1 || row == 0 || row == field.getRows() - 1) {
             return true;
-        } return false;
+        }
+        return false;
     }
 
 

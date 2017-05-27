@@ -23,9 +23,9 @@ public class GameObjectFactory {
     }
 
     public static Enemy getNewRegularEnemy(Field field){
-        AbstractPosition pos=field.createRepresentation("/Users/codecadet/TopDownShooter/1571779_k_152.jpg");
+        AbstractPosition pos=field.createRepresentation("/Users/codecadet/Desktop/TopDownShooter/src/org/academiadecodigo/bootcamp8/topdownshooter/gameobjects/player/1571779_k_152.jpg");
         while (!pos.isEdge()){
-            pos=field.createRepresentation("/Users/codecadet/TopDownShooter/1571779_k_152.jpg");
+            pos=field.createRepresentation("/Users/codecadet/Desktop/TopDownShooter/src/org/academiadecodigo/bootcamp8/topdownshooter/gameobjects/player/1571779_k_152.jpg");
         }
         return new RegularEnemy(pos);
     }
