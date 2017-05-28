@@ -36,6 +36,7 @@ public class SimpleGFXPosition extends AbstractPosition {
         picture = new Picture(field.columntoX(getColumn()), field.rowToY(getRow()), image);
         HEIGHT = picture.getHeight();
         WIDTH = picture.getWidth();
+        show();
 
     }
 
@@ -63,6 +64,7 @@ public class SimpleGFXPosition extends AbstractPosition {
     @Override
     public void hide() {
         //rectangle.delete();
+        picture.delete();
     }
 
     @Override
