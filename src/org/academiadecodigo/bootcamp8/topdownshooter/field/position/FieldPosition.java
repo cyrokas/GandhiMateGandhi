@@ -19,7 +19,7 @@ public interface FieldPosition {
 
     void hide();
 
-    boolean equals(FieldPosition position);
+    boolean equals(FieldPosition position);                             //What's this?
 
     boolean isEdge();
 

@@ -8,17 +8,16 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
  */
 public abstract class AbstractPosition implements FieldPosition {
 
-    private int column;
-    private int row;
+    private int column;                                     //Horizontal position
+    private int row;                                        //Vertical position
+    private Field field;                                    //Game field
 
-    private Field field;
-
+    //Constructor
     public AbstractPosition(int row, int column, Field field) {
 
         this.row = row;
         this.column = column;
         this.field = field;
-
     }
 
     public Field getField() {
@@ -43,6 +42,7 @@ public abstract class AbstractPosition implements FieldPosition {
         return row;
     }
 
+    //Move object in argument direction. Do nothing if direction is STOPPED
     @Override
     public void moveInDirection(Direction direction) {
 
@@ -77,47 +77,44 @@ public abstract class AbstractPosition implements FieldPosition {
         }
     }
 
-    @Override
+    @Override                                                                                                                   //What's this?
     public boolean equals(FieldPosition position) {
-
-        return (column == position.getColumn() && row == position.getRow());
+        return column == position.getColumn() && row == position.getRow();
     }
 
+    //Can move right AND down
     private void moveDownRight() {
 
         if (column + 1 + getWidth() < field.getColumns() && row + 1 + getHeight() < field.getRows()) {
             setPosition(row + 1, column + 1);
-            return;
         }
-
     }
 
+    //Can move down AND left
     private void moveDownLeft() {
 
         if (column - 1 > 0 && row + 1 + getHeight() < field.getRows()) {
             setPosition(row + 1, column - 1);
-            return;
         }
-
     }
 
+    //Can move up AND right
     private void moveUpRight() {
 
         if (column + 1 + getWidth() < field.getColumns() && row - 1 > 0) {
             setPosition(row - 1, column + 1);
         }
-
     }
 
+    //Can move up AND left
     private void moveUpLeft() {
 
         if (column - 1 > 0 && row - 1 > 0) {
             setPosition(row - 1, column - 1);
-            return;
         }
-
     }
 
+    //Can move up
     private void moveUp() {
 
         if (row - 1 > 0) {
@@ -125,6 +122,7 @@ public abstract class AbstractPosition implements FieldPosition {
         }
     }
 
+    //Can move down
     private void moveDown() {
 
         if (row + 1 + getHeight() < field.getRows()) {
@@ -132,6 +130,7 @@ public abstract class AbstractPosition implements FieldPosition {
         }
     }
 
+    //Can move left
     public void moveLeft() {
 
         if (column - 1 > 0) {
@@ -139,6 +138,7 @@ public abstract class AbstractPosition implements FieldPosition {
         }
     }
 
+    //Can move right
     public void moveRight() {
 
         if (column + 1 + getWidth() < field.getColumns()) {
@@ -146,11 +146,10 @@ public abstract class AbstractPosition implements FieldPosition {
         }
     }
 
+    //Detects field borders, without overlapping them
     @Override
     public boolean isEdge() {
         return column == 1 || column == field.getColumns() - 1 ||
                 row == 1 || row == field.getRows() - 1;
     }
-
-
 }

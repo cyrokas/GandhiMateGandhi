@@ -75,36 +75,21 @@ public class Game {
     //Game Round
     public void gameRound() {
 
-        Projectile[] projectiles = new Projectile[playerOne.getProjectileList().size()];
-        playerOne.getProjectileList().toArray(projectiles);
-        boolean[] projectileSatus = new boolean[projectiles.length];
+        int activeProjectiles = 0;
 
-        for (int i = 0; i < projectileSatus.length ; i++) {
-            projectileSatus[i] = true;
-        }
 
         playerOne.playRound();
 
         for (Projectile p : playerOne.getProjectileList()) {
-            p.playRound();
-        }
-
-        for (int i = 0; i < projectiles.length; i++) {
-            if (projectiles[i].isActive()) {
-                projectileSatus[i] = false;
+            if (p.isActive()) {
+                activeProjectiles++;
+                p.playRound();
             }
         }
 
-        //reg1.move(reg1.chooseDirection(reg2.getPos()),1);
-
-        for (int i = 0; i < projectileSatus.length; i++) {
-            if (projectileSatus[i] = false) {
-                playerOne.getProjectileList().remove(projectiles[i]);
-            }
+        if (activeProjectiles == 0) {
+            playerOne.reload();
         }
-
-
-
 
     }
 }

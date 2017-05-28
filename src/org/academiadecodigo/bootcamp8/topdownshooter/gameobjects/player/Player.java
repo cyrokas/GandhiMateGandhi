@@ -17,17 +17,18 @@ import java.util.ArrayList;
 public class Player extends GameObject implements Mobile, Hittable {
 
     private int playerSpeed = 5;
+    private int playerHitpoints = 100;
 
     private final int MAX_PROJECTILES = 10;
-    private ArrayList<Projectile> projectileList = new ArrayList<>();
-    //private int projectilesFired;
+    private int projectilesFired;                                                           //Fired projectile counter
+    private ArrayList<Projectile> projectileList = new ArrayList<>();                       //Projectile list
 
     private PlayerNumber playerNumber;
     private final int HEIGHT;
     private final int WIDTH;
 
-    private Direction playerDirection;
-    private Direction facingDirection;
+    private Direction playerDirection;                                                       //Direction player is moving to
+    private Direction facingDirection;                                                       //Direction player is facing
     private Field field;
     private FieldPosition fieldPosition;
 
@@ -69,14 +70,13 @@ public class Player extends GameObject implements Mobile, Hittable {
     @Override
     public void hit(int damage) {
 
-
-
+        playerHitpoints -= damage;
 
     }
 
     @Override
     public boolean isDead() {
-        return false;
+        return playerHitpoints <= 0;
     }
 
     @Override
@@ -86,10 +86,9 @@ public class Player extends GameObject implements Mobile, Hittable {
             move(chooseDirection());
         }
 
-        if (keyboardController.isShooting() && projectileList.size() < MAX_PROJECTILES) {
+        if (keyboardController.isShooting() && projectilesFired < MAX_PROJECTILES) {
             projectileList.add(new Projectile(this, ProjectileType.FIRE));
-            //projectilesFired++;
-            System.out.println("made one?");
+            projectilesFired++;
         }
 
     }
@@ -136,5 +135,10 @@ public class Player extends GameObject implements Mobile, Hittable {
     public ArrayList<Projectile> getProjectileList() {
         return projectileList;
     }
+
+    public void reload() {
+        projectilesFired = 0;
+    }
+
 }
 
