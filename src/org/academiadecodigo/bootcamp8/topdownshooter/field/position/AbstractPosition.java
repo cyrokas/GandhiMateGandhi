@@ -187,6 +187,7 @@ public abstract class AbstractPosition implements FieldPosition {
         }
     }
 
+    @Override
     public boolean isEdge(){
         return (column == 0 || column==field.getColumns()-1 || row==0 || row==field.getRows()-1);
     }

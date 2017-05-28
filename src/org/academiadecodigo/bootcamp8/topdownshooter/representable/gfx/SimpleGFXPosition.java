@@ -18,13 +18,12 @@ public class SimpleGFXPosition extends AbstractPosition {
     private final int WIDTH;
 
 
-
-    public SimpleGFXPosition(String image, SimpleGFXField field ) {
+    public SimpleGFXPosition(String image, SimpleGFXField field) {
         super((int) (Math.random() * field.getRows()), (int) (Math.random() * field.getColumns()), field);
 
-        int row=-1;
-        int col=-1;
-        while (!(col == 0 || col==field.getColumns()-1 || row==0 || row==field.getRows()-1)){
+        int row = -1;
+        int col = -1;
+        while (!(col == 0 || col == field.getColumns() - 1 || row == 0 || row == field.getRows() - 1)) {
             row = (int) (Math.random() * field.getRows());
             col = (int) (Math.random() * field.getColumns());
         }
@@ -42,20 +41,20 @@ public class SimpleGFXPosition extends AbstractPosition {
         picture = new Picture(field.columntoX(col), field.rowToY(row), image);
         HEIGHT = picture.getHeight();
         WIDTH = picture.getWidth();
-        int dx=0;
-        int dy=0;
+        int dx = 0;
+        int dy = 0;
 
-        if(field.rowToY(row)+HEIGHT>field.rowToY(field.getRows()-1)){
-            dy= field.rowToY(field.getRows()-1)-HEIGHT-field.rowToY(row);
-            row=field.getRows()-1-Math.round(HEIGHT/field.getCELL_SIZE());
+        if (field.rowToY(row) + HEIGHT > field.rowToY(field.getRows() - 1)) {
+            dy = field.rowToY(field.getRows() - 1) - HEIGHT - field.rowToY(row);
+            row = field.getRows() - 1 - Math.round(HEIGHT / field.getCELL_SIZE());
         }
-        if(field.columntoX(col)+WIDTH>field.columntoX(field.getColumns()-1)){
-            dx=field.columntoX(field.getColumns()-1)-WIDTH-field.columntoX(col);
-            col=field.getColumns()-1-Math.round(WIDTH/field.getCELL_SIZE());
+        if (field.columntoX(col) + WIDTH > field.columntoX(field.getColumns() - 1)) {
+            dx = field.columntoX(field.getColumns() - 1) - WIDTH - field.columntoX(col);
+            col = field.getColumns() - 1 - Math.round(WIDTH / field.getCELL_SIZE());
         }
-        setPos(row,col);
+        setPos(row, col);
 
-        picture.translate(dx,dy);
+        picture.translate(dx, dy);
 
         show();
 
@@ -111,5 +110,15 @@ public class SimpleGFXPosition extends AbstractPosition {
     @Override
     public int getWidth() {
         return WIDTH;
+    }
+
+    @Override
+    public boolean isEdge() {
+        boolean rightedge = simpleGFXField.rowToY(getRow()) + HEIGHT > simpleGFXField.rowToY(simpleGFXField.getRows() - 1);
+        boolean loweredge = simpleGFXField.columntoX(getColumn()) + WIDTH > simpleGFXField.columntoX(simpleGFXField.getColumns() - 1);
+        if (rightedge || loweredge || getColumn() == 0 || getRow() == 0) {
+            return true;
+        }
+        return false;
     }
 }
