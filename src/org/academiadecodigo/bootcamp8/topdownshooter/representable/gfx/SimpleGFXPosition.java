@@ -114,9 +114,9 @@ public class SimpleGFXPosition extends AbstractPosition {
 
     @Override
     public boolean isEdge() {
-        boolean rightedge = simpleGFXField.rowToY(getRow()) + HEIGHT > simpleGFXField.rowToY(simpleGFXField.getRows() - 1);
-        boolean loweredge = simpleGFXField.columntoX(getColumn()) + WIDTH > simpleGFXField.columntoX(simpleGFXField.getColumns() - 1);
-        if (rightedge || loweredge || getColumn() == 0 || getRow() == 0) {
+        int rightedge = simpleGFXField.getColumns() - 1 - Math.round(WIDTH / simpleGFXField.getCELL_SIZE());
+        int loweredge = simpleGFXField.getRows() - 1 - Math.round(HEIGHT / simpleGFXField.getCELL_SIZE());
+        if (getColumn()==rightedge || getRow()==loweredge || getColumn() == 0 || getRow() == 0) {
             return true;
         }
         return false;
