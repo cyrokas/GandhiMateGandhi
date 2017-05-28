@@ -29,7 +29,7 @@ public abstract class AbstractPosition implements FieldPosition {
 
         this.row = row;
         this.column = column;
-        show();
+        //show();
     }
 
     @Override
@@ -75,6 +75,8 @@ public abstract class AbstractPosition implements FieldPosition {
                break;
 
         }
+
+        show();
     }
 
     @Override                                                                                                                   //What's this?

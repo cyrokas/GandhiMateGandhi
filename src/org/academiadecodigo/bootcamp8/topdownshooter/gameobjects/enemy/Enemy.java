@@ -11,114 +11,121 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPositio
 /**
  * Created by codecadet on 24/05/17.
  */
-public abstract class Enemy extends GameObject implements Mobile, Hittable{
+public abstract class Enemy extends GameObject implements Mobile, Hittable {
     private int health;
     private boolean dead;
     private Direction currentDirection;
     private AbstractPosition pos;
     private Field field;
-    private EnemyType enemyType;
+    private int speed;
+    private FieldPosition playerpos;
 
-    public Enemy(int health, AbstractPosition pos){
+    public Enemy(int health, AbstractPosition pos, int speed, FieldPosition playerpos) {
 
         this.pos = pos;
         this.health = health;
         dead = false;
+        this.speed = speed;
+        this.playerpos = playerpos;
 
-        currentDirection = Direction.values()[(int)(Math.random()*Direction.values().length)];
+        currentDirection = Direction.values()[(int) (Math.random() * Direction.values().length)];
 
         //test
-        System.out.println(currentDirection.toString());
-        System.out.println("health "+health);
+        //System.out.println(currentDirection.toString());
+        //System.out.println("health "+health);
     }
 
 
     //getters
-    public int getHealth(){
+    public int getHealth() {
         return health;
     }
 
-    public Direction getCurrentDirection(){
+    public Direction getCurrentDirection() {
         return currentDirection;
     }
 
-    public AbstractPosition getPos(){
+    public AbstractPosition getPos() {
         return pos;
     }
 
-    public EnemyType getEnemyType(){
-        return enemyType;
+    public int getSpeed() {
+        return speed;
     }
 
     @Override
-    public boolean isDead(){
+    public boolean isDead() {
         return dead;
     }
 
     @Override
-    public void playRound(){
-
-
+    public void playRound() {
+        move(chooseDirection());
 
     }
 
     @Override
-    public void hit(int damage){
+    public void hit(int damage) {
 
-        if(!dead){
+        if (!dead) {
             health -= damage;
         }
-        if(health <= 0){
+        if (health <= 0) {
             dead = true;
         }
     }
 
     //implement method depending on player position
     @Override
-    public Direction chooseDirection(){
-        return null;}
+    public Direction chooseDirection() {
 
+        Direction vertical = Direction.STOPPED;
 
-    public Direction chooseDirection(AbstractPosition playerpos){
+        Direction horiz = Direction.STOPPED;
 
-        Direction vertical=null;
+        if (playerpos.getColumn() > pos.getColumn()) {
 
-        Direction horiz=null;
+            horiz = Direction.RIGHT;
 
-        if (playerpos.getColumn() > pos.getColumn()   ){
-
-            horiz=Direction.RIGHT;
-
-        } else if (playerpos.getColumn() < pos.getColumn()){
-            horiz=Direction.LEFT;
+        } else if (playerpos.getColumn() < pos.getColumn()) {
+            horiz = Direction.LEFT;
         }
-        if (playerpos.getRow() > pos.getRow()){
-            vertical=Direction.DOWN;
+        if (playerpos.getRow() > pos.getRow()) {
+            vertical = Direction.DOWN;
 
-        } else if (playerpos.getRow() < pos.getRow()){
-            vertical=Direction.UP;
+        } else if (playerpos.getRow() < pos.getRow()) {
+            vertical = Direction.UP;
         }
-        if(horiz == null) {
-            return vertical;}
+        if (horiz == Direction.STOPPED) {
+            return vertical;
+        }
 
-        if(vertical== null){
-            return horiz;}
+        if (vertical == Direction.STOPPED) {
+            return horiz;
+        }
 
-        int rnd=(int)(Math.random()*2);
-
-        switch (rnd){
-            case 0:
-                return horiz;
-            case 1:
-                return vertical;
+        switch (horiz) {
+            case RIGHT:
+                if (vertical == Direction.DOWN) {
+                    return Direction.DOWN_RIGHT;
+                } else {
+                    return Direction.UP_RIGHT;
+                }
+            case LEFT:
+                if (vertical == Direction.DOWN) {
+                    return Direction.DOWN_LEFT;
+                } else {
+                    return Direction.UP_LEFT;
+                }
         }
         return null;
     }
 
 
     @Override
-    public void move(Direction direction){
-        pos.moveInDirection(direction);
+    public void move(Direction direction) {
+        for (int i = 0; i < speed; i++) {
+            pos.moveInDirection(chooseDirection());
+        }
     }
-
 }
