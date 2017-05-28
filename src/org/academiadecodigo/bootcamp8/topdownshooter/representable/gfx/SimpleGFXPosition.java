@@ -116,7 +116,7 @@ public class SimpleGFXPosition extends AbstractPosition {
     public boolean isEdge() {
         int rightedge = simpleGFXField.getColumns() - 1 - Math.round(WIDTH / simpleGFXField.getCELL_SIZE());
         int loweredge = simpleGFXField.getRows() - 1 - Math.round(HEIGHT / simpleGFXField.getCELL_SIZE());
-        if (getColumn()==rightedge || getRow()==loweredge || getColumn() == 0 || getRow() == 0) {
+        if (getColumn() == rightedge || getRow() == loweredge || getColumn() == 1 || getRow() == 1) {
             return true;
         }
         return false;

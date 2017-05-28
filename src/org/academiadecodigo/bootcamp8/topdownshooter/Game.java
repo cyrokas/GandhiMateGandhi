@@ -11,6 +11,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.PlayerNumber;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.Projectile;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -30,8 +31,8 @@ public class Game {
     //Testing
     //private GameObject reg1;
     private Player playerOne;
-    private Enemy reg1;
-    private Enemy reg2;
+    private ArrayList<Enemy> enemyArrayList = new ArrayList<Enemy>();
+    private int maxEnemiesPerLevel = 20;
 
     //Constructor
     public Game(int rows, int columns, int delay, FieldType fieldType) {
@@ -50,8 +51,6 @@ public class Game {
         //reg1 = GameObjectFactory.getNewEnemy(field);
         playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
 
-        reg1= GameObjectFactory.getNewRegularEnemy(field);
-        reg2= GameObjectFactory.getNewRegularEnemy(field);
     }
 
     //Game Loop
@@ -73,7 +72,17 @@ public class Game {
 
         playerOne.playRound();
 
-        reg1.move(reg1.chooseDirection(playerOne.getFieldPosition()),8);
+        int enemyodds = (int) (Math.random() * 200);
+        if (enemyArrayList.size() < maxEnemiesPerLevel) {
+            if (enemyodds < 3) {
+                enemyArrayList.add(GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition()));
+            }
+        }
+
+        for (int i = 0; i < enemyArrayList.size(); i++) {
+            Enemy e = enemyArrayList.get(i);
+            e.playRound();
+        }
     }
 
 
