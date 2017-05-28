@@ -79,11 +79,11 @@ public abstract class Enemy extends GameObject implements Mobile, Hittable{
         return null;}
 
 
-    public Direction chooseDirection(AbstractPosition playerpos){
+    public Direction chooseDirection(FieldPosition playerpos){
 
-        Direction vertical=null;
+        Direction vertical=Direction.STOPPED;
 
-        Direction horiz=null;
+        Direction horiz=Direction.STOPPED;
 
         if (playerpos.getColumn() > pos.getColumn()   ){
 
@@ -98,10 +98,10 @@ public abstract class Enemy extends GameObject implements Mobile, Hittable{
         } else if (playerpos.getRow() < pos.getRow()){
             vertical=Direction.UP;
         }
-        if(horiz == null) {
+        if(horiz == Direction.STOPPED) {
             return vertical;}
 
-        if(vertical== null){
+        if(vertical== Direction.STOPPED){
             return horiz;}
 
         int rnd=(int)(Math.random()*2);

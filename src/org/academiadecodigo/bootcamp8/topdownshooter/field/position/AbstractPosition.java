@@ -11,6 +11,7 @@ public abstract class AbstractPosition implements FieldPosition {
     private int column;
     private int row;
 
+
     private int maxDistance = 0;
 
     private Field field;
@@ -21,6 +22,7 @@ public abstract class AbstractPosition implements FieldPosition {
         this.column = column;
 
         this.field = field;
+
 
     }
 
@@ -45,9 +47,9 @@ public abstract class AbstractPosition implements FieldPosition {
         return row;
     }
 
+
     @Override
     public void moveInDirection(Direction direction, int distance) {
-
         switch (direction) {
             case UP:
                 moveUp(distance);
@@ -186,9 +188,7 @@ public abstract class AbstractPosition implements FieldPosition {
     }
 
     public boolean isEdge(){
-        if(column == 0 || column==field.getColumns()-1 || row==0 || row==field.getRows()-1){
-            return true;
-        } return false;
+        return (column == 0 || column==field.getColumns()-1 || row==0 || row==field.getRows()-1);
     }
 
 

@@ -86,4 +86,8 @@ public class Player extends GameObject implements Mobile, Hittable {
             fieldPosition.moveInDirection(newDirection, 1);
         }
     }
+
+    public FieldPosition getFieldPosition(){
+        return fieldPosition;
+    }
 }

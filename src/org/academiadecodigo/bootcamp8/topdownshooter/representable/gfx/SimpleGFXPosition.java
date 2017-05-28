@@ -20,8 +20,14 @@ public class SimpleGFXPosition extends AbstractPosition {
 
 
     public SimpleGFXPosition(String image, SimpleGFXField field ) {
-
         super((int) (Math.random() * field.getRows()), (int) (Math.random() * field.getColumns()), field);
+
+        int row=-1;
+        int col=-1;
+        while (!(col == 0 || col==field.getColumns()-1 || row==0 || row==field.getRows()-1)){
+            row = (int) (Math.random() * field.getRows());
+            col = (int) (Math.random() * field.getColumns());
+        }
 
         /*
         super((int)(Math.random()*field.getRows()), (int)(Math.random()*field.getColumns()), field);
@@ -33,9 +39,25 @@ public class SimpleGFXPosition extends AbstractPosition {
         //rectangle = new Rectangle(field.columntoX(super.getColumn()),
         //        field.rowToY(super.getRow()), field.getCELL_SIZE(), field.getCELL_SIZE());
 
-        picture = new Picture(field.columntoX(getColumn()), field.rowToY(getRow()), image);
+        picture = new Picture(field.columntoX(col), field.rowToY(row), image);
         HEIGHT = picture.getHeight();
         WIDTH = picture.getWidth();
+        int dx=0;
+        int dy=0;
+
+        if(field.rowToY(row)+HEIGHT>field.rowToY(field.getRows()-1)){
+            dy= field.rowToY(field.getRows()-1)-HEIGHT-field.rowToY(row);
+            row=field.getRows()-1-Math.round(HEIGHT/field.getCELL_SIZE());
+        }
+        if(field.columntoX(col)+WIDTH>field.columntoX(field.getColumns()-1)){
+            dx=field.columntoX(field.getColumns()-1)-WIDTH-field.columntoX(col);
+            col=field.getColumns()-1-Math.round(WIDTH/field.getCELL_SIZE());
+        }
+        setPos(row,col);
+
+        picture.translate(dx,dy);
+
+        show();
 
     }
 
@@ -46,6 +68,7 @@ public class SimpleGFXPosition extends AbstractPosition {
         simpleGFXField = field;
         //rectangle = new Rectangle(field.columntoX(col), field.rowToY(row), field.getCELL_SIZE(),
         //        field.getCELL_SIZE());
+
 
         picture = new Picture(field.columntoX(col), field.rowToY(row), image);
         HEIGHT = picture.getHeight();

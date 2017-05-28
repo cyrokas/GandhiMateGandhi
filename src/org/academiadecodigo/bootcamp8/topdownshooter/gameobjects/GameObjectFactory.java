@@ -6,6 +6,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.Enemy;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.RegularEnemy;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.PlayerNumber;
+import org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx.SimpleGFXPosition;
 
 /**
  * Created by codecadet on 24/05/17.
@@ -23,13 +24,15 @@ public class GameObjectFactory {
     }
 
     public static Enemy getNewRegularEnemy(Field field){
-        AbstractPosition pos=field.createRepresentation("/Users/codecadet/TopDownShooter/1571779_k_152.jpg");
-        while (!pos.isEdge()){
-            pos=field.createRepresentation("/Users/codecadet/TopDownShooter/1571779_k_152.jpg");
+        /*
+        int row=-1;
+        int col=-1;
+        while (!(col == 0 || col==field.getColumns()-1 || row==0 || row==field.getRows()-1)){
+           row = (int) (Math.random() * field.getRows());
+           col = (int) (Math.random() * field.getColumns());
         }
+        */
+        AbstractPosition pos=field.createRepresentation( "/Users/codecadet/TopDownShooter/1571779_k_152.jpg");
         return new RegularEnemy(pos);
     }
-
-
-
 }

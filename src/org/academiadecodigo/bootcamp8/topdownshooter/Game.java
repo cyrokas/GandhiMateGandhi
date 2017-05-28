@@ -73,7 +73,7 @@ public class Game {
 
         playerOne.playRound();
 
-        reg1.move(reg1.chooseDirection(reg2.getPos()),1);
+        reg1.move(reg1.chooseDirection(playerOne.getFieldPosition()),8);
     }
 
 
