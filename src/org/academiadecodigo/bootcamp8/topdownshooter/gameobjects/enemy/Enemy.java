@@ -117,8 +117,8 @@ public abstract class Enemy extends GameObject implements Mobile, Hittable{
 
 
     @Override
-    public void move(Direction direction, int speed){
-        pos.moveInDirection(direction,speed);
+    public void move(Direction direction){
+        pos.moveInDirection(direction);
     }
 
 }

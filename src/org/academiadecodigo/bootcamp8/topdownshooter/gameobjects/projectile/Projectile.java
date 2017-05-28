@@ -29,29 +29,40 @@ public class Projectile implements Mobile {
 
         HEIGHT = fieldPosition.getHeight();
         WIDTH = fieldPosition.getWidth();
-        direction = player.getPlayerDirection();
+        direction = player.getFacingDirection();
         projectileSpeed = player.getPlayerSpeed() * 2;
     }
 
 
     @Override
     public void playRound() {
-        move(chooseDirection(), projectileSpeed);
+        move(chooseDirection());
     }
 
     @Override
     public Direction chooseDirection() {
-        if (!fieldPosition.isEdge()) {
-            return direction;
-        }
-        return  Direction.STOPPED;
+       return direction;
     }
 
     @Override
-    public void move(Direction direction, int speed) {
+    public void move(Direction direction) {
 
-        for (int i = 0; i < speed; i++) {
-            fieldPosition.moveInDirection(direction, 1);
+        for (int i = 0; i < projectileSpeed; i++) {
+
+            if (fieldPosition.isEdge()) {
+                System.out.println("IM EDGE");
+                active = false;
+                fieldPosition.hide();
+                return;
+            }
+
+            fieldPosition.moveInDirection(direction);
+            System.out.println("col " + fieldPosition.getColumn() + " row " + fieldPosition.getRow());
+
         }
+    }
+
+    public boolean isActive() {
+        return active;
     }
 }

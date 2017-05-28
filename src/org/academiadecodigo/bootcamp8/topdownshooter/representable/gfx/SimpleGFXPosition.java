@@ -17,16 +17,14 @@ public class SimpleGFXPosition extends AbstractPosition {
     private final int HEIGHT;
     private final int WIDTH;
 
-
-
-    public SimpleGFXPosition(String image, SimpleGFXField field ) {
+    public SimpleGFXPosition(String image, SimpleGFXField field) {
 
         super((int) (Math.random() * field.getRows()), (int) (Math.random() * field.getColumns()), field);
 
         /*
         super((int)(Math.random()*field.getRows()), (int)(Math.random()*field.getColumns()), field);
         while (!this.isEdge()){
-            this.setPos((int)(Math.random()*field.getRows()), (int)(Math.random()*field.getColumns()));
+            this.setPosition((int)(Math.random()*field.getRows()), (int)(Math.random()*field.getColumns()));
         }
         */
         simpleGFXField = field;
@@ -39,15 +37,15 @@ public class SimpleGFXPosition extends AbstractPosition {
 
     }
 
-    public SimpleGFXPosition(int row, int col, String image, SimpleGFXField field) {
+    public SimpleGFXPosition(int row, int columns, String image, SimpleGFXField field) {
 
-        super(row, col, field);
+        super(row, columns, field);
 
         simpleGFXField = field;
         //rectangle = new Rectangle(field.columntoX(col), field.rowToY(row), field.getCELL_SIZE(),
         //        field.getCELL_SIZE());
 
-        picture = new Picture(field.columntoX(col), field.rowToY(row), image);
+        picture = new Picture(field.columntoX(columns), field.rowToY(row), image);
         HEIGHT = picture.getHeight();
         WIDTH = picture.getWidth();
         show();
@@ -63,15 +61,16 @@ public class SimpleGFXPosition extends AbstractPosition {
     @Override
     public void hide() {
         //rectangle.delete();
+        picture.delete();
     }
 
     @Override
-    public void moveInDirection(Direction direction, int distance) {
+    public void moveInDirection(Direction direction) {
 
         int initialColumn = simpleGFXField.columntoX(super.getColumn());
         int initialRow = simpleGFXField.rowToY(super.getRow());
 
-        super.moveInDirection(direction, distance);
+        super.moveInDirection(direction);
 
         int finalColumn = simpleGFXField.columntoX(super.getColumn());
         int finalRow = simpleGFXField.rowToY(super.getRow());
@@ -88,5 +87,15 @@ public class SimpleGFXPosition extends AbstractPosition {
     @Override
     public int getWidth() {
         return WIDTH;
+    }
+
+    @Override
+    public boolean isEdge() {
+        int rightEdge = simpleGFXField.getColumns() - 1 - Math.round(WIDTH / simpleGFXField.getCELL_SIZE());
+        int lowerEdge = simpleGFXField.getRows() - 1 - Math.round(HEIGHT / simpleGFXField.getCELL_SIZE());
+        if (getColumn() == rightEdge || getRow() == lowerEdge || getColumn() == 1 || getRow() == 1) {
+            return true;
+        }
+        return false;
     }
 }

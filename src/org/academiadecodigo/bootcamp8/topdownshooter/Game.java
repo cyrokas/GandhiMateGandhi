@@ -12,7 +12,9 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.PlayerNu
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.Projectile;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.ProjectileType;
 
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 /**
  * Created by codecadet on 24/05/17.
@@ -52,8 +54,8 @@ public class Game {
         //reg1 = GameObjectFactory.getNewEnemy(field);
         playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
 
-        reg1= GameObjectFactory.getNewRegularEnemy(field);
-        reg2= GameObjectFactory.getNewRegularEnemy(field);
+        reg1 = GameObjectFactory.getNewRegularEnemy(field);
+        reg2 = GameObjectFactory.getNewRegularEnemy(field);
         //p1 = new Projectile(playerOne, ProjectileType.FIRE);
     }
 
@@ -73,12 +75,36 @@ public class Game {
     //Game Round
     public void gameRound() {
 
+        Projectile[] projectiles = new Projectile[playerOne.getProjectileList().size()];
+        playerOne.getProjectileList().toArray(projectiles);
+        boolean[] projectileSatus = new boolean[projectiles.length];
+
+        for (int i = 0; i < projectileSatus.length ; i++) {
+            projectileSatus[i] = true;
+        }
+
         playerOne.playRound();
+
+        for (Projectile p : playerOne.getProjectileList()) {
+            p.playRound();
+        }
+
+        for (int i = 0; i < projectiles.length; i++) {
+            if (projectiles[i].isActive()) {
+                projectileSatus[i] = false;
+            }
+        }
 
         //reg1.move(reg1.chooseDirection(reg2.getPos()),1);
 
-        //p1.playRound();
+        for (int i = 0; i < projectileSatus.length; i++) {
+            if (projectileSatus[i] = false) {
+                playerOne.getProjectileList().remove(projectiles[i]);
+            }
+        }
+
+
+
+
     }
-
-
 }

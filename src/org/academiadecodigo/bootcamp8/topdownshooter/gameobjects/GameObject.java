@@ -5,4 +5,6 @@ package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects;
  */
 public abstract class GameObject {
 
+
+
 }

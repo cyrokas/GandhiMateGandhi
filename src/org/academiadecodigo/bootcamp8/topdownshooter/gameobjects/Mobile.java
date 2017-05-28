@@ -9,6 +9,6 @@ public interface Mobile {
 
     void playRound();           //call move, direction
     Direction chooseDirection();
-    void move(Direction direction, int speed);
+    void move(Direction direction);
 
 }

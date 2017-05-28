@@ -12,7 +12,7 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 public class KeyboardController implements KeyboardHandler {
 
     private Direction direction;
-    private boolean moving;
+    private boolean moving = false;
     private boolean shooting = false;
 
     private int[] keyMap;
@@ -100,6 +100,7 @@ public class KeyboardController implements KeyboardHandler {
         }
         if (e.getKey() == keyMap[4]) {
             shooting = true;
+
         }
 
         direction = pressedDirection();

@@ -9,35 +9,41 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.Mobile;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.Projectile;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.ProjectileType;
 
+import java.util.ArrayList;
+
 /**
  * Created by codecadet on 24/05/17.
  */
 public class Player extends GameObject implements Mobile, Hittable {
 
     private int playerSpeed = 5;
+
+    private final int MAX_PROJECTILES = 10;
+    private ArrayList<Projectile> projectileList = new ArrayList<>();
+    //private int projectilesFired;
+
+    private PlayerNumber playerNumber;
     private final int HEIGHT;
     private final int WIDTH;
+
     private Direction playerDirection;
+    private Direction facingDirection;
     private Field field;
     private FieldPosition fieldPosition;
-    private final int MAX_PROJECTILES = 10;
-    private int projectilesFired;
-    private int playerDamage;
 
     private KeyboardController keyboardController;
-    private PlayerNumber playerNumber;
 
     public Player(Field field, PlayerNumber playerNumber) {
 
         this.field = field;
-        this.fieldPosition = field.createRepresentation(field.getRows() / 2, field.getColumns() / 2, playerNumber.getPlayerType().getImage());
+        this.fieldPosition = field.createRepresentation(field.getRows() / 2, field.getColumns() / 2, playerNumber.getPlayerType().getImage()); //Instantiate representation centered in the field
         HEIGHT = fieldPosition.getHeight();
         WIDTH = fieldPosition.getWidth();
         this.playerNumber = playerNumber;
-        projectilesFired = 0;
-        playerDamage = 1;
 
         initialDirection();
+
+        facingDirection = playerDirection;
 
         keyboardControllerConfiguration();
     }
@@ -55,17 +61,16 @@ public class Player extends GameObject implements Mobile, Hittable {
 
     private void initialDirection() {
 
-        Direction[] directions = Direction.values();                    //Array that contains all directions
-        int random = (int) (Math.random() * directions.length);         //Generate random direction from array
-        playerDirection = directions[random];                           //Attribute random direction
+        Direction[] directions = Direction.values();                        //Array that contains all directions
+        int random = (int) (Math.random() * directions.length - 1);         //Generate random direction from array, except stopped
+        playerDirection = directions[random];                               //Attribute random direction
     }
 
     @Override
     public void hit(int damage) {
 
-        new Projectile(this, ProjectileType.FIRE).playRound();
-        projectilesFired++;
-        System.out.println("made one");
+
+
 
     }
 
@@ -78,29 +83,37 @@ public class Player extends GameObject implements Mobile, Hittable {
     public void playRound() {
 
         if (keyboardController.isMoving()) {
-            move(chooseDirection(), playerSpeed);
+            move(chooseDirection());
         }
 
-        if (keyboardController.isShooting() && projectilesFired <= MAX_PROJECTILES) {
-           hit(playerDamage);
+        if (keyboardController.isShooting() && projectileList.size() < MAX_PROJECTILES) {
+            projectileList.add(new Projectile(this, ProjectileType.FIRE));
+            //projectilesFired++;
+            System.out.println("made one?");
         }
+
     }
 
     @Override
     public Direction chooseDirection() {
 
-        return keyboardController.getDirection();
+        Direction newDirection = keyboardController.getDirection();
+
+        if (newDirection != Direction.STOPPED) {
+            facingDirection = newDirection;
+        }
+
+        return newDirection;
     }
 
     @Override
-    public void move(Direction direction, int speed) {
+    public void move(Direction direction) {
 
         Direction newDirection = direction;
-        playerSpeed = speed;
         playerDirection = newDirection;
 
-        for (int i = 0; i < speed; i++) {
-            fieldPosition.moveInDirection(newDirection, 1);
+        for (int i = 0; i < playerSpeed; i++) {
+            fieldPosition.moveInDirection(newDirection);
         }
     }
 
@@ -108,8 +121,8 @@ public class Player extends GameObject implements Mobile, Hittable {
         return field;
     }
 
-    public Direction getPlayerDirection() {
-        return playerDirection;
+    public Direction getFacingDirection() {
+        return facingDirection;
     }
 
     public int getPlayerSpeed() {
@@ -119,4 +132,9 @@ public class Player extends GameObject implements Mobile, Hittable {
     public FieldPosition getFieldPosition() {
         return fieldPosition;
     }
+
+    public ArrayList<Projectile> getProjectileList() {
+        return projectileList;
+    }
 }
+
