@@ -3,12 +3,13 @@ package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.AbstractPosition;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.bonus.Bonus;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.bonus.BonusType;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.Enemy;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.RegularEnemy;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.Shellazar;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.PlayerNumber;
-import org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx.SimpleGFXPosition;
 
 /**
  * Developed @ <Academia de Código_>
@@ -45,6 +46,14 @@ public class GameObjectFactory {
         AbstractPosition pos = field.createRepresentation("/Users/codecadet/Desktop/TopDownShooter/src/org/academiadecodigo/bootcamp8/topdownshooter/gameobjects/player/1571779_k_152.jpg", true);
         return new RegularEnemy(pos, playerpos);
     }
+
+    public static Bonus createNewBonus(Field field, int DELAY) {
+
+        return new Bonus(field, DELAY);
+
+    }
+
+
 
     public static Enemy getNewShellazar(Field field, FieldPosition playerpos) {
         AbstractPosition pos = field.createRepresentation(0, Math.round(field.getColumns() / 2),

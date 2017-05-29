@@ -9,7 +9,7 @@ package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile;
 
 public enum ProjectileType {
 
-    FIRE("/Users/codecadet/Desktop/TopDownShooter/src/org/academiadecodigo/bootcamp8/topdownshooter/gameobjects/projectile/download.jpeg");
+    FIRE("/Users/codecadet/Documents/TopDownShooter/src/org/academiadecodigo/bootcamp8/topdownshooter/gameobjects/projectile/download.jpeg");
 
     private String image;
 
