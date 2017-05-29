@@ -10,11 +10,11 @@ package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.bonus;
 
 public enum BonusType {
 
-    FIRE("/Users/codecadet/Documents/TopDownShooter/src/org/academiadecodigo/bootcamp8/topdownshooter/gameobjects/bonus/fire.jpg", 1, 5), //turns powers to fire
-    WATER("/Users/codecadet/Documents/TopDownShooter/src/org/academiadecodigo/bootcamp8/topdownshooter/gameobjects/bonus/water.jpeg", 2, 5), //turns powers to water, slower enemy
-    EARTH("/Users/codecadet/Documents/TopDownShooter/src/org/academiadecodigo/bootcamp8/topdownshooter/gameobjects/bonus/earth.jpg", 2, 5), //turns powers to earth, damage up, speed down
-    WIND("/Users/codecadet/Documents/TopDownShooter/src/org/academiadecodigo/bootcamp8/topdownshooter/gameobjects/projectile/download.jpeg", 2, 5), //turns powers to wind, speed up
-    HEALTH("/Users/codecadet/Documents/TopDownShooter/src/org/academiadecodigo/bootcamp8/topdownshooter/gameobjects/bonus/health.jpg", 2, 5); //gives health
+    FIRE("Images/Bonus/fire.jpg", 1, 5), //turns powers to fire
+    WATER("Images/Bonus/water.jpeg", 2, 5), //turns powers to water, slower enemy
+    EARTH("Images/Bonus/earth.jpg", 2, 5), //turns powers to earth, damage up, speed down
+    WIND("Images/Bonus/windkappa.jpeg", 2, 5), //turns powers to wind, speed up
+    HEALTH("Images/Bonus/health.jpg", 2, 5); //gives health
 
     private int multiplier;
     private String image;

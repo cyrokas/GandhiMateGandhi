@@ -9,7 +9,7 @@ package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player;
 
 public enum PlayerType {
 
-    P1("/Users/codecadet/Desktop/TopDownShooter/src/org/academiadecodigo/bootcamp8/topdownshooter/gameobjects/player/1571779_k_152.jpg");
+    P1("Images/Player/1571779_k_152.jpg");
 
     private String image;
 
