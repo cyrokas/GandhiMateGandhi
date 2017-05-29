@@ -70,7 +70,7 @@ public class Player extends GameObject implements Movable, Hittable {
         keyboardController = new KeyboardController(playerDirection,
                                                     playerNumber.getUp(), playerNumber.getDown(),
                                                     playerNumber.getLeft(), playerNumber.getRight(),
-                                                    playerNumber.getShoot());
+                                                    playerNumber.getShootFront(), playerNumber.getShootBack());
 
         //Configure keyboardController
         keyboardController.keyMapConfiguration();
@@ -98,6 +98,9 @@ public class Player extends GameObject implements Movable, Hittable {
 
         //Shoot
         if (keyboardController.isShooting() && projectileList.size() < MAX_PROJECTILES) {
+            if (keyboardController.isKiting()) {
+                facingDirection = facingDirection.oppositeDirection();
+            }
             projectileList.add(new Projectile(this, ProjectileType.FIRE));
         }
     }
