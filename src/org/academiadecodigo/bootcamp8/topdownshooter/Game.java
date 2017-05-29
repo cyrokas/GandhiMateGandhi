@@ -13,8 +13,11 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.PlayerNu
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.Projectile;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.ProjectileType;
 
+import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 /**
  * Created by codecadet on 24/05/17.
@@ -40,6 +43,8 @@ public class Game {
     private final int BONUS_CHANCE = 2;
     private final int BONUS_DURATION;
     private ArrayList<Bonus> bonusList = new ArrayList<>();
+    private ArrayList<Enemy> enemyArrayList = new ArrayList<Enemy>();
+    private int maxEnemiesPerLevel = 20;
 
     //Constructor
     public Game(int rows, int columns, int delay, FieldType fieldType) {
@@ -60,6 +65,8 @@ public class Game {
 
         playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
 
+        //reg1 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
+        //reg2 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
         //reg1= GameObjectFactory.getNewRegularEnemy(field);
         //reg2= GameObjectFactory.getNewRegularEnemy(field);
         //p1 = new Projectile(playerOne, ProjectileType.FIRE);
@@ -98,14 +105,36 @@ public class Game {
 
         }
 
+        int activeProjectiles = 0;
+
+
         playerOne.playRound();
 
-        //reg1.move(reg1.chooseDirection(reg2.getPos()),1);
+        for (Projectile p : playerOne.getProjectileList()) {
+            if (p.isActive()) {
+                activeProjectiles++;
+                p.playRound();
+            }
+        }
+        int enemyodds = (int) (Math.random() * 200);
+        if (enemyArrayList.size() < maxEnemiesPerLevel) {
+            if (enemyodds < 3) {
+                enemyArrayList.add(GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition()));
+            }
+        }
 
+        for (int i = 0; i < enemyArrayList.size(); i++) {
+            Enemy e = enemyArrayList.get(i);
+            e.playRound();
+        }
         //p1.playRound();
 
 
+        if (activeProjectiles == 0)
+
+        {
+            playerOne.reload();
+        }
+
     }
-
-
 }

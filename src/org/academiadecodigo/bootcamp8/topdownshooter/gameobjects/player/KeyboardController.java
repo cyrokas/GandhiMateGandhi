@@ -11,22 +11,26 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
  */
 public class KeyboardController implements KeyboardHandler {
 
-    private Direction direction;
-    private boolean moving;
-    private boolean shooting = false;
+    private Direction direction;                            //Pressed direction
+    private boolean moving = false;                         //Movement status
+    private boolean shooting = false;                       //Shoot status
 
-    private int[] keyMap;
-    private boolean[] pressedKeys = new boolean[4];
+    private int[] keyMap;                                   //Available keys
+    private boolean[] pressedKeys = new boolean[4];         //Key status - pressed or not
     Keyboard k;
 
     public KeyboardController(Direction direction, int upKey, int downKey, int leftKey, int rightKey, int shoot) {
 
         this.direction = direction;
 
+        //Instantiate keyboard
         k = new Keyboard(this);
+
+        //Define available keys
         keyMap = new int[] {upKey, downKey, leftKey, rightKey, shoot};
     }
 
+    //Instantiates KeyboardEvents and adds EventListeners
     public void keyMapConfiguration() {
 
         KeyboardEvent pressUp = new KeyboardEvent();
@@ -81,6 +85,7 @@ public class KeyboardController implements KeyboardHandler {
 
     }
 
+    //Detects pressed keys
     @Override
     public void keyPressed(KeyboardEvent e) {
 
@@ -100,11 +105,14 @@ public class KeyboardController implements KeyboardHandler {
         }
         if (e.getKey() == keyMap[4]) {
             shooting = true;
+
         }
 
+        //Updates direction
         direction = pressedDirection();
     }
 
+    //Detects released keys
     @Override
     public void keyReleased (KeyboardEvent e) {
 
@@ -126,11 +134,13 @@ public class KeyboardController implements KeyboardHandler {
 
         direction = pressedDirection();
 
+        //Stops player if no keys is pressed
         if(direction == Direction.STOPPED) {
             moving = false;
         }
     }
 
+    //Redirects player according to pressed keys
     private Direction pressedDirection() {
 
         if (pressedKeys[0] && pressedKeys[2]) {

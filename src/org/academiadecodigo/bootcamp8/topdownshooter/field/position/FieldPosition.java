@@ -11,15 +11,15 @@ public interface FieldPosition {
 
     int getRow();
 
-    void setPos(int row, int col);
+    void setPosition(int row, int column);
 
-    void moveInDirection(Direction direction, int speed);
+    void moveInDirection(Direction direction);
 
     void show();
 
     void hide();
 
-    boolean equals(FieldPosition position);
+    boolean equals(FieldPosition position);                             //What's this?
 
     boolean isEdge();
 

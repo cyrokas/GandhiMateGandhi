@@ -8,20 +8,16 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
  */
 public abstract class AbstractPosition implements FieldPosition {
 
-    private int column;
-    private int row;
+    private int column;                                     //Horizontal position
+    private int row;                                        //Vertical position
+    private Field field;                                    //Game field
 
-    private int maxDistance = 0;
-
-    private Field field;
-
+    //Constructor
     public AbstractPosition(int row, int column, Field field) {
 
         this.row = row;
         this.column = column;
-
         this.field = field;
-
     }
 
     public Field getField() {
@@ -29,10 +25,11 @@ public abstract class AbstractPosition implements FieldPosition {
     }
 
     @Override
-    public void setPos(int row, int column) {
+    public void setPosition(int row, int column) {
 
         this.row = row;
         this.column = column;
+        //show();
     }
 
     @Override
@@ -45,152 +42,116 @@ public abstract class AbstractPosition implements FieldPosition {
         return row;
     }
 
+    //Move object in argument direction. Do nothing if direction is STOPPED
     @Override
-    public void moveInDirection(Direction direction, int distance) {
+    public void moveInDirection(Direction direction) {
 
         switch (direction) {
             case UP:
-                moveUp(distance);
+                moveUp();
                 break;
             case DOWN:
-                moveDown(distance);
+                moveDown();
                 break;
             case LEFT:
-                moveLeft(distance);
+                moveLeft();
                 break;
             case RIGHT:
-                moveRight(distance);
+                moveRight();
                 break;
             case DOWN_RIGHT:
-                moveDownRight(distance);
+                moveDownRight();
                 break;
             case DOWN_LEFT:
-                moveDownLeft(distance);
+                moveDownLeft();
                 break;
             case UP_RIGHT:
-                moveUpRight(distance);
+                moveUpRight();
                 break;
             case UP_LEFT:
-                moveUpLeft(distance);
+                moveUpLeft();
                 break;
+            case STOPPED:
+               break;
+
+        }
+
+        show();
+    }
+
+    @Override                                                                                                                   //What's this?
+    public boolean equals(FieldPosition position) {
+        return column == position.getColumn() && row == position.getRow();
+    }
+
+    //Can move right AND down
+    private void moveDownRight() {
+
+        if (column + 1 + getWidth() < field.getColumns() && row + 1 + getHeight() < field.getRows()) {
+            setPosition(row + 1, column + 1);
         }
     }
 
+    //Can move down AND left
+    private void moveDownLeft() {
+
+        if (column - 1 > 0 && row + 1 + getHeight() < field.getRows()) {
+            setPosition(row + 1, column - 1);
+        }
+    }
+
+    //Can move up AND right
+    private void moveUpRight() {
+
+        if (column + 1 + getWidth() < field.getColumns() && row - 1 > 0) {
+            setPosition(row - 1, column + 1);
+        }
+    }
+
+    //Can move up AND left
+    private void moveUpLeft() {
+
+        if (column - 1 > 0 && row - 1 > 0) {
+            setPosition(row - 1, column - 1);
+        }
+    }
+
+    //Can move up
+    private void moveUp() {
+
+        if (row - 1 > 0) {
+            setPosition(row - 1, column);
+        }
+    }
+
+    //Can move down
+    private void moveDown() {
+
+        if (row + 1 + getHeight() < field.getRows()) {
+            setPosition(row + 1, column);
+        }
+    }
+
+    //Can move left
+    public void moveLeft() {
+
+        if (column - 1 > 0) {
+            setPosition(row, column - 1);
+        }
+    }
+
+    //Can move right
+    public void moveRight() {
+
+        if (column + 1 + getWidth() < field.getColumns()) {
+            setPosition(row, column + 1);
+        }
+    }
+
+    //Detects field borders, without overlapping them
     @Override
-    public boolean equals(FieldPosition pos) {
-
-        return (column == pos.getColumn() && row == pos.getRow());
-    }
-
-    private void moveDownRight(int distance) {
-
-        if (column + distance + getWidth() < field.getColumns() && row + distance + getHeight() < field.getRows()) {
-            maxDistance = distance;
-            setPos(row + maxDistance, column + maxDistance);
-            show();
-            return;
-        }
-
-        if (column + distance + getWidth() < field.getColumns()) {
-            moveRight(distance);
-            return;
-        }
-
-        moveDown(distance);
-    }
-
-    private void moveDownLeft(int distance) {
-
-        if (column - distance >= 1 && row + distance + getHeight() < field.getRows()) {
-            maxDistance = distance;
-            setPos(row + maxDistance, column - maxDistance);
-            show();
-            return;
-        }
-
-        if (column - distance >= 1) {
-            moveLeft(distance);
-            return;
-        }
-
-        moveDown(distance);
-    }
-
-    private void moveUpRight(int distance) {
-
-        if (column + distance + getWidth() < field.getColumns() && row - distance >= 1) {
-            maxDistance = distance;
-            setPos(row - maxDistance, column + maxDistance);
-            show();
-        }
-
-        if (column + distance + getWidth() < field.getColumns()) {
-            moveRight(distance);
-            return;
-        }
-
-        moveUp(distance);
-    }
-
-    private void moveUpLeft(int distance) {
-
-        if (column - distance - getHeight() >= 1 && row - distance >= 1) {
-            maxDistance = distance;
-            setPos(row - maxDistance, column - maxDistance);
-            show();
-            return;
-        }
-
-        if (column - distance + getWidth() >= 1) {
-            moveLeft(distance);
-            return;
-        }
-
-        moveUp(distance);
-    }
-
-    private void moveUp(int distance) {
-
-        if (row - distance >= 1) {
-            maxDistance = distance;
-            setPos(row - maxDistance, column);
-            show();
-        }
-    }
-
-    private void moveDown(int distance) {
-
-        if (row + distance + getHeight() < field.getRows()) {
-            maxDistance = distance;
-            setPos(row + maxDistance, column);
-            show();
-        }
-    }
-
-    public void moveLeft(int distance) {
-
-        if (column - distance >= 1) {
-            maxDistance = distance;
-            setPos(row, column - maxDistance);
-            show();
-        }
-    }
-
-    public void moveRight(int distance) {
-
-        if (column + distance + getWidth() < field.getColumns()) {
-            maxDistance = distance;
-            setPos(row, column + maxDistance);
-            show();
-        }
-    }
-
     public boolean isEdge() {
-        if (column == 0 || column == field.getColumns() - 1 || row == 0 || row == field.getRows() - 1) {
-            return true;
-        }
-        return false;
+        return column == 1 || column == field.getColumns() - 1 ||
+                row == 1 || row == field.getRows() - 1;
     }
-
-
 }

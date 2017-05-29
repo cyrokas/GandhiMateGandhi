@@ -6,5 +6,4 @@ package org.academiadecodigo.bootcamp8.topdownshooter.field;
 public enum FieldType {
 
     SIMPLE_GFX
-
 }

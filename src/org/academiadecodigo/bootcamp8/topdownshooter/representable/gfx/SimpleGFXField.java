@@ -10,7 +10,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
  */
 public class SimpleGFXField implements Field {
 
-    private final  int PADDING = 10;
+    private final int PADDING = 10;
     private int columns;
     private int rows;
     private Rectangle field;
@@ -19,8 +19,8 @@ public class SimpleGFXField implements Field {
 
     public SimpleGFXField(int rows, int columns) {
 
-     this.rows = rows;
-     this.columns = columns;
+        this.rows = rows;
+        this.columns = columns;
 
     }
 
@@ -40,32 +40,32 @@ public class SimpleGFXField implements Field {
         return rows;
     }
 
-    public int getWidth(){
-        return columns*CELL_SIZE;
+    public int getWidth() {
+        return columns * CELL_SIZE;
     }
 
-    public int getHeight(){
-        return rows*CELL_SIZE;
+    public int getHeight() {
+        return rows * CELL_SIZE;
     }
 
-    public int getCELL_SIZE(){
+    public int getCELL_SIZE() {
         return CELL_SIZE;
     }
 
-    public int getX(){
+    public int getX() {
         return PADDING;
     }
 
-    public int getY(){
+    public int getY() {
         return PADDING;
     }
 
-    public int columntoX(int col){
-        return PADDING+col*CELL_SIZE;
+    public int columntoX(int col) {
+        return PADDING + col * CELL_SIZE;
     }
 
-    public int rowToY(int row){
-        return PADDING+row*CELL_SIZE;
+    public int rowToY(int row) {
+        return PADDING + row * CELL_SIZE;
     }
 
     @Override
@@ -74,8 +74,8 @@ public class SimpleGFXField implements Field {
     }
 
     @Override
-    public AbstractPosition createRepresentation(int row, int col, String image){
-        return new SimpleGFXPosition(row,col,image, this);
+    public AbstractPosition createRepresentation(int row, int col, String image) {
+        return new SimpleGFXPosition(row, col, image, this);
     }
 
 }

@@ -7,6 +7,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx.SimpleGFX
  */
 public class FieldFactory {
 
+    //Initializes a field according to argument library
     public static Field getNewField(FieldType fieldType, int rows, int columns) {
 
         switch (fieldType) {

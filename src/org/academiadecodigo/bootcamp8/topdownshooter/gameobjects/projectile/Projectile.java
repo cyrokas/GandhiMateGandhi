@@ -13,7 +13,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
 public class Projectile implements Mobile {
 
     private int projectileSpeed;
-    private boolean active = false;
+    private boolean active = true;
     private ProjectileType projectileType;
     private FieldPosition fieldPosition;
     private Field field;
@@ -29,29 +29,40 @@ public class Projectile implements Mobile {
 
         HEIGHT = fieldPosition.getHeight();
         WIDTH = fieldPosition.getWidth();
-        direction = player.getPlayerDirection();
+        direction = player.getFacingDirection();
         projectileSpeed = player.getPlayerSpeed() * 2;
     }
 
 
     @Override
     public void playRound() {
-        move(chooseDirection(), projectileSpeed);
+        move(chooseDirection());
+        System.out.println(active);
     }
 
     @Override
     public Direction chooseDirection() {
-        if (!fieldPosition.isEdge()) {
-            return direction;
-        }
-        return  Direction.STOPPED;
+       return direction;
     }
 
     @Override
-    public void move(Direction direction, int speed) {
+    public void move(Direction direction) {
 
-        for (int i = 0; i < speed; i++) {
-            fieldPosition.moveInDirection(direction, 1);
+        for (int i = 0; i < projectileSpeed; i++) {
+
+            if (fieldPosition.isEdge()) {
+                active = false;
+                fieldPosition.hide();
+
+                return;
+            }
+
+            fieldPosition.moveInDirection(direction);
+
         }
+    }
+
+    public boolean isActive() {
+        return active;
     }
 }
