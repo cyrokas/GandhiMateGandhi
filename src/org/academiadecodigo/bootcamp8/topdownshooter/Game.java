@@ -1,5 +1,6 @@
 package org.academiadecodigo.bootcamp8.topdownshooter;
 
+import org.academiadecodigo.bootcamp8.topdownshooter.Menu.State;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldFactory;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldType;
@@ -14,6 +15,11 @@ import java.util.LinkedList;
  * Created by codecadet on 24/05/17.
  */
 public class Game {
+
+
+
+    // Game state
+    private State state;
 
     //Game field
     private Field field;
@@ -33,18 +39,27 @@ public class Game {
 
         field = FieldFactory.getNewField(fieldType, rows, columns);
         DELAY = delay;
+        state = State.MENU;
 
     }
 
     //Game setup
     public void setup() {
 
-        field.setup();
+        if (state == State.MENU) {
+            field.setup();
+            field.createRepresentation(70, 150, "/Users/codecadet/TopDownShooter/play button.jpg");
+            field.createRepresentation(140, 150, "/Users/codecadet/TopDownShooter/quit button.jpg");
 
-        //Test
-        reg1 = GameObjectFactory.getNewEnemy(field);
-        playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
+        } else {
 
+            field.setup();
+
+            //Test
+            reg1 = GameObjectFactory.getNewEnemy(field);
+            playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
+
+        }
     }
 
     //Game Loop
