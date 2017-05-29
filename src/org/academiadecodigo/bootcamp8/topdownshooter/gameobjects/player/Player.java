@@ -60,7 +60,7 @@ public class Player extends GameObject implements Movable, Hittable {
 
         keyboardControllerConfiguration();
 
-        score = new Score(field);                           //Creating Score
+        score = new Score(field, playerNumber);                           //Creating Score
     }
 
     private void initialDirection() {
@@ -74,9 +74,9 @@ public class Player extends GameObject implements Movable, Hittable {
 
         //Instantiate keyboardController
         keyboardController = new KeyboardController(playerDirection,
-                                                    playerNumber.getUp(), playerNumber.getDown(),
-                                                    playerNumber.getLeft(), playerNumber.getRight(),
-                                                    playerNumber.getShootFront(), playerNumber.getShootBack());
+                playerNumber.getUp(), playerNumber.getDown(),
+                playerNumber.getLeft(), playerNumber.getRight(),
+                playerNumber.getShootFront(), playerNumber.getShootBack());
 
         //Configure keyboardController
         keyboardController.keyMapConfiguration();
@@ -107,7 +107,7 @@ public class Player extends GameObject implements Movable, Hittable {
 
             //Shoot while moving backwards
             if (keyboardController.isKiting()) {
-               projectileList.add(new Projectile(this, projectileType, true));
+                projectileList.add(new Projectile(this, projectileType, true));
             }
             //Shoot while moving forward
             else {
@@ -124,7 +124,7 @@ public class Player extends GameObject implements Movable, Hittable {
         //Update facing direction if player isn't stopped
         if (newDirection != Direction.STOPPED) {
             facingDirection = newDirection;
-            score.incrementPoints();                                                // Incrementetion points when he moves
+            score.addPoints();                                                // Incrementetion points when he moves
         }
 
         return newDirection;
@@ -170,12 +170,5 @@ public class Player extends GameObject implements Movable, Hittable {
 
         return projectileList;
     }
-
-
-
-    public int getPoints(){
-        return score.getPoints();
-    }
-
 }
 

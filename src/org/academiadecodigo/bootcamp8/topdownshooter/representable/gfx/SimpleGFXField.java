@@ -14,7 +14,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class SimpleGFXField implements Field {
 
-    private final  int PADDING = 20;
+    private final int PADDING = 20;
     private int columns;
     private int rows;
     private Rectangle field;
@@ -45,15 +45,15 @@ public class SimpleGFXField implements Field {
         return rows;
     }
 
-        /*
+    /*
 
-    public int getWidth() {
-        return columns * CELL_SIZE;
-    }
+public int getWidth() {
+    return columns * CELL_SIZE;
+}
 
-    public int getHeight() {
-        return rows * CELL_SIZE;
-    }
+public int getHeight() {
+    return rows * CELL_SIZE;
+}
 
 */
     public int getCellSize() {
@@ -93,8 +93,9 @@ public class SimpleGFXField implements Field {
     }
 
     //TESTING
-    public SimpleGFXScore createRepresentationScore(){
-        return new SimpleGFXScore(this);
+    public SimpleGFXScore createRepresentationScore(int points) {
+
+        return new SimpleGFXScore(this, points);
     }
 
 }

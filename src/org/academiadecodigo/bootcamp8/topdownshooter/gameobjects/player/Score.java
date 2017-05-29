@@ -1,42 +1,45 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
-import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;
+import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldScore;
+
 
 /**
- * Created by codecadet on 28/05/17.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet> Cyrille Feijó
  */
 public class Score {
 
     //Proprieties
     private int points;                                                             //Points for each player
     private Field field;
-    private FieldPosition fieldPosition;
-    private String textMessage;
+    private FieldScore fieldScore;
+    private PlayerNumber playerNumber;
 
     //Constructor
-    public Score(Field field){
+    public Score(Field field, PlayerNumber playerNumber) {
 
         points = 0;
         this.field = field;
-        this.fieldPosition = field.createRepresentationScore();
-        textMessage = "P1 points : " + points;
+        this.playerNumber = playerNumber;
+        this.fieldScore = field.createRepresentationScore(points);
 
     }
 
-    public void incrementPoints(){
+    public void addPoints() {
+        fieldScore.hide();
         points++;
-        System.out.println("Player1 points: " + points);
+        fieldScore.show(points, playerNumber);
+        System.out.println(playerNumber + " points: " + points);
     }
 
 
     //Getters
     //Getter to get points if needed
-    public int getPoints(){
+    public int getPoints() {
         return points;
     }
 
-    public void textMessage(){
-
-    }
 }
