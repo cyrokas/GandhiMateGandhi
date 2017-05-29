@@ -24,7 +24,7 @@ public class Projectile implements Movable {
     private final int WIDTH;
     private Direction direction;
 
-    public Projectile(Player player, ProjectileType projectileType) {
+    public Projectile(Player player, ProjectileType projectileType, boolean kiting) {
 
         field = player.getField();
         this.projectileType = projectileType;
@@ -32,7 +32,14 @@ public class Projectile implements Movable {
 
         HEIGHT = fieldPosition.getHeight();
         WIDTH = fieldPosition.getWidth();
-        direction = player.getFacingDirection();
+
+        if (kiting) {
+            direction = player.getFacingDirection().oppositeDirection();
+        }
+        else {
+            direction = player.getFacingDirection();
+        }
+
         projectileSpeed = player.getPlayerSpeed() * 2;
     }
 

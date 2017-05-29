@@ -26,6 +26,7 @@ public class Player extends GameObject implements Movable, Hittable {
 
     private final int MAX_PROJECTILES = 10;
     private ArrayList<Projectile> projectileList = new ArrayList<>();                       //Projectile list
+    private ProjectileType projectileType = ProjectileType.FIRE;
 
     private PlayerNumber playerNumber;
     private final int HEIGHT;
@@ -70,7 +71,7 @@ public class Player extends GameObject implements Movable, Hittable {
         keyboardController = new KeyboardController(playerDirection,
                                                     playerNumber.getUp(), playerNumber.getDown(),
                                                     playerNumber.getLeft(), playerNumber.getRight(),
-                                                    playerNumber.getShoot());
+                                                    playerNumber.getShootFront(), playerNumber.getShootBack());
 
         //Configure keyboardController
         keyboardController.keyMapConfiguration();
@@ -98,7 +99,15 @@ public class Player extends GameObject implements Movable, Hittable {
 
         //Shoot
         if (keyboardController.isShooting() && projectileList.size() < MAX_PROJECTILES) {
-            projectileList.add(new Projectile(this, ProjectileType.FIRE));
+
+            //Shoot while moving backwards
+            if (keyboardController.isKiting()) {
+               projectileList.add(new Projectile(this, projectileType, true));
+            }
+            //Shoot while moving forward
+            else {
+                projectileList.add(new Projectile(this, projectileType, false));
+            }
         }
     }
 
