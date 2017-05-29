@@ -10,8 +10,13 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.Proj
 import java.util.LinkedList;
 
 /**
- * Created by codecadet on 25/05/17.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet>
+ * <Code Cadet>
  */
+
 public class HitDetection {
 
     public static void checkEnemyVsPlayer(LinkedList<Enemy> enemyLinkedList, Player player){

@@ -1,8 +1,12 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.field;
 
 /**
- * Created by cyrokas on 26-05-2017.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet> Cyrille Feijó
  */
+
 public enum FieldType {
 
     SIMPLE_GFX

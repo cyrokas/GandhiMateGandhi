@@ -1,8 +1,13 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy;
 
 /**
- * Created by codecadet on 24/05/17.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet> João Portela
+ * <Code Cadet> Robin Opinião
  */
+
 public enum EnemyType {
     REGULAR,
     BOSS_SHELLAZAR,

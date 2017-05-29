@@ -1,8 +1,13 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.bonus;
 
 /**
- * Created by codecadet on 24/05/17.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet> Tiago Santos
+ * <Code Cadet> Filipe Santos Sá
  */
+
 public abstract class Bonus {
 
 }

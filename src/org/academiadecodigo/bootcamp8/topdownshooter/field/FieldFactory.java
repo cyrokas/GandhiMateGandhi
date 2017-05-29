@@ -3,8 +3,12 @@ package org.academiadecodigo.bootcamp8.topdownshooter.field;
 import org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx.SimpleGFXField;
 
 /**
- * Created by cyrokas on 26-05-2017.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet> Cyrille Feijó
  */
+
 public class FieldFactory {
 
     //Initializes a field according to argument library

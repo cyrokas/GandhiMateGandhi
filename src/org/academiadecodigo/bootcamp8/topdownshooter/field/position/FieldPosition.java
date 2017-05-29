@@ -3,8 +3,14 @@ package org.academiadecodigo.bootcamp8.topdownshooter.field.position;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Direction;
 
 /**
- * Created by codecadet on 25/05/17.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet> Filipe Santos Sá
+ * <Code Cadet> Cyrille Feijó
+ * <Code Cadet> João Portela
  */
+
 public interface FieldPosition {
 
     int getColumn();

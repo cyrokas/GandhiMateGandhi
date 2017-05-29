@@ -1,8 +1,12 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects;
 
 /**
- * Created by codecadet on 24/05/17.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet> Cyrille Feijó
  */
+
 public abstract class GameObject {
 
 

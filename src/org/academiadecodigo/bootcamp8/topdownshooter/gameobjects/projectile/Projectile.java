@@ -3,14 +3,17 @@ package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Direction;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;
-import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.Mobile;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.Movable;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
 
 /**
- * Created by codecadet on 24/05/17.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet> Filipe Santos Sá
  */
 
-public class Projectile implements Mobile {
+public class Projectile implements Movable {
 
     private int projectileSpeed;
     private boolean active = true;
@@ -36,12 +39,13 @@ public class Projectile implements Mobile {
 
     @Override
     public void playRound() {
+
         move(chooseDirection());
-        System.out.println(active);
     }
 
     @Override
     public Direction chooseDirection() {
+
        return direction;
     }
 
@@ -53,16 +57,15 @@ public class Projectile implements Mobile {
             if (fieldPosition.isEdge()) {
                 active = false;
                 fieldPosition.hide();
-
                 return;
             }
 
             fieldPosition.moveInDirection(direction);
-
         }
     }
 
     public boolean isActive() {
+
         return active;
     }
 }

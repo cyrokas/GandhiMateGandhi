@@ -18,8 +18,16 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 /**
- * Created by codecadet on 24/05/17.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet> Filipe Santos Sá
+ * <Code Cadet> Cyrille Feijó
+ * <Code Cadet> João Portela
+ * <Code Cadet> Tiago Santos
+ * <Code Cadet> Robin Opinião
  */
+
 public class Game {
 
     //Game field
@@ -32,7 +40,6 @@ public class Game {
     private final int DELAY;
 
     //Testing
-    //private GameObject reg1;
     private Player playerOne;
     private Enemy reg1;
     private Enemy reg2;
@@ -89,6 +96,11 @@ public class Game {
                 p.playRound();
             }
         }
+
+        if (activeProjectiles == 0) {
+            playerOne.reload();
+        }
+
         int enemyodds = (int) (Math.random() * 200);
         if (enemyArrayList.size() < maxEnemiesPerLevel) {
             if (enemyodds < 3) {
@@ -101,9 +113,7 @@ public class Game {
             e.playRound();
         }
 
-        if (activeProjectiles == 0) {
-            playerOne.reload();
-        }
+
 
     }
 }

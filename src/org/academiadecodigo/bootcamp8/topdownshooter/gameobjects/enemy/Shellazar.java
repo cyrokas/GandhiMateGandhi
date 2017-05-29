@@ -6,8 +6,13 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPositio
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.Projectile;
 
 /**
- * Created by codecadet on 28/05/17.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet> João Portela
+ * <Code Cadet> Robin Opinião
  */
+
 public class Shellazar extends Enemy {
 
     public Shellazar(AbstractPosition pos, FieldPosition playerpos) {

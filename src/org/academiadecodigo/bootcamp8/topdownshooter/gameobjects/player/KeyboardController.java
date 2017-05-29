@@ -7,8 +7,12 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
 /**
- * Created by codecadet on 23/05/17.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet> Filipe Santos Sá
  */
+
 public class KeyboardController implements KeyboardHandler {
 
     private Direction direction;                            //Pressed direction
@@ -171,14 +175,17 @@ public class KeyboardController implements KeyboardHandler {
     }
 
     public Direction getDirection() {
+
         return direction;
     }
 
     public boolean isMoving() {
+
         return moving;
     }
 
-    public boolean isShooting(){
+    public boolean isShooting() {
+
         return shooting;
     }
 

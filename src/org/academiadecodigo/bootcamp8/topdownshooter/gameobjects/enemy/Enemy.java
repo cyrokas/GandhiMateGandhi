@@ -4,14 +4,19 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.Direction;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.AbstractPosition;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.Hittable;
-import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.Mobile;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.Movable;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;
 
 /**
- * Created by codecadet on 24/05/17.
+ * <Academia de Código_>
+ * Created by
+ * <Code Cadet> João Portela
+ * <Code Cadet> Cyrille Feijó
+ * <Code Cadet> Robin Opinião
  */
-public abstract class Enemy extends GameObject implements Mobile, Hittable {
+
+public abstract class Enemy extends GameObject implements Movable, Hittable {
     private int health;
     private boolean dead;
     private Direction currentDirection;

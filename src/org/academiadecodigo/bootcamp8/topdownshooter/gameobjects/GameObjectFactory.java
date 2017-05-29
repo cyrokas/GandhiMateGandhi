@@ -11,8 +11,15 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.PlayerNu
 import org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx.SimpleGFXPosition;
 
 /**
- * Created by codecadet on 24/05/17.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet> Filipe Santos Sá
+ * <Code Cadet> Tiago Santos
+ * <Code Cadet> João Portela>
+ * <Code Cadet> Cyrille Feijó>
  */
+
 public class GameObjectFactory {
 
     /*
@@ -22,6 +29,7 @@ public class GameObjectFactory {
 
    */
     public static Player createNewPlayer(Field field, PlayerNumber playerNumber) {
+
         return new Player(field, playerNumber);
     }
 
@@ -34,7 +42,7 @@ public class GameObjectFactory {
            col = (int) (Math.random() * field.getColumns());
         }
         */
-        AbstractPosition pos = field.createRepresentation("/Users/codecadet/Desktop/TopDownShooter/src/org/academiadecodigo/bootcamp8/topdownshooter/gameobjects/player/1571779_k_152.jpg");
+        AbstractPosition pos = field.createRepresentation("/Users/codecadet/Desktop/TopDownShooter/src/org/academiadecodigo/bootcamp8/topdownshooter/gameobjects/player/1571779_k_152.jpg", true);
         return new RegularEnemy(pos, playerpos);
     }
 

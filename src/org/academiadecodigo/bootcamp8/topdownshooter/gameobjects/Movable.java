@@ -6,7 +6,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPositio
 /**
  * Created by codecadet on 24/05/17.
  */
-public interface Mobile {
+public interface Movable {
 
     void playRound();           //call move, direction
     Direction chooseDirection();
