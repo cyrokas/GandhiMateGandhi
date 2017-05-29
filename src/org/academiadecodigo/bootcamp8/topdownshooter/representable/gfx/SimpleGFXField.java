@@ -10,7 +10,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
  */
 public class SimpleGFXField implements Field {
 
-    private final  int PADDING = 10;
+    private final  int PADDING = 20;
     private int columns;
     private int rows;
     private Rectangle field;
@@ -76,6 +76,11 @@ public class SimpleGFXField implements Field {
     @Override
     public AbstractPosition createRepresentation(int row, int col, String image){
         return new SimpleGFXPosition(row,col,image, this);
+    }
+
+    //TESTING
+    public SimpleGFXScore createRepresentationScore(){
+        return new SimpleGFXScore(this);
     }
 
 }

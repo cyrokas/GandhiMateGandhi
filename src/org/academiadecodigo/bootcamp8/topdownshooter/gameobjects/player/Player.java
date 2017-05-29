@@ -34,6 +34,8 @@ public class Player extends GameObject implements Mobile, Hittable {
 
     private KeyboardController keyboardController;
 
+    private Score score;                                                                    //Score of player FOR TESTING PLAYER WILL EARN POINTS WITH MOVE
+
     public Player(Field field, PlayerNumber playerNumber) {
 
         this.field = field;
@@ -47,6 +49,8 @@ public class Player extends GameObject implements Mobile, Hittable {
         facingDirection = playerDirection;
 
         keyboardControllerConfiguration();
+
+        score = new Score(field);                           //Creating Score
     }
 
     private void keyboardControllerConfiguration() {
@@ -100,6 +104,7 @@ public class Player extends GameObject implements Mobile, Hittable {
 
         if (newDirection != Direction.STOPPED) {
             facingDirection = newDirection;
+            score.incrementPoints();                                                // Incrementetion points when he moves
         }
 
         return newDirection;
@@ -138,6 +143,10 @@ public class Player extends GameObject implements Mobile, Hittable {
 
     public void reload() {
         projectilesFired = 0;
+    }
+
+    public int getPoints(){
+        return score.getPoints();
     }
 
 }
