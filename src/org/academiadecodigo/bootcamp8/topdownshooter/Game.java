@@ -50,8 +50,8 @@ public class Game {
     private final int BONUS_CHANCE = 2;
     private final int BONUS_DURATION;
     private ArrayList<Bonus> bonusList = new ArrayList<>();
-    private ArrayList<Enemy> enemyArrayList = new ArrayList<Enemy>();
-    private int maxEnemiesPerLevel = 20;
+    private ArrayList<Enemy> enemyArrayList = new ArrayList<>();
+    private int maxEnemiesPerLevel = 1;
 
     //Constructor
     public Game(int rows, int columns, int delay, FieldType fieldType) {
@@ -140,8 +140,6 @@ public class Game {
             e.playRound();
         }
         //p1.playRound();
-
-
 
     }
 }

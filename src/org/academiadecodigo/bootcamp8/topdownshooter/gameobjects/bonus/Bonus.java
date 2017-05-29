@@ -31,9 +31,6 @@ public class Bonus extends GameObject {
         BONUS_DURATION = bonusType.getDuration() * DELAY;
         this.fieldPosition = field.createRepresentation(bonusType.getImage(), false);
         active = true;
-
-        System.out.println("col " + fieldPosition.getColumn());
-        System.out.println("row " + fieldPosition.getRow());
     }
 
     public void initialBonus() {

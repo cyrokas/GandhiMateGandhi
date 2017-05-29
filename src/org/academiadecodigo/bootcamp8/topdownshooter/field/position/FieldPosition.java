@@ -25,12 +25,16 @@ public interface FieldPosition {
 
     void hide();
 
-    boolean equals(FieldPosition position);                             //What's this?
+    boolean collidedWith(FieldPosition position);                             //What's this?
 
     boolean isEdge();
 
     int getHeight();
 
     int getWidth();
+
+    int getMaxRow();
+
+    int getMaxColumn();
 
 }

@@ -43,7 +43,7 @@ public class GameObjectFactory {
            col = (int) (Math.random() * field.getColumns());
         }
         */
-        AbstractPosition pos = field.createRepresentation("/Users/codecadet/Desktop/TopDownShooter/src/org/academiadecodigo/bootcamp8/topdownshooter/gameobjects/player/1571779_k_152.jpg", true);
+        AbstractPosition pos = field.createRepresentation("Images/Enemy/regularEnemy.jpg", true);
         return new RegularEnemy(pos, playerpos);
     }
 
@@ -57,7 +57,7 @@ public class GameObjectFactory {
 
     public static Enemy getNewShellazar(Field field, FieldPosition playerpos) {
         AbstractPosition pos = field.createRepresentation(0, Math.round(field.getColumns() / 2),
-                "/Users/codecadet/Desktop/TopDownShooter/src/org/academiadecodigo/bootcamp8/topdownshooter/gameobjects/player/1571779_k_152.jpg");
+                "Images/Enemy/regularEnemy.jpg");
         return new Shellazar(pos, playerpos);
     }
 }
