@@ -1,8 +1,13 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects;
 
 /**
- * Created by codecadet on 24/05/17.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet> Filipe Santos Sá
+ * <Code Cadet> Cyrille Feijó
  */
+
 public interface Hittable {
 
     void hit(int damage);

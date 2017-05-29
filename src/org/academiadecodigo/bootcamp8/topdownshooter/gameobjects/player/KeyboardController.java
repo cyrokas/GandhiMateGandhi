@@ -7,19 +7,24 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
 /**
- * Created by codecadet on 23/05/17.
+ * Developed @ <Academia de Código_>
+ * <p>
+ * Created by
+ * <Code Cadet> Filipe Santos Sá
  */
+
 public class KeyboardController implements KeyboardHandler {
 
     private Direction direction;                            //Pressed direction
     private boolean moving = false;                         //Movement status
     private boolean shooting = false;                       //Shoot status
+    private boolean backShot = false;
 
     private int[] keyMap;                                   //Available keys
     private boolean[] pressedKeys = new boolean[4];         //Key status - pressed or not
     Keyboard k;
 
-    public KeyboardController(Direction direction, int upKey, int downKey, int leftKey, int rightKey, int shoot) {
+    public KeyboardController(Direction direction, int upKey, int downKey, int leftKey, int rightKey, int shootFront, int shootBack) {
 
         this.direction = direction;
 
@@ -27,7 +32,7 @@ public class KeyboardController implements KeyboardHandler {
         k = new Keyboard(this);
 
         //Define available keys
-        keyMap = new int[] {upKey, downKey, leftKey, rightKey, shoot};
+        keyMap = new int[]{upKey, downKey, leftKey, rightKey, shootFront, shootBack};
     }
 
     //Instantiates KeyboardEvents and adds EventListeners
@@ -83,6 +88,16 @@ public class KeyboardController implements KeyboardHandler {
         releaseShoot.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
         k.addEventListener(releaseShoot);
 
+        KeyboardEvent pressShootBack = new KeyboardEvent();
+        pressShootBack.setKey(keyMap[5]);
+        pressShootBack.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        k.addEventListener(pressShootBack);
+
+        KeyboardEvent releaseShootBack = new KeyboardEvent();
+        releaseShootBack.setKey(keyMap[5]);
+        releaseShootBack.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        k.addEventListener(releaseShootBack);
+
     }
 
     //Detects pressed keys
@@ -105,7 +120,11 @@ public class KeyboardController implements KeyboardHandler {
         }
         if (e.getKey() == keyMap[4]) {
             shooting = true;
-
+            backShot = false;
+        }
+        if (e.getKey() == keyMap[5]) {
+            shooting = true;
+            backShot = true;
         }
 
         //Updates direction
@@ -114,7 +133,7 @@ public class KeyboardController implements KeyboardHandler {
 
     //Detects released keys
     @Override
-    public void keyReleased (KeyboardEvent e) {
+    public void keyReleased(KeyboardEvent e) {
 
         if (e.getKey() == keyMap[0]) {
             pressedKeys[0] = false;
@@ -131,11 +150,16 @@ public class KeyboardController implements KeyboardHandler {
         if (e.getKey() == keyMap[4]) {
             shooting = false;
         }
+        if (e.getKey() == keyMap[5]) {
+            shooting = false;
+            backShot = false;
+
+        }
 
         direction = pressedDirection();
 
         //Stops player if no keys is pressed
-        if(direction == Direction.STOPPED) {
+        if (direction == Direction.STOPPED) {
             moving = false;
         }
     }
@@ -171,15 +195,23 @@ public class KeyboardController implements KeyboardHandler {
     }
 
     public Direction getDirection() {
+
         return direction;
     }
 
     public boolean isMoving() {
+
         return moving;
     }
 
-    public boolean isShooting(){
+    public boolean isShooting() {
+
         return shooting;
+    }
+
+    public boolean isKiting() {
+
+        return backShot;
     }
 
 }

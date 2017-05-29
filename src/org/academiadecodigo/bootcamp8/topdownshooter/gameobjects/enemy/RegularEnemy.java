@@ -4,8 +4,13 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.position.AbstractPosi
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;
 
 /**
- * Created by codecadet on 25/05/17.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet> Cyrille Feijó
+ * <Code Cadet> João Portela
  */
+
 public class RegularEnemy extends Enemy {
 
     public RegularEnemy(AbstractPosition pos, FieldPosition playerpos) {

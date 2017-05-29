@@ -1,23 +1,25 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player;
 
 /**
- * Created by codecadet on 25/05/17.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet> Filipe Santos Sá
  */
+
 public enum PlayerType {
 
-    P1("/gameobjects/player/1571779_k_152.jpg"),
-    P2;
+    P1("Images/Player/1571779_k_152.jpg");
 
     private String image;
 
-    PlayerType() {
-    }
-
     PlayerType(String image) {
+
         this.image = image;
     }
 
     public String getImage() {
+
         return image;
     }
 

@@ -1,8 +1,12 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.field;
 
 /**
- * Created by codecadet on 24/05/17.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet> Filipe Santos Sá
  */
+
 public enum Direction {
 
     UP,
@@ -15,7 +19,7 @@ public enum Direction {
     DOWN_LEFT,
     STOPPED;
 
-    public Direction oppositeDirection() {
+    public Direction oppositeDirection() {                      //Do we need this?
 
         Direction opposite = null;
 

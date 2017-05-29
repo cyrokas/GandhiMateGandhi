@@ -3,8 +3,13 @@ package org.academiadecodigo.bootcamp8.topdownshooter.field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.AbstractPosition;
 
 /**
- * Created by codecadet on 25/05/17.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet> Filipe Santos Sá
+ * <Code Cadet> Cyrille Feijó
  */
+
 public interface Field {
 
     void setup();
@@ -13,7 +18,7 @@ public interface Field {
 
     int getRows();
 
-    AbstractPosition createRepresentation(String image);
+    AbstractPosition createRepresentation(String image, boolean edge);
 
     AbstractPosition createRepresentation(int x, int y, String image);
 }
