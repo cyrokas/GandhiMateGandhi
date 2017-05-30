@@ -25,8 +25,6 @@ public abstract class AbstractPosition implements FieldPosition {
         this.field = field;
     }
 
-
-
     @Override
     public void setPosition(int row, int column) {
 
@@ -72,7 +70,7 @@ public abstract class AbstractPosition implements FieldPosition {
     }
 
     @Override
-    public boolean collidedWith(FieldPosition position) {
+    public boolean isColliding(FieldPosition position) {
 
         if(getRow() <= position.getMaxRow() && getMaxRow() >= position.getRow()) {
 

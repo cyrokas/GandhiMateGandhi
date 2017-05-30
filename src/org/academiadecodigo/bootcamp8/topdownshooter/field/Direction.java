@@ -19,37 +19,37 @@ public enum Direction {
     DOWN_LEFT,
     STOPPED;
 
-    public Direction oppositeDirection() {                      //Do we need this?
+    public Direction opposite() {
 
-        Direction opposite = null;
+        Direction oppositeDirection = Direction.STOPPED;
 
         switch (this) {
             case UP:
-                opposite = Direction.DOWN;
+                oppositeDirection = Direction.DOWN;
                 break;
             case DOWN:
-                opposite = Direction.UP;
+                oppositeDirection = Direction.UP;
                 break;
             case LEFT:
-                opposite = Direction.RIGHT;
+                oppositeDirection = Direction.RIGHT;
                 break;
             case RIGHT:
-                opposite = Direction.LEFT;
+                oppositeDirection = Direction.LEFT;
                 break;
             case UP_LEFT:
-                opposite = Direction.DOWN_RIGHT;
+                oppositeDirection = Direction.DOWN_RIGHT;
                 break;
             case UP_RIGHT:
-                opposite = Direction.DOWN_LEFT;
+                oppositeDirection = Direction.DOWN_LEFT;
                 break;
             case DOWN_LEFT:
-                opposite = Direction.UP_RIGHT;
+                oppositeDirection = Direction.UP_RIGHT;
                 break;
             case DOWN_RIGHT:
-                opposite = Direction.UP_LEFT;
+                oppositeDirection = Direction.UP_LEFT;
                 break;
         }
 
-        return opposite;
+        return oppositeDirection;
     }
 }

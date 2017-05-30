@@ -6,18 +6,13 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldType;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObjectFactory;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.bonus.Bonus;
-import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.bonus.BonusType;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.Enemy;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.PlayerNumber;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.Projectile;
-import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.ProjectileType;
 
-import java.util.Iterator;
-import java.util.ArrayList;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.ListIterator;
 
 /**
  * Developed @ <Academia de Código_>
@@ -51,7 +46,7 @@ public class Game {
     private final int BONUS_DURATION;
     private ArrayList<Bonus> bonusList = new ArrayList<>();
     private ArrayList<Enemy> enemyArrayList = new ArrayList<>();
-    private int maxEnemiesPerLevel = 4;
+    private int maxEnemiesPerLevel = 1;
 
     //Constructor
     public Game(int rows, int columns, int delay, FieldType fieldType) {
@@ -121,11 +116,14 @@ public class Game {
             if (p.isActive()) {
                 activeProjectiles++;
                 p.playRound();
-                for (int i=0;i<enemyArrayList.size();i++) {
-                    Enemy enemy=enemyArrayList.get(i);
-                    if (p.getFieldPosition().collidedWith(enemy.getPos())) {
+                for (int i = 0; i < enemyArrayList.size(); i++) {
+                    Enemy enemy = enemyArrayList.get(i);
+                    if (p.getFieldPosition().isColliding(enemy.getPosition())) {
                         enemy.hit(p.getProjectileDamage());
-                        if(enemy.isDead()){enemyArrayList.remove(enemy);}
+                        //p.use();
+                        if (enemy.isDead()) {
+                            enemyArrayList.remove(enemy);
+                        }
                     }
                 }
             }
@@ -145,7 +143,7 @@ public class Game {
         for (int i = 0; i < enemyArrayList.size(); i++) {
             Enemy e = enemyArrayList.get(i);
             e.playRound();
-            if (e.getPos().collidedWith(playerOne.getFieldPosition())) {
+            if (e.getPosition().isColliding(playerOne.getFieldPosition())) {
                 playerOne.hit(e.getEnemyDamage());
             }
         }

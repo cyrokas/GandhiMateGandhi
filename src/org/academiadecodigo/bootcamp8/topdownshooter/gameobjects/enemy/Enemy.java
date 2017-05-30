@@ -21,21 +21,21 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
     private int health;
     private boolean dead;
     private Direction currentDirection;
-    private AbstractPosition pos;
+    private AbstractPosition position;
     private Field field;
     private int speed;
-    private FieldPosition playerpos;
+    private FieldPosition playerPosition;
     private int enemyDamage = 5;
-    private int recoil;
+    private int recoilSpeed;
 
-    public Enemy(int health, AbstractPosition pos, int speed, FieldPosition playerpos) {
+    public Enemy(int health, AbstractPosition position, int speed, FieldPosition playerPosition) {
 
-        this.pos = pos;
+        this.position = position;
         this.health = health;
         dead = false;
         this.speed = speed;
-        this.playerpos = playerpos;
-
+        this.playerPosition = playerPosition;
+        recoilSpeed = speed * 40;
         currentDirection = Direction.values()[(int) (Math.random() * Direction.values().length)];
 
         //test
@@ -53,8 +53,8 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
         return currentDirection;
     }
 
-    public AbstractPosition getPos() {
-        return pos;
+    public AbstractPosition getPosition() {
+        return position;
     }
 
     public int getSpeed() {
@@ -72,9 +72,9 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
 
     @Override
     public void playRound() {
-        if (!isDead() && !pos.collidedWith(playerpos)) {
+        if (!isDead() && !position.isColliding(playerPosition)) {
             move(chooseDirection());
-        } else if (pos.collidedWith(playerpos)) {
+        } else if (position.isColliding(playerPosition)) {
             moverecoil();
         }
     }
@@ -87,7 +87,7 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
         }
         if (health <= 0) {
             dead = true;
-            pos.hide();
+            position.hide();
         }
     }
 
@@ -99,17 +99,17 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
 
         Direction horiz = Direction.STOPPED;
 
-        if (playerpos.getColumn() > pos.getColumn()) {
+        if (playerPosition.getColumn() > position.getColumn()) {
 
             horiz = Direction.RIGHT;
 
-        } else if (playerpos.getColumn() < pos.getColumn()) {
+        } else if (playerPosition.getColumn() < position.getColumn()) {
             horiz = Direction.LEFT;
         }
-        if (playerpos.getRow() > pos.getRow()) {
+        if (playerPosition.getRow() > position.getRow()) {
             vertical = Direction.DOWN;
 
-        } else if (playerpos.getRow() < pos.getRow()) {
+        } else if (playerPosition.getRow() < position.getRow()) {
             vertical = Direction.UP;
         }
         if (horiz == Direction.STOPPED) {
@@ -141,8 +141,8 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
     @Override
     public void move(Direction direction) {
         for (int i = 0; i < speed; i++) {
-            pos.moveInDirection(chooseDirection());
-            if (pos.collidedWith(playerpos)) {
+            position.moveInDirection(chooseDirection());
+            if (position.isColliding(playerPosition)) {
                 direction = Direction.STOPPED;
                 //hit(enemyDamage);
 
@@ -152,9 +152,8 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
     }
 
     public void moverecoil() {
-        recoil=speed*20;
-        for (int i = 0; i < recoil; i++) {
-            pos.moveInDirection(chooseDirection().oppositeDirection());
+        for (int i = 0; i < recoilSpeed; i++) {
+            position.moveInDirection(chooseDirection().opposite());
         }
     }
 
