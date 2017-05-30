@@ -97,7 +97,6 @@ public class KeyboardController implements KeyboardHandler {
         releaseShootBack.setKey(keyMap[5]);
         releaseShootBack.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
         k.addEventListener(releaseShootBack);
-
     }
 
     //Detects pressed keys

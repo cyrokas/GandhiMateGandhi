@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  * Developed @ <Academia de Código_>
- *
+ * <p>
  * Created by
  * <Code Cadet> Filipe Santos Sá
  * <Code Cadet> Tiago Santos
@@ -43,6 +43,7 @@ public class Player extends GameObject implements Movable, Hittable {
     public Player(Field field, PlayerNumber playerNumber) {
 
         this.field = field;
+
         //Instantiate representation centered in the field
         this.fieldPosition = field.createRepresentation(field.getRows() / 2, field.getColumns() / 2, playerNumber.getPlayerType().getImage());
 
@@ -69,9 +70,9 @@ public class Player extends GameObject implements Movable, Hittable {
 
         //Instantiate keyboardController
         keyboardController = new KeyboardController(playerDirection,
-                                                    playerNumber.getUp(), playerNumber.getDown(),
-                                                    playerNumber.getLeft(), playerNumber.getRight(),
-                                                    playerNumber.getShootFront(), playerNumber.getShootBack());
+                playerNumber.getUp(), playerNumber.getDown(),
+                playerNumber.getLeft(), playerNumber.getRight(),
+                playerNumber.getShootFront(), playerNumber.getShootBack());
 
         //Configure keyboardController
         keyboardController.keyMapConfiguration();
@@ -80,8 +81,15 @@ public class Player extends GameObject implements Movable, Hittable {
     @Override
     public void hit(int damage) {
 
-        playerHitpoints -= damage;
-        if(playerHitpoints<=0){fieldPosition.hide();}
+        for (int i = 0; i < damage; i++) {
+            playerHitpoints--;
+
+            if (playerHitpoints <= 0) {
+                //fieldPosition.hide();
+                return;
+            }
+        }
+
     }
 
     @Override
@@ -103,7 +111,7 @@ public class Player extends GameObject implements Movable, Hittable {
 
             //Shoot while moving backwards
             if (keyboardController.isKiting()) {
-               projectileList.add(new Projectile(this, projectileType, true));
+                projectileList.add(new Projectile(this, projectileType, true));
             }
             //Shoot while moving forward
             else {
@@ -166,7 +174,6 @@ public class Player extends GameObject implements Movable, Hittable {
 
         return projectileList;
     }
-
 
 
 }

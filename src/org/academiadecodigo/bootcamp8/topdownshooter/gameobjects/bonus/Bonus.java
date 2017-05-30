@@ -22,13 +22,13 @@ public class Bonus extends GameObject {
     private final int DELAY;
 
 
-    public Bonus (Field field, int DELAY) {
+    public Bonus (Field field, int delay) {
 
         this.field = field;
-        this.DELAY = DELAY;
+        this.DELAY = delay;
         duration = 0;
         initialBonus();
-        BONUS_DURATION = bonusType.getDuration() * DELAY;
+        BONUS_DURATION = bonusType.getDuration() * delay;
         this.fieldPosition = field.createRepresentation(bonusType.getImage(), false);
         active = true;
     }
@@ -44,18 +44,15 @@ public class Bonus extends GameObject {
     public void playRound() {
 
         duration++;
-        if (duration > BONUS_DURATION) {
 
+        if (duration > BONUS_DURATION) {
             active = false;
             fieldPosition.hide();
         }
-
     }
 
     public boolean isActive() {
-
         return active;
-
     }
 
 }

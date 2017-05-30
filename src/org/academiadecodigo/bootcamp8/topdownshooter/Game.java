@@ -8,18 +8,13 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldType;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObjectFactory;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.bonus.Bonus;
-import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.bonus.BonusType;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.Enemy;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.PlayerNumber;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.Projectile;
-import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.ProjectileType;
 
-import java.util.Iterator;
-import java.util.ArrayList;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.ListIterator;
 
 /**
  * Developed @ <Academia de Código_>
@@ -57,8 +52,8 @@ public class Game {
     private final int BONUS_CHANCE = 2;
     private final int BONUS_DURATION;
     private ArrayList<Bonus> bonusList = new ArrayList<>();
-    private ArrayList<Enemy> enemyArrayList = new ArrayList<Enemy>();
-    private int maxEnemiesPerLevel = 20;
+    private ArrayList<Enemy> enemyArrayList = new ArrayList<>();
+    private int maxEnemiesPerLevel = 1;
     private Menu menu;
 
     //Constructor
@@ -71,14 +66,30 @@ public class Game {
 
     }
 
-    //Game setup
-    public void setup() throws InterruptedException {
+    public void menu() throws InterruptedException {
 
         menu = new Menu(field);
 
+        while (state == State.MENU) {
+
+
         state = menu.getState();
+            System.out.println(state);
 
         if (state == State.GAME) {
+            menu.getFieldPosition().hide();
+
+            setup();
+        }
+        Thread.sleep(50);
+        }
+
+    }
+
+    //Game setup
+    public void setup() throws InterruptedException {
+
+
 
             field.setup();
 
@@ -89,7 +100,7 @@ public class Game {
             playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
 
             //Test
-            playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
+            //playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
             reg1 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
 
 
@@ -99,12 +110,15 @@ public class Game {
             //reg2= GameObjectFactory.getNewRegularEnemy(field);
             //p1 = new Projectile(playerOne, ProjectileType.FIRE);
 
-            gameLoop();
+        playerOne.getFieldPosition().hide();
+        reg1.getPosition().hide();
+        gameLoop();
 
-        }
     }
     //Game Loop
     public void gameLoop() throws InterruptedException {
+
+        playerOne.getFieldPosition().show();
 
         while (!playerOne.isDead()) {                                                      //maybe change to playerAlive OR lastBoss dead
 
@@ -145,11 +159,14 @@ public class Game {
             if (p.isActive()) {
                 activeProjectiles++;
                 p.playRound();
-                for (int i=0;i<enemyArrayList.size();i++) {
-                    Enemy enemy=enemyArrayList.get(i);
-                    if (p.getFieldPosition().collidedWith(enemy.getPos())) {
+                for (int i = 0; i < enemyArrayList.size(); i++) {
+                    Enemy enemy = enemyArrayList.get(i);
+                    if (p.getFieldPosition().isColliding(enemy.getPosition())) {
                         enemy.hit(p.getProjectileDamage());
-                        if(enemy.isDead()){enemyArrayList.remove(enemy);}
+                        //p.use();
+                        if (enemy.isDead()) {
+                            enemyArrayList.remove(enemy);
+                        }
                     }
                 }
             }
@@ -169,7 +186,7 @@ public class Game {
         for (int i = 0; i < enemyArrayList.size(); i++) {
             Enemy e = enemyArrayList.get(i);
             e.playRound();
-            if (e.getPos().collidedWith(playerOne.getFieldPosition())) {
+            if (e.getPosition().isColliding(playerOne.getFieldPosition())) {
                 playerOne.hit(e.getEnemyDamage());
             }
         }
