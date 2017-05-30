@@ -71,10 +71,21 @@ public abstract class AbstractPosition implements FieldPosition {
         show();
     }
 
-    @Override                                                                                                                   //What's this?
-    public boolean equals(FieldPosition position) {
+    @Override
+    public boolean collidedWith(FieldPosition position) {
 
-        return column == position.getColumn() && row == position.getRow();
+        if(getRow() <= position.getMaxRow() && getMaxRow() >= position.getRow()) {
+
+            return getMaxColumn() + 1 >= position.getColumn() && getColumn() + 1 <= position.getMaxColumn();
+        }
+
+        if(getColumn() <= position.getMaxColumn() && getMaxColumn() >= position.getColumn()) {
+
+            return getMaxRow() + 1 >= position.getRow() && getRow() + 1 <= position.getMaxRow();
+        }
+
+        return false;
+
     }
 
     private void moveDownRight() {
@@ -157,4 +168,15 @@ public abstract class AbstractPosition implements FieldPosition {
     {
         return row;
     }
+
+    @Override
+    public int getMaxRow() {
+        return row + getHeight();
+    }
+
+    @Override
+    public int getMaxColumn() {
+        return column + getWidth();
+    }
+
 }

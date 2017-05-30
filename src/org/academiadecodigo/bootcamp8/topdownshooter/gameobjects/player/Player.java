@@ -81,6 +81,7 @@ public class Player extends GameObject implements Movable, Hittable {
     public void hit(int damage) {
 
         playerHitpoints -= damage;
+        if(playerHitpoints<=0){fieldPosition.hide();}
     }
 
     @Override
@@ -132,6 +133,7 @@ public class Player extends GameObject implements Movable, Hittable {
 
         for (int i = 0; i < playerSpeed; i++) {
             fieldPosition.moveInDirection(newDirection);
+            //if (colisionDetector)
         }
     }
 

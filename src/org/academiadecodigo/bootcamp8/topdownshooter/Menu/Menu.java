@@ -15,6 +15,12 @@ public class Menu {
     private Field field;
     private KeyboardControl keyboardController;
 
+    public Menu(Field field){
+        this.field = field;
+        keyboardController = new KeyboardControl();
+        field.createRepresentation(0,0,"");
+    }
+
     private class KeyboardControl implements KeyboardHandler{
 
         private Keyboard k;
@@ -22,14 +28,15 @@ public class Menu {
 
         public KeyboardControl(){
             k = new Keyboard(this);
+            keyMap();
         }
 
 
-        public void keyMap() {
-            KeyboardEvent pressMenu = new KeyboardEvent();
-            pressMenu.setKey(KeyboardEvent.KEY_Z);
-            pressMenu.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-            k.addEventListener(pressMenu);
+        private void keyMap() {
+            KeyboardEvent pressGame = new KeyboardEvent();
+            pressGame.setKey(KeyboardEvent.KEY_Z);
+            pressGame.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+            k.addEventListener(pressGame);
 
             KeyboardEvent pressStory = new KeyboardEvent();
             pressStory.setKey(KeyboardEvent.KEY_X);
@@ -38,7 +45,15 @@ public class Menu {
         }
 
         @Override
-        public void keyPressed(KeyboardEvent keyboardEvent) {
+        public void keyPressed(KeyboardEvent e) {
+
+            if (e.getKey() == KeyboardEvent.KEY_Z){
+                state = State.GAME;
+            }
+
+            if (e.getKey() == KeyboardEvent.KEY_X){
+                state = State.STORY;
+            }
 
         }
 
@@ -48,4 +63,7 @@ public class Menu {
         }
     }
 
+    public State getState() {
+        return state;
     }
+}

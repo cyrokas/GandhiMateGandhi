@@ -23,7 +23,7 @@ public class Main {
 
         Game game = new Game(rows, columns, delay, FieldType.SIMPLE_GFX);
         game.setup();
-        game.gameLoop();
+
 
     }
 }

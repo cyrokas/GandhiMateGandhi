@@ -67,40 +67,46 @@ public class Game {
         field = FieldFactory.getNewField(fieldType, rows, columns);
         DELAY = delay;
         BONUS_DURATION = 500 * DELAY;
-        menu = new Menu();
         state = State.MENU;
 
     }
 
     //Game setup
-    public void setup() {
+    public void setup() throws InterruptedException {
+
+        menu = new Menu(field);
+
+        state = menu.getState();
+
+        if (state == State.GAME) {
 
             field.setup();
 
-        //Test
-        //reg1 = GameObjectFactory.getNewEnemy(field);
 
-        playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
+            //Test
+            //reg1 = GameObjectFactory.getNewEnemy(field);
+
+            playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
 
             //Test
             playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
             reg1 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
 
 
-        //reg1 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
-        //reg2 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
-        //reg1= GameObjectFactory.getNewRegularEnemy(field);
-        //reg2= GameObjectFactory.getNewRegularEnemy(field);
-        //p1 = new Projectile(playerOne, ProjectileType.FIRE);
+            //reg1 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
+            //reg2 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
+            //reg1= GameObjectFactory.getNewRegularEnemy(field);
+            //reg2= GameObjectFactory.getNewRegularEnemy(field);
+            //p1 = new Projectile(playerOne, ProjectileType.FIRE);
+
+            gameLoop();
+
+        }
     }
-
-
-
-
     //Game Loop
     public void gameLoop() throws InterruptedException {
 
-        while (true) {                                                      //maybe change to playerAlive OR lastBoss dead
+        while (!playerOne.isDead()) {                                                      //maybe change to playerAlive OR lastBoss dead
 
             Thread.sleep(DELAY);
 
@@ -139,6 +145,13 @@ public class Game {
             if (p.isActive()) {
                 activeProjectiles++;
                 p.playRound();
+                for (int i=0;i<enemyArrayList.size();i++) {
+                    Enemy enemy=enemyArrayList.get(i);
+                    if (p.getFieldPosition().collidedWith(enemy.getPos())) {
+                        enemy.hit(p.getProjectileDamage());
+                        if(enemy.isDead()){enemyArrayList.remove(enemy);}
+                    }
+                }
             }
         }
 
@@ -156,6 +169,9 @@ public class Game {
         for (int i = 0; i < enemyArrayList.size(); i++) {
             Enemy e = enemyArrayList.get(i);
             e.playRound();
+            if (e.getPos().collidedWith(playerOne.getFieldPosition())) {
+                playerOne.hit(e.getEnemyDamage());
+            }
         }
         //p1.playRound();
 

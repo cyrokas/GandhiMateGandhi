@@ -6,6 +6,7 @@ package org.academiadecodigo.bootcamp8.topdownshooter.Menu;
 public enum State {
 
     MENU,
-    GAME
+    GAME,
+    STORY
 
 }

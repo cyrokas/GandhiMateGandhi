@@ -14,6 +14,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPositio
  * <Code Cadet> João Portela
  * <Code Cadet> Cyrille Feijó
  * <Code Cadet> Robin Opinião
+ * <Code Cadet> Filipe Santos Sá
  */
 
 public abstract class Enemy extends GameObject implements Movable, Hittable {
@@ -24,6 +25,8 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
     private Field field;
     private int speed;
     private FieldPosition playerpos;
+    private int enemyDamage = 5;
+    private int recoil;
 
     public Enemy(int health, AbstractPosition pos, int speed, FieldPosition playerpos) {
 
@@ -58,6 +61,10 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
         return speed;
     }
 
+    public int getEnemyDamage() {
+        return enemyDamage;
+    }
+
     @Override
     public boolean isDead() {
         return dead;
@@ -65,8 +72,11 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
 
     @Override
     public void playRound() {
-        move(chooseDirection());
-
+        if (!isDead() && !pos.collidedWith(playerpos)) {
+            move(chooseDirection());
+        } else if (pos.collidedWith(playerpos)) {
+            moverecoil();
+        }
     }
 
     @Override
@@ -77,6 +87,7 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
         }
         if (health <= 0) {
             dead = true;
+            pos.hide();
         }
     }
 
@@ -131,6 +142,20 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
     public void move(Direction direction) {
         for (int i = 0; i < speed; i++) {
             pos.moveInDirection(chooseDirection());
+            if (pos.collidedWith(playerpos)) {
+                direction = Direction.STOPPED;
+                //hit(enemyDamage);
+
+                return;
+            }
         }
     }
+
+    public void moverecoil() {
+        recoil=speed*20;
+        for (int i = 0; i < recoil; i++) {
+            pos.moveInDirection(chooseDirection().oppositeDirection());
+        }
+    }
+
 }

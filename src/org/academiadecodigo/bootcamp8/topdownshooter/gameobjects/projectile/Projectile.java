@@ -23,6 +23,7 @@ public class Projectile implements Movable {
     private final int HEIGHT;
     private final int WIDTH;
     private Direction direction;
+    private int projectileDamage=10;
 
     public Projectile(Player player, ProjectileType projectileType, boolean kiting) {
 
@@ -43,6 +44,14 @@ public class Projectile implements Movable {
         projectileSpeed = player.getPlayerSpeed() * 2;
     }
 
+
+    public FieldPosition getFieldPosition(){
+        return fieldPosition;
+    }
+
+    public int getProjectileDamage(){
+        return projectileDamage;
+    }
 
     @Override
     public void playRound() {
