@@ -7,9 +7,11 @@ package org.academiadecodigo.bootcamp8.topdownshooter.field;
  * <Code Cadet> Cyrille Feijó
  */
 
-public interface FieldScore {
+public interface FieldStats {
 
-    void show(int points);
+    void showPoints(int points);
+
+    void showHitPoints(int hitPoints);
 
     void hide();
 

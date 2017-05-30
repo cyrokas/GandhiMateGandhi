@@ -1,38 +1,41 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
-import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldScore;
+import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldStats;
 
 
 /**
  * Developed @ <Academia de Código_>
- *
+ * <p>
  * Created by
  * <Code Cadet> Cyrille Feijó
  */
-public class Score {
+public class Stats {
 
     //Proprieties
     private int points;                                                             //Points for each player
     private Field field;
-    private FieldScore fieldScore;
-    private PlayerNumber playerNumber;
+    private FieldStats fieldStats;
 
     //Constructor
-    public Score(Field field, PlayerNumber playerNumber) {
+    public Stats(Field field) {
 
         points = 0;
         this.field = field;
-        this.playerNumber = playerNumber;
-        this.fieldScore = field.createRepresentationScore(points);
+        this.fieldStats = field.createRepresentationStats(points);
 
     }
 
     public void addPoints() {
-        fieldScore.hide();
+        fieldStats.hide();
         points++;
-        fieldScore.show(points);
-        System.out.println(playerNumber + " points: " + points);
+        fieldStats.showPoints(points);
+    }
+
+    public void removeHitPoints(int playerHitPoints) {
+        fieldStats.hide();
+        fieldStats.showHitPoints(playerHitPoints);
+
     }
 
 

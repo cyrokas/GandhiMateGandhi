@@ -95,10 +95,12 @@ public int getHeight() {
         return new SimpleGFXPosition(row, column, image, this);
     }
 
-    //TESTING
-    public SimpleGFXScore createRepresentationScore(int points) {
 
-        return new SimpleGFXScore(this, points);
+    @Override
+    public SimpleGFXStats createRepresentationStats(int points) {
+
+        return new SimpleGFXStats(this, points);
     }
+
 
 }

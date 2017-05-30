@@ -40,7 +40,7 @@ public class Player extends GameObject implements Movable, Hittable {
     private KeyboardController keyboardController;
 
 
-    private Score score;                                                                    //Score of player FOR TESTING PLAYER WILL EARN POINTS WITH MOVE
+    private Stats stats;                                                                    //Score of player FOR TESTING PLAYER WILL EARN POINTS WITH MOVE
 
     //Constructor
     public Player(Field field, PlayerNumber playerNumber) {
@@ -61,7 +61,7 @@ public class Player extends GameObject implements Movable, Hittable {
 
         keyboardControllerConfiguration();
 
-        score = new Score(field, playerNumber);                           //Creating Score
+        stats = new Stats(field);                           //Creating Score
     }
 
     private void initialDirection() {
@@ -88,6 +88,7 @@ public class Player extends GameObject implements Movable, Hittable {
 
         for (int i = 0; i < damage; i++) {
             playerHitpoints--;
+            stats.removeHitPoints(playerHitpoints);
 
             if (playerHitpoints <= 0) {
                 //fieldPosition.hide();
@@ -182,7 +183,7 @@ public class Player extends GameObject implements Movable, Hittable {
     }
 
     public void addPoints(){
-        score.addPoints();
+        stats.addPoints();
     }
 }
 

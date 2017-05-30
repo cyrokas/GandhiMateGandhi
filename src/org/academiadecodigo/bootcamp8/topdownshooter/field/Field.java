@@ -1,7 +1,7 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.field;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.AbstractPosition;
-import org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx.SimpleGFXScore;
+import org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx.SimpleGFXStats;
 
 /**
  * Developed @ <Academia de Código_>
@@ -23,5 +23,5 @@ public interface Field {
 
     AbstractPosition createRepresentation(int x, int y, String image);
 
-    SimpleGFXScore createRepresentationScore(int points);
+    SimpleGFXStats createRepresentationStats(int points);
 }
