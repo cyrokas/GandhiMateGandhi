@@ -10,11 +10,11 @@ package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.bonus;
 
 public enum BonusType {
 
-    FIRE("Images/Bonus/fire.jpg", 1, 5), //turns powers to fire
-    WATER("Images/Bonus/water.jpeg", 2, 5), //turns powers to water, slower enemy
+    FIRE("images/Bonus/bonusfire.png", 1, 5), //turns powers to fire
+    WATER("images/Bonus/bonuswater.png", 2, 5), //turns powers to water, slower enemy
     EARTH("Images/Bonus/earth.jpg", 2, 5), //turns powers to earth, damage up, speed down
-    WIND("Images/Bonus/windkappa.jpeg", 2, 5), //turns powers to wind, speed up
-    HEALTH("Images/Bonus/health.jpg", 2, 5); //gives health
+    WIND("images/Bonus/bonuswind.png", 2, 5), //turns powers to wind, speed up
+    HEALTH("images/Bonus/bonushealth.png", 2, 5); //gives health
 
     private int multiplier;
     private String image;
