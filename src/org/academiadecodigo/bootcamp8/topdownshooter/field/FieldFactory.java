@@ -7,6 +7,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx.SimpleGFX
  *
  * Created by
  * <Code Cadet> Cyrille Feijó
+ * <Code Cadet> Filipe Santos Sá
  */
 
 public class FieldFactory {
@@ -18,7 +19,7 @@ public class FieldFactory {
             case SIMPLE_GFX:
                 return new SimpleGFXField(rows, columns);
             default:
-                return null;
+                return new SimpleGFXField(rows, columns);
         }
     }
 }

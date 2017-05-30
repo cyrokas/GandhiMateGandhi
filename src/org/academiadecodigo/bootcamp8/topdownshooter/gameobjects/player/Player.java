@@ -46,6 +46,7 @@ public class Player extends GameObject implements Movable, Hittable {
     public Player(Field field, PlayerNumber playerNumber) {
 
         this.field = field;
+
         //Instantiate representation centered in the field
         this.fieldPosition = field.createRepresentation(field.getRows() / 2, field.getColumns() / 2, playerNumber.getPlayerType().getImage());
 
@@ -85,7 +86,15 @@ public class Player extends GameObject implements Movable, Hittable {
     @Override
     public void hit(int damage) {
 
-        playerHitpoints -= damage;
+        for (int i = 0; i < damage; i++) {
+            playerHitpoints--;
+
+            if (playerHitpoints <= 0) {
+                //fieldPosition.hide();
+                return;
+            }
+        }
+
     }
 
     @Override
@@ -124,7 +133,7 @@ public class Player extends GameObject implements Movable, Hittable {
         //Update facing direction if player isn't stopped
         if (newDirection != Direction.STOPPED) {
             facingDirection = newDirection;
-            score.addPoints();                                                // Incrementetion points when he moves
+            //score.addPoints();                                                // Incrementetion points when he moves
         }
 
         return newDirection;
@@ -138,6 +147,7 @@ public class Player extends GameObject implements Movable, Hittable {
 
         for (int i = 0; i < playerSpeed; i++) {
             fieldPosition.moveInDirection(newDirection);
+            //if (colisionDetector)
         }
     }
 
@@ -169,6 +179,10 @@ public class Player extends GameObject implements Movable, Hittable {
     public ArrayList<Projectile> getProjectileList() {
 
         return projectileList;
+    }
+
+    public void addPoints(){
+        score.addPoints();
     }
 }
 

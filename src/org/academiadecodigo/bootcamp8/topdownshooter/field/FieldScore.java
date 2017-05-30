@@ -1,7 +1,5 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.field;
 
-import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.PlayerNumber;
-
 /**
  * Developed @ <Academia de Código_>
  *
@@ -11,7 +9,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.PlayerNu
 
 public interface FieldScore {
 
-    void show(int points, PlayerNumber playerNumber);
+    void show(int points);
 
     void hide();
 

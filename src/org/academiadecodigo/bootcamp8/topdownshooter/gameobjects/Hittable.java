@@ -12,5 +12,4 @@ public interface Hittable {
 
     void hit(int damage);
     boolean isDead();
-
 }

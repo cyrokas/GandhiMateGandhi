@@ -31,7 +31,7 @@ public class Score {
     public void addPoints() {
         fieldScore.hide();
         points++;
-        fieldScore.show(points, playerNumber);
+        fieldScore.show(points);
         System.out.println(playerNumber + " points: " + points);
     }
 

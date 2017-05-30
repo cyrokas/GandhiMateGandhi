@@ -141,4 +141,15 @@ public class SimpleGFXPosition extends AbstractPosition {
 
         picture.translate(dx, dy);
     }
+
+    @Override
+    public int getMaxRow() {
+        return getRow() + HEIGHT;
+    }
+
+    @Override
+    public int getMaxColumn() {
+        return getColumn() + WIDTH;
+    }
+
 }

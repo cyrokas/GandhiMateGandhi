@@ -6,22 +6,17 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldType;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObjectFactory;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.bonus.Bonus;
-import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.bonus.BonusType;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.Enemy;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.PlayerNumber;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.Projectile;
-import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.ProjectileType;
 
-import java.util.Iterator;
-import java.util.ArrayList;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.ListIterator;
 
 /**
  * Developed @ <Academia de Código_>
- *
+ * <p>
  * Created by
  * <Code Cadet> Filipe Santos Sá
  * <Code Cadet> Cyrille Feijó
@@ -50,8 +45,8 @@ public class Game {
     private final int BONUS_CHANCE = 2;
     private final int BONUS_DURATION;
     private ArrayList<Bonus> bonusList = new ArrayList<>();
-    private ArrayList<Enemy> enemyArrayList = new ArrayList<Enemy>();
-    private int maxEnemiesPerLevel = 20;
+    private ArrayList<Enemy> enemyArrayList = new ArrayList<>();
+    private int maxEnemiesPerLevel = 1;
 
     //Constructor
     public Game(int rows, int columns, int delay, FieldType fieldType) {
@@ -82,7 +77,7 @@ public class Game {
     //Game Loop
     public void gameLoop() throws InterruptedException {
 
-        while (true) {                                                      //maybe change to playerAlive OR lastBoss dead
+        while (!playerOne.isDead()) {                                                      //maybe change to playerAlive OR lastBoss dead
 
             Thread.sleep(DELAY);
 
@@ -121,6 +116,17 @@ public class Game {
             if (p.isActive()) {
                 activeProjectiles++;
                 p.playRound();
+                for (int i = 0; i < enemyArrayList.size(); i++) {
+                    Enemy enemy = enemyArrayList.get(i);
+                    if (p.getFieldPosition().isColliding(enemy.getPosition())) {
+                        enemy.hit(p.getProjectileDamage());
+                        //p.use();
+                        if (enemy.isDead()) {
+                            enemyArrayList.remove(enemy);
+                            playerOne.addPoints();
+                        }
+                    }
+                }
             }
         }
 
@@ -138,10 +144,11 @@ public class Game {
         for (int i = 0; i < enemyArrayList.size(); i++) {
             Enemy e = enemyArrayList.get(i);
             e.playRound();
+            if (e.getPosition().isColliding(playerOne.getFieldPosition())) {
+                playerOne.hit(e.getEnemyDamage());
+            }
         }
         //p1.playRound();
-
-
 
     }
 }

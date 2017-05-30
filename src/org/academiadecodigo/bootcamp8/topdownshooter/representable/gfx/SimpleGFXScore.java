@@ -1,7 +1,6 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldScore;
-import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.PlayerNumber;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 
 /**
@@ -13,7 +12,7 @@ import org.academiadecodigo.simplegraphics.graphics.Text;
 public class SimpleGFXScore implements FieldScore {
 
     //Proprieties
-    private Text text;                                                           // Text to show points
+    private Text text;                                           // Text to show points
     private SimpleGFXField simpleGFXField;
     private int points;
 
@@ -21,18 +20,18 @@ public class SimpleGFXScore implements FieldScore {
     //Constructor
     public SimpleGFXScore(SimpleGFXField simpleGFXField, int points) {
 
-        text = new Text(20, 0, "Points player1: " + points);//Creating Text with fix number to test
+        text = new Text(20, 0, "");
         this.simpleGFXField = simpleGFXField;
-        this.points = points;                                          //Variable points
+        this.points = points;
 
-        //show();
+        show(points);
         System.out.println("Show score");
 
     }
 
     @Override
-    public void show(int points, PlayerNumber playerNumber) {
-        text.setText(playerNumber + " player1: " + points);
+    public void show(int points) {
+        text.setText("Player points: " + points);
         text.draw();
         System.out.println("Draw score");
 

@@ -23,18 +23,24 @@ public class Projectile implements Movable {
     private final int HEIGHT;
     private final int WIDTH;
     private Direction direction;
+    private int projectileDamage=10;
+    private FieldPosition playerPosition;
 
     public Projectile(Player player, ProjectileType projectileType, boolean kiting) {
 
         field = player.getField();
         this.projectileType = projectileType;
-        fieldPosition = field.createRepresentation(player.getFieldPosition().getRow(), player.getFieldPosition().getColumn(), projectileType.getImage());
+        fieldPosition = field.createRepresentation(player.getFieldPosition().getRow() + player.getFieldPosition().getHeight() / 2,
+                                                    player.getFieldPosition().getColumn() + player.getFieldPosition().getWidth() / 2,
+                                                    projectileType.getImage());
+
+        playerPosition= player.getFieldPosition();
 
         HEIGHT = fieldPosition.getHeight();
         WIDTH = fieldPosition.getWidth();
 
         if (kiting) {
-            direction = player.getFacingDirection().oppositeDirection();
+            direction = player.getFacingDirection().opposite();
         }
         else {
             direction = player.getFacingDirection();
@@ -43,6 +49,14 @@ public class Projectile implements Movable {
         projectileSpeed = player.getPlayerSpeed() * 2;
     }
 
+
+    public FieldPosition getFieldPosition(){
+        return fieldPosition;
+    }
+
+    public int getProjectileDamage(){
+        return projectileDamage;
+    }
 
     @Override
     public void playRound() {
@@ -74,5 +88,10 @@ public class Projectile implements Movable {
     public boolean isActive() {
 
         return active;
+    }
+
+    public void use() {
+        fieldPosition.hide();
+        active = false;
     }
 }
