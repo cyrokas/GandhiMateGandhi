@@ -120,6 +120,7 @@ public class Game {
 
         playerOne.getFieldPosition().show();
 
+        
         while (!playerOne.isDead()) {                                                      //maybe change to playerAlive OR lastBoss dead
 
             Thread.sleep(DELAY);
