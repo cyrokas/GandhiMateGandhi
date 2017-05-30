@@ -71,7 +71,6 @@ public class Game {
         //reg2 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
         //reg1= GameObjectFactory.getNewRegularEnemy(field);
         //reg2= GameObjectFactory.getNewRegularEnemy(field);
-        //p1 = new Projectile(playerOne, ProjectileType.FIRE);
     }
 
     //Game Loop
@@ -80,12 +79,6 @@ public class Game {
         while (!playerOne.isDead()) {                                                      //maybe change to playerAlive OR lastBoss dead
 
             Thread.sleep(DELAY);
-
-            if (BONUS_CHANCE > (int) (Math.random() * 100) * DELAY) {
-
-                bonusList.add(GameObjectFactory.createNewBonus(field, DELAY));
-
-            }
 
             gameRound();
 
@@ -96,43 +89,18 @@ public class Game {
     //Game Round
     public void gameRound() {
 
-
-        for (Bonus b : bonusList) {
-
-            if (b.isActive()) {
-
-                b.playRound();
-
-            }
-
-        }
+        bonusRound();
 
         int activeProjectiles = 0;
 
-
         playerOne.playRound();
 
-        for (Projectile p : playerOne.getProjectileList()) {
-            if (p.isActive()) {
-                activeProjectiles++;
-                p.playRound();
-                for (int i = 0; i < enemyArrayList.size(); i++) {
-                    Enemy enemy = enemyArrayList.get(i);
-                    if (p.getFieldPosition().isColliding(enemy.getPosition())) {
-                        enemy.hit(p.getProjectileDamage());
-                        //p.use();
-                        if (enemy.isDead()) {
-                            enemyArrayList.remove(enemy);
-                        }
-                    }
-                }
-            }
-        }
+        activeProjectiles = projectileRound();
 
-        if (activeProjectiles == 0) {
-            playerOne.reload();
-        }
 
+
+
+        //REFACTOR THIS --------------------------------------------------------------------------------
         int enemyodds = (int) (Math.random() * 200);
         if (enemyArrayList.size() < maxEnemiesPerLevel) {
             if (enemyodds < 3) {
@@ -147,7 +115,78 @@ public class Game {
                 playerOne.hit(e.getEnemyDamage());
             }
         }
-        //p1.playRound();
+        // _______________________________________________________________________________________________
 
+        //checkPlayerBonusInteraction();
+
+
+        if (activeProjectiles == 0) {
+            playerOne.reload();
+        }
+
+    }
+
+    private void bonusRound() {
+        //Chance per image update
+        final int CHANCE_PER_TURN = 100 * DELAY;
+
+        //Chance to create bonus
+        if (BONUS_CHANCE > (int) (Math.random() * CHANCE_PER_TURN)) {
+            bonusList.add(GameObjectFactory.createNewBonus(field, DELAY));
+        }
+
+
+        for (Bonus b : bonusList) {
+            if (b.isActive()) {
+                b.playRound();
+            }
+        }
+    }
+
+    private int projectileRound() {
+
+        int activeProjectiles = 0;
+
+        for (Projectile p : playerOne.getProjectileList()) {
+
+            if (p.isActive()) {
+                boolean collided;
+                activeProjectiles++;
+                p.playRound();
+
+                collided = checkProjectileEnemyCollision(p);
+
+                if (collided) {
+                    p.use();
+                }
+            }
+        }
+
+        return activeProjectiles;
+    }
+
+
+
+
+    //REFACTOR THIS
+    private boolean checkProjectileEnemyCollision(Projectile p) {
+        boolean collided = false;
+
+        for (int i = 0; i < enemyArrayList.size(); i++) {
+
+            Enemy enemy = enemyArrayList.get(i);
+
+            if (p.getFieldPosition().isColliding(enemy.getPosition())) {
+                enemy.hit(p.getProjectileDamage());
+                p.getFieldPosition().hide();
+                collided = true;
+
+                if (enemy.isDead()) {
+                    enemyArrayList.remove(enemy);
+                }
+            }
+        }
+
+        return collided;
     }
 }

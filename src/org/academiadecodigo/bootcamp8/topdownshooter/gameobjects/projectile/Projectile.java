@@ -23,7 +23,7 @@ public class Projectile implements Movable {
     private final int HEIGHT;
     private final int WIDTH;
     private Direction direction;
-    private int projectileDamage=10;
+    private int projectileDamage;
     private FieldPosition playerPosition;
 
     public Projectile(Player player, ProjectileType projectileType, boolean kiting) {
@@ -46,6 +46,7 @@ public class Projectile implements Movable {
             direction = player.getFacingDirection();
         }
 
+        projectileDamage = player.getPlayerDamage();
         projectileSpeed = player.getPlayerSpeed() * 2;
     }
 
@@ -91,7 +92,6 @@ public class Projectile implements Movable {
     }
 
     public void use() {
-        fieldPosition.hide();
         active = false;
     }
 }

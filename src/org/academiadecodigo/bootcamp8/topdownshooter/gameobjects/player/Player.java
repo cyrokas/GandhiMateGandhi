@@ -23,6 +23,7 @@ public class Player extends GameObject implements Movable, Hittable {
 
     private int playerSpeed = 5;
     private int playerHitpoints = 100;
+    private int playerDamage = 1;
 
     private final int MAX_PROJECTILES = 10;
     private ArrayList<Projectile> projectileList = new ArrayList<>();                       //Projectile list
@@ -175,6 +176,9 @@ public class Player extends GameObject implements Movable, Hittable {
         return projectileList;
     }
 
+    public int getPlayerDamage() {
+        return playerDamage;
+    }
 
 }
 
