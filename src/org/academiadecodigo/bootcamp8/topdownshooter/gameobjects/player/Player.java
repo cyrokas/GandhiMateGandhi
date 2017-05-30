@@ -182,8 +182,14 @@ public class Player extends GameObject implements Movable, Hittable {
         return projectileList;
     }
 
+    //Getter to addPoints when enemys died
     public void addPoints(){
         stats.addPoints();
+    }
+
+    //Getter of points to creating highscore
+    public int getPoints(){
+        return stats.getPoints();
     }
 }
 
