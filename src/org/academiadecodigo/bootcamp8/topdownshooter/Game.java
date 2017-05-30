@@ -1,5 +1,7 @@
 package org.academiadecodigo.bootcamp8.topdownshooter;
 
+import org.academiadecodigo.bootcamp8.topdownshooter.Menu.Menu;
+import org.academiadecodigo.bootcamp8.topdownshooter.Menu.State;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldFactory;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldType;
@@ -16,7 +18,7 @@ import java.util.LinkedList;
 
 /**
  * Developed @ <Academia de Código_>
- * <p>
+ *
  * Created by
  * <Code Cadet> Filipe Santos Sá
  * <Code Cadet> Cyrille Feijó
@@ -26,6 +28,11 @@ import java.util.LinkedList;
  */
 
 public class Game {
+
+
+
+    // Game state
+    private State state;
 
     //Game field
     private Field field;
@@ -47,6 +54,7 @@ public class Game {
     private ArrayList<Bonus> bonusList = new ArrayList<>();
     private ArrayList<Enemy> enemyArrayList = new ArrayList<>();
     private int maxEnemiesPerLevel = 1;
+    private Menu menu;
 
     //Constructor
     public Game(int rows, int columns, int delay, FieldType fieldType) {
@@ -54,28 +62,63 @@ public class Game {
         field = FieldFactory.getNewField(fieldType, rows, columns);
         DELAY = delay;
         BONUS_DURATION = 500 * DELAY;
+        state = State.MENU;
+
+    }
+
+    public void menu() throws InterruptedException {
+
+        menu = new Menu(field);
+
+        while (state == State.MENU) {
+
+
+        state = menu.getState();
+            System.out.println(state);
+
+        if (state == State.GAME) {
+            menu.getFieldPosition().hide();
+
+            setup();
+        }
+        Thread.sleep(50);
+        }
 
     }
 
     //Game setup
-    public void setup() {
+    public void setup() throws InterruptedException {
 
-        field.setup();
 
-        //Test
-        //reg1 = GameObjectFactory.getNewEnemy(field);
 
-        playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
+            field.setup();
 
-        //reg1 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
-        //reg2 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
-        //reg1= GameObjectFactory.getNewRegularEnemy(field);
-        //reg2= GameObjectFactory.getNewRegularEnemy(field);
-        //p1 = new Projectile(playerOne, ProjectileType.FIRE);
+
+            //Test
+            //reg1 = GameObjectFactory.getNewEnemy(field);
+
+            playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
+
+            //Test
+            //playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
+            reg1 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
+
+
+            //reg1 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
+            //reg2 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
+            //reg1= GameObjectFactory.getNewRegularEnemy(field);
+            //reg2= GameObjectFactory.getNewRegularEnemy(field);
+            //p1 = new Projectile(playerOne, ProjectileType.FIRE);
+
+        playerOne.getFieldPosition().hide();
+        reg1.getPosition().hide();
+        gameLoop();
+
     }
-
     //Game Loop
     public void gameLoop() throws InterruptedException {
+
+        playerOne.getFieldPosition().show();
 
         while (!playerOne.isDead()) {                                                      //maybe change to playerAlive OR lastBoss dead
 
@@ -149,6 +192,8 @@ public class Game {
             }
         }
         //p1.playRound();
+
+
 
     }
 }

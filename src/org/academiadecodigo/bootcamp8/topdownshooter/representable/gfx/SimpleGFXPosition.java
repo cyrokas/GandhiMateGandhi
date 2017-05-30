@@ -77,6 +77,7 @@ public class SimpleGFXPosition extends AbstractPosition {
     }
 
 
+
     @Override
     public void show() {
 
