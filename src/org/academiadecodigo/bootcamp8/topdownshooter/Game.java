@@ -21,7 +21,7 @@ import java.util.ListIterator;
 
 /**
  * Developed @ <Academia de Código_>
- *
+ * <p>
  * Created by
  * <Code Cadet> Filipe Santos Sá
  * <Code Cadet> Cyrille Feijó
@@ -51,7 +51,7 @@ public class Game {
     private final int BONUS_DURATION;
     private ArrayList<Bonus> bonusList = new ArrayList<>();
     private ArrayList<Enemy> enemyArrayList = new ArrayList<>();
-    private int maxEnemiesPerLevel = 1;
+    private int maxEnemiesPerLevel = 4;
 
     //Constructor
     public Game(int rows, int columns, int delay, FieldType fieldType) {
@@ -82,7 +82,7 @@ public class Game {
     //Game Loop
     public void gameLoop() throws InterruptedException {
 
-        while (true) {                                                      //maybe change to playerAlive OR lastBoss dead
+        while (!playerOne.isDead()) {                                                      //maybe change to playerAlive OR lastBoss dead
 
             Thread.sleep(DELAY);
 
@@ -121,6 +121,13 @@ public class Game {
             if (p.isActive()) {
                 activeProjectiles++;
                 p.playRound();
+                for (int i=0;i<enemyArrayList.size();i++) {
+                    Enemy enemy=enemyArrayList.get(i);
+                    if (p.getFieldPosition().collidedWith(enemy.getPos())) {
+                        enemy.hit(p.getProjectileDamage());
+                        if(enemy.isDead()){enemyArrayList.remove(enemy);}
+                    }
+                }
             }
         }
 
@@ -138,6 +145,9 @@ public class Game {
         for (int i = 0; i < enemyArrayList.size(); i++) {
             Enemy e = enemyArrayList.get(i);
             e.playRound();
+            if (e.getPos().collidedWith(playerOne.getFieldPosition())) {
+                playerOne.hit(e.getEnemyDamage());
+            }
         }
         //p1.playRound();
 
