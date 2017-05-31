@@ -36,6 +36,20 @@ public class Stats {
         fieldStats.showHitPoints(playerHitPoints);
     }
 
+    public void showSpeed(int speed){
+
+    }
+
+    public void showDamage(int damage){
+
+
+    }
+
+    public void showProjectiels(int projectiels){
+
+
+    }
+
     //Getters
     //Getter to get points if needed
     public int getPoints() {
