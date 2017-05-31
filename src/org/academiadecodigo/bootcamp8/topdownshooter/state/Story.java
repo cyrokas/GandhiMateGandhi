@@ -1,4 +1,4 @@
-package org.academiadecodigo.bootcamp8.topdownshooter.Menu;
+package org.academiadecodigo.bootcamp8.topdownshooter.state;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;

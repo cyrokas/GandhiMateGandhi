@@ -1,7 +1,7 @@
 package org.academiadecodigo.bootcamp8.topdownshooter;
 
-import org.academiadecodigo.bootcamp8.topdownshooter.Menu.Menu;
-import org.academiadecodigo.bootcamp8.topdownshooter.Menu.State;
+import org.academiadecodigo.bootcamp8.topdownshooter.state.Menu;
+import org.academiadecodigo.bootcamp8.topdownshooter.state.State;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldFactory;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldType;

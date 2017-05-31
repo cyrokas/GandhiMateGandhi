@@ -1,4 +1,4 @@
-package org.academiadecodigo.bootcamp8.topdownshooter.Menu;
+package org.academiadecodigo.bootcamp8.topdownshooter.state;
 
 /**
  * Created by codecadet on 29/05/17.
