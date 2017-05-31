@@ -96,11 +96,11 @@ public int getHeight() {
     }
 
 
-    @Override
+    /*@Override
     public SimpleGFXStats createRepresentationStats(int points) {
 
         return new SimpleGFXStats(points);
-    }
+    }*/
 
 
 }
