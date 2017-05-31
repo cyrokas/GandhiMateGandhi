@@ -3,6 +3,7 @@ package org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Direction;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.AbstractPosition;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.Enemy;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -23,7 +24,10 @@ public class SimpleGFXPosition extends AbstractPosition {
     private final int HEIGHT;
     private final int WIDTH;
 
-    private int i = 0;
+    private PlayerImage playerImage;
+    private EnemyImage enemyImage;
+
+    private int imageCount;
 
     public SimpleGFXPosition(String image, SimpleGFXField field, boolean edge) {
 
@@ -48,6 +52,11 @@ public class SimpleGFXPosition extends AbstractPosition {
         fixPosition(row, column);
 
         show();
+
+        playerImage = new PlayerImage();
+        enemyImage = new EnemyImage();
+
+        imageCount = 0;
 
     }
 
@@ -78,6 +87,9 @@ public class SimpleGFXPosition extends AbstractPosition {
         picture.translate(dx, dy);
 
         show();
+
+        playerImage = new PlayerImage();
+        imageCount = 0;
     }
 
 
@@ -105,12 +117,9 @@ public class SimpleGFXPosition extends AbstractPosition {
         int finalRow = simpleGFXField.rowToY(super.getRow());
 
         picture.translate(finalColumn - initialColumn, finalRow - initialRow);
+        changePicture(gameObject, direction);
+        imageCount++;
 
-        if (gameObject instanceof Player) {
-
-            imageChange(direction);                //Set images with movement
-
-        }
     }
 
     @Override
@@ -163,92 +172,32 @@ public class SimpleGFXPosition extends AbstractPosition {
         return getColumn() + WIDTH;
     }
 
-    //Select Image to use
-    public void imageChange(Direction direction) {
+    private void changePicture(GameObject gameObject, Direction direction) {
 
-        if (i < 10) {
+        if (gameObject instanceof Player) {
 
-            imageSet(direction, ImagesPlayer.MOV2);
-            ++i;
+            if (imageCount % 15 == 0 && imageCount < 120) {
 
-        } else if (i < 20) {
+                picture.load(playerImage.imageChange(direction, imageCount));    //Set images with movement
 
-            imageSet(direction, ImagesPlayer.MOV4);
-            ++i;
+            } else if (imageCount == 120) {
 
-        } else if (i < 30) {
-
-            imageSet(direction, ImagesPlayer.MOV6);
-            i++;
-
-        } else {
-            i = 0;
-        }
-    }
-
-    //Select direction of image
-    public void imageSet(Direction direction, ImagesPlayer imagesPlayer) {
-        if (direction == Direction.DOWN || direction == Direction.DOWN_LEFT ||
-                direction == Direction.DOWN_RIGHT) {
-
-            picture.load(imagesPlayer.getDown());
-
-        } else if (direction == Direction.UP || direction == Direction.UP_LEFT ||
-                direction == Direction.UP_RIGHT) {
-
-            picture.load(imagesPlayer.getUp());
-
-        } else if (direction == Direction.RIGHT) {
-
-            picture.load(imagesPlayer.getRight());
-
-        } else if (direction == Direction.LEFT) {
-
-            picture.load(imagesPlayer.getLeft());
-
-        }
-    }
-
-    //Enum of images for the player
-    public enum ImagesPlayer {
-        MOV2("images/player/up2.png", "images/player/down2.png",
-                "images/player/left2.png", "images/player/right2.png"),
-        MOV4("images/player/up4.png", "images/player/down4.png",
-                "images/player/left4.png", "images/player/right4.png"),
-        MOV6("images/player/up6.png", "images/player/down6.png",
-                "images/player/left6.png", "images/player/right4.png");
-
-
-        private String up;
-        private String down;
-        private String left;
-        private String right;
-
-
-        ImagesPlayer(String up, String down, String left, String right) {
-
-            this.up = up;
-            this.down = down;
-            this.left = left;
-            this.right = right;
-
+                imageCount = 0;
+            }
         }
 
-        public String getUp() {
-            return up;
+        if (gameObject instanceof Enemy) {
+
+            if (imageCount % 15 == 0 && imageCount < 120) {
+
+                picture.load(enemyImage.imageChange(direction, imageCount));    //Set images with movement
+
+            } else if (imageCount == 120) {
+
+                imageCount = 0;
+            }
         }
 
-        public String getDown() {
-            return down;
-        }
-
-        public String getLeft() {
-            return left;
-        }
-
-        public String getRight() {
-            return right;
-        }
     }
 }
 

@@ -32,7 +32,7 @@ public class SimpleGFXField implements Field {
     public void setup() {
 
         //field = new Rectangle(PADDING, PADDING, columns * CELL_SIZE, rows * CELL_SIZE);
-        field = new Picture(PADDING, PADDING, "resources/images/Floor.png");
+        field = new Picture(PADDING, PADDING, "images/padding.png");
         field.draw();
     }
 
@@ -96,11 +96,11 @@ public int getHeight() {
     }
 
 
-    /*@Override
+    @Override
     public SimpleGFXStats createRepresentationStats(int points) {
 
         return new SimpleGFXStats(points);
-    }*/
+    }
 
 
 }

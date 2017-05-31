@@ -53,7 +53,7 @@ public class Game {
     private final int BONUS_DURATION;
     private ArrayList<Bonus> bonusList = new ArrayList<>();
     private ArrayList<Enemy> enemyArrayList = new ArrayList<>();
-    private int maxEnemiesPerLevel = 1;
+    private int maxEnemiesPerLevel = 20;
     private Menu menu;
 
     //Constructor
