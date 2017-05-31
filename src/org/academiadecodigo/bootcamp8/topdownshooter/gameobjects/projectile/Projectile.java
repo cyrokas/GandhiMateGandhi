@@ -3,6 +3,7 @@ package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Direction;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.Movable;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
 
@@ -13,7 +14,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
  * <Code Cadet> Filipe Santos Sá
  */
 
-public class Projectile implements Movable {
+public class Projectile extends GameObject implements Movable {
 
     private int projectileSpeed;
     private boolean active = true;
@@ -81,7 +82,7 @@ public class Projectile implements Movable {
                 return;
             }
 
-            fieldPosition.moveInDirection(direction);
+            fieldPosition.moveInDirection(direction, this );
         }
     }
 

@@ -9,10 +9,10 @@ package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile;
 
 public enum ProjectileType {
 
-    FIRE("images/Powers/fireball.png"),
-    ROCK("images/Powers/rockball.png"),
-    WATER("images/Powers/waterball.png"),
-    WIND("images/Powers/windball.png");
+    FIRE("images/powers/fireball.png"),
+    ROCK("images/powers/rockball.png"),
+    WATER("images/powers/waterball.png"),
+    WIND("images/powers/windball.png");
 
     private String image;
 

@@ -135,6 +135,8 @@ public class Game {
 
         }
 
+        System.exit(1);             //Close the program when player die
+
     }
 
     //Game Round
@@ -167,6 +169,7 @@ public class Game {
                         //p.use();
                         if (enemy.isDead()) {
                             enemyArrayList.remove(enemy);
+                            playerOne.addPoints();
                         }
                     }
                 }

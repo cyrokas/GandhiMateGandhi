@@ -35,8 +35,8 @@ public class Bonus extends GameObject {
 
     public void initialBonus() {
 
-        BonusType[] bonusTypes = BonusType.values();                //Array that contains all Bonus types
-        int random = (int) (Math.random() * bonusTypes.length);     //Generate random Bonus type from array
+        BonusType[] bonusTypes = BonusType.values();                //Array that contains all bonus types
+        int random = (int) (Math.random() * bonusTypes.length);     //Generate random bonus type from array
         bonusType = bonusTypes[random];                             //Attribute random direction
 
     }

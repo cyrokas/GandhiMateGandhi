@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  * Developed @ <Academia de Código_>
- * <p>
+ *
  * Created by
  * <Code Cadet> Filipe Santos Sá
  * <Code Cadet> Tiago Santos
@@ -39,6 +39,9 @@ public class Player extends GameObject implements Movable, Hittable {
 
     private KeyboardController keyboardController;
 
+
+    private Stats stats;                                                                    //Score of player FOR TESTING PLAYER WILL EARN POINTS WITH MOVE
+
     //Constructor
     public Player(Field field, PlayerNumber playerNumber) {
 
@@ -57,6 +60,8 @@ public class Player extends GameObject implements Movable, Hittable {
         facingDirection = playerDirection;
 
         keyboardControllerConfiguration();
+
+        stats = new Stats(field);                           //Creating Score
     }
 
     private void initialDirection() {
@@ -83,6 +88,7 @@ public class Player extends GameObject implements Movable, Hittable {
 
         for (int i = 0; i < damage; i++) {
             playerHitpoints--;
+            stats.removeHitPoints(playerHitpoints);
 
             if (playerHitpoints <= 0) {
                 //fieldPosition.hide();
@@ -128,6 +134,7 @@ public class Player extends GameObject implements Movable, Hittable {
         //Update facing direction if player isn't stopped
         if (newDirection != Direction.STOPPED) {
             facingDirection = newDirection;
+            //score.addPoints();                                                // Incrementetion points when he moves
         }
 
         return newDirection;
@@ -140,7 +147,7 @@ public class Player extends GameObject implements Movable, Hittable {
         playerDirection = newDirection;
 
         for (int i = 0; i < playerSpeed; i++) {
-            fieldPosition.moveInDirection(newDirection);
+            fieldPosition.moveInDirection(newDirection, this);
             //if (colisionDetector)
         }
     }
@@ -175,6 +182,16 @@ public class Player extends GameObject implements Movable, Hittable {
         return projectileList;
     }
 
+    //Getter to addPoints when enemys died
+    public void addPoints(){
 
+        stats.addPoints();
+    }
+
+    //Getter of points to creating highscore
+    public int getPoints(){
+
+        return stats.getPoints();
+    }
 }
 
