@@ -143,13 +143,14 @@ public class Game {
         }
         // _______________________________________________________________________________________________
 
+        checkEnemyBonusInteraction();
         checkPlayerBonusInteraction();
 
     }
 
     private void bonusRound() {
         //Chance per image update
-        final int CHANCE_PER_TURN = 250;
+        final int CHANCE_PER_TURN = 20;
 
         //Chance to create bonus
         if (BONUS_CHANCE > (int) (Math.random() * CHANCE_PER_TURN)) {
@@ -215,6 +216,28 @@ public class Game {
         return collided;
     }
 
+    private void checkEnemyBonusInteraction() {
+
+        Iterator<Bonus> bonusIterator = bonusList.iterator();
+        Iterator<Enemy> enemyIterator = enemyArrayList.iterator();
+
+        while (bonusIterator.hasNext()) {
+            Bonus b = bonusIterator.next();
+
+            while (enemyIterator.hasNext()) {
+                Enemy e = enemyIterator.next();
+
+                if(b.getFieldPosition().isColliding(e.getPosition())) {
+                    b.consume();
+                    b.getFieldPosition().hide();
+                }
+            }
+
+        }
+
+    }
+
+
     private void checkPlayerBonusInteraction() {
 
         Iterator<Bonus> iterator = bonusList.iterator();
@@ -226,6 +249,7 @@ public class Game {
 
             if (playerPosition.isColliding(b.getFieldPosition())) {
                 playerOne.powerUp(b.getBonusType());
+                b.consume();
                 b.getFieldPosition().hide();
 
             }
