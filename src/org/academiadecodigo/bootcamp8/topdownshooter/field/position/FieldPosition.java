@@ -1,6 +1,7 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.field.position;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Direction;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 
 /**
  * Developed @ <Academia de Código_>
@@ -19,7 +20,7 @@ public interface FieldPosition {
 
     void setPosition(int row, int column);
 
-    void moveInDirection(Direction direction);
+    void moveInDirection(Direction direction, GameObject gameObject);
 
     void show();
 

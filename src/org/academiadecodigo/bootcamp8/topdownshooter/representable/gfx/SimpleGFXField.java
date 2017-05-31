@@ -3,10 +3,11 @@ package org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.AbstractPosition;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 /**
  * Developed @ <Academia de Código_>
- *
+ * <p>
  * Created by
  * <Code Cadet> Filipe Santos Sá
  * <Code Cadet> Cyrille Feijó
@@ -14,10 +15,11 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class SimpleGFXField implements Field {
 
-    private final int PADDING = 10;
+    private final int PADDING = 20;
     private int columns;
     private int rows;
-    private Rectangle field;
+    //private Rectangle field;
+    private Picture field;
     private final int CELL_SIZE = 1;
 
     public SimpleGFXField(int rows, int columns) {
@@ -29,7 +31,8 @@ public class SimpleGFXField implements Field {
     @Override
     public void setup() {
 
-        field = new Rectangle(PADDING, PADDING, columns * CELL_SIZE, rows * CELL_SIZE);
+        //field = new Rectangle(PADDING, PADDING, columns * CELL_SIZE, rows * CELL_SIZE);
+        field = new Picture(PADDING, PADDING, "resources/images/Floor.png");
         field.draw();
     }
 
@@ -45,15 +48,15 @@ public class SimpleGFXField implements Field {
         return rows;
     }
 
-        /*
+    /*
 
-    public int getWidth() {
-        return columns * CELL_SIZE;
-    }
+public int getWidth() {
+    return columns * CELL_SIZE;
+}
 
-    public int getHeight() {
-        return rows * CELL_SIZE;
-    }
+public int getHeight() {
+    return rows * CELL_SIZE;
+}
 
 */
     public int getCellSize() {
@@ -91,5 +94,13 @@ public class SimpleGFXField implements Field {
 
         return new SimpleGFXPosition(row, column, image, this);
     }
+
+
+    @Override
+    public SimpleGFXStats createRepresentationStats(int points) {
+
+        return new SimpleGFXStats(points);
+    }
+
 
 }

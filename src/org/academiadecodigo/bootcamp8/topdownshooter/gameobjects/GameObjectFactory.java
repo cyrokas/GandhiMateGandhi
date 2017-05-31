@@ -29,9 +29,9 @@ public class GameObjectFactory {
     }
 
    */
-    public static Player createNewPlayer(Field field, PlayerNumber playerNumber, int delay) {
+    public static Player createNewPlayer(Field field, PlayerNumber playerNumber) {
 
-        return new Player(field, playerNumber, delay);
+        return new Player(field, playerNumber);
     }
 
     public static Enemy getNewRegularEnemy(Field field, FieldPosition playerpos) {
@@ -43,13 +43,13 @@ public class GameObjectFactory {
            col = (int) (Math.random() * field.getColumns());
         }
         */
-        AbstractPosition pos = field.createRepresentation("Images/Enemy/regularEnemy.jpg", true);
+        AbstractPosition pos = field.createRepresentation("images/player/down1.png", true);
         return new RegularEnemy(pos, playerpos);
     }
 
-    public static Bonus createNewBonus(Field field, int DELAY) {
+    public static Bonus createNewBonus(Field field/*, int DELAY*/) {
 
-        return new Bonus(field, DELAY);
+        return new Bonus(field/*, DELAY*/);
 
     }
 
@@ -57,7 +57,7 @@ public class GameObjectFactory {
 
     public static Enemy getNewShellazar(Field field, FieldPosition playerpos) {
         AbstractPosition pos = field.createRepresentation(0, Math.round(field.getColumns() / 2),
-                "Images/Enemy/regularEnemy.jpg");
+                "images/player/down1.png");
         return new Shellazar(pos, playerpos);
     }
 }

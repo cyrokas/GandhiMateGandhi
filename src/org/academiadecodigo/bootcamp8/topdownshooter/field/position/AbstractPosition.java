@@ -2,6 +2,7 @@ package org.academiadecodigo.bootcamp8.topdownshooter.field.position;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Direction;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 
 /**
  * Developed @ <Academia de Código_>
@@ -34,7 +35,7 @@ public abstract class AbstractPosition implements FieldPosition {
 
     //Move object in argument direction. Do nothing if direction is STOPPED
     @Override
-    public void moveInDirection(Direction direction) {
+    public void moveInDirection(Direction direction, GameObject gameObject) {
 
         switch (direction) {
             case UP:

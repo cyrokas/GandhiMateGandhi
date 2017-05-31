@@ -6,6 +6,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPositio
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.Hittable;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.Movable;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.bonus.BonusType;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.Projectile;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.ProjectileType;
 
@@ -22,11 +23,12 @@ import java.util.LinkedList;
 
 public class Player extends GameObject implements Movable, Hittable, Iterable<Projectile> {
 
-    private int playerSpeed = 5;
-    private int playerHitpoints = 100;
+    private int playerSpeed = 2;
+    private final int INITIAL_HITPOINTS = 50;
+    private int playerHitpoints;
     private int playerDamage = 1;
 
-    private final int MAX_PROJECTILES = 10;
+    private int maxProjectiles = 10;
     private LinkedList<Projectile> projectileList = new LinkedList<>();                       //Projectile list
     private ProjectileType projectileType = ProjectileType.FIRE;
     private int roundCounter;
@@ -42,10 +44,12 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
     private FieldPosition fieldPosition;
     private KeyboardController keyboardController;
 
-    //Constructor
-    public Player(Field field, PlayerNumber playerNumber, int delay) {
 
-        //cooldown = delay / 10; -------------------
+    private Stats stats;                                                                    //Score of player FOR TESTING PLAYER WILL EARN POINTS WITH MOVE
+
+    //Constructor
+    public Player(Field field, PlayerNumber playerNumber) {
+
         this.field = field;
 
         int fieldCenterRow = field.getRows() / 2;
@@ -57,13 +61,15 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
         HEIGHT = fieldPosition.getHeight();
         WIDTH = fieldPosition.getWidth();
         this.playerNumber = playerNumber;
-
         //Choose random direction
         initialDirection();
 
         facingDirection = playerDirection;
+        playerHitpoints = INITIAL_HITPOINTS;
 
         keyboardControllerConfiguration();
+
+        stats = new Stats(field);                           //Creating Score
     }
 
     private void initialDirection() {
@@ -90,15 +96,18 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
 
         for (int i = 0; i < damage; i++) {
             playerHitpoints--;
+            stats.removeHitPoints(playerHitpoints);
 
             if (playerHitpoints <= 0) {
                 return;
             }
         }
+
     }
 
     @Override
     public boolean isDead() {
+
         return playerHitpoints <= 0;
     }
 
@@ -122,7 +131,7 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
     }
 
     private boolean hasProjectiles() {
-        return projectileList.size() < MAX_PROJECTILES;
+        return projectileList.size() < maxProjectiles;
     }
 
     private boolean notOnCooldown() {
@@ -149,7 +158,8 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
         playerDirection = newDirection;
 
         for (int i = 0; i < playerSpeed; i++) {
-            fieldPosition.moveInDirection(newDirection);
+            fieldPosition.moveInDirection(newDirection, this);
+            //if (colisionDetector)
         }
     }
 
@@ -184,8 +194,52 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
         return projectileList;
     }
 
+    //Getter to addPoints when enemys died
+    public void addPoints() {
+        stats.addPoints();
+    }
+
     public int getPlayerDamage() {
         return playerDamage;
+    }
+
+    public int getRoundCounter() {
+        return roundCounter;
+    }
+
+    public void powerUp(BonusType bonusType) {
+
+        switch (bonusType) {
+            case FIRE:
+                maxProjectiles += bonusType.getMultiplier();
+                break;
+            case WIND:
+                playerSpeed += bonusType.getMultiplier();
+                break;
+            case EARTH:
+                playerDamage += bonusType.getMultiplier();
+                playerSpeed -= bonusType.getMultiplier();
+                if (playerSpeed < 1) {
+                    playerSpeed = 1;
+                }
+                break;
+            case WATER:
+                playerHitpoints += bonusType.getMultiplier();
+                break;
+            case HEALTH:
+                playerHitpoints += bonusType.getMultiplier();
+                if (playerHitpoints > INITIAL_HITPOINTS) {
+                    playerHitpoints = INITIAL_HITPOINTS;
+                }
+
+        }
+    }
+
+
+    //Getter of points to creating highscore
+    public int getPoints() {
+
+        return stats.getPoints();
     }
 
     @Override
@@ -193,4 +247,6 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
         return projectileList.iterator();
     }
 }
+
+
 

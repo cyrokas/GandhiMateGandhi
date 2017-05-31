@@ -3,6 +3,7 @@ package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Direction;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.Movable;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
 
@@ -13,7 +14,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
  * <Code Cadet> Filipe Santos Sá
  */
 
-public class Projectile implements Movable {
+public class Projectile extends GameObject implements Movable {
 
     private int projectileSpeed;
     private boolean active = true;
@@ -31,8 +32,8 @@ public class Projectile implements Movable {
         field = player.getField();
         this.projectileType = projectileType;
 
-        int row = player.getFieldPosition().getRow() + player.getFieldPosition().getHeight() / 2;
-        int column = player.getFieldPosition().getColumn() + player.getFieldPosition().getWidth() / 2;
+        int row = player.getFieldPosition().getRow() + player.getFieldPosition().getHeight() / 4;
+        int column = player.getFieldPosition().getColumn() + player.getFieldPosition().getWidth() / 4;
 
         if (kiting) {
             direction = player.getFacingDirection().opposite();
@@ -44,15 +45,12 @@ public class Projectile implements Movable {
 
         fieldPosition = field.createRepresentation(row, column, projectileType.getImage());
 
-        //playerPosition= player.getFieldPosition();
-
         HEIGHT = fieldPosition.getHeight();
         WIDTH = fieldPosition.getWidth();
 
         projectileDamage = player.getPlayerDamage();
         projectileSpeed = player.getPlayerSpeed();
     }
-
 
     public FieldPosition getFieldPosition(){
         return fieldPosition;
@@ -83,11 +81,14 @@ public class Projectile implements Movable {
                 return;
             }
 
-            fieldPosition.moveInDirection(direction);
+            fieldPosition.moveInDirection(direction, this );
         }
     }
 
     public boolean isActive() {
         return active;
     }
+
+
+
 }

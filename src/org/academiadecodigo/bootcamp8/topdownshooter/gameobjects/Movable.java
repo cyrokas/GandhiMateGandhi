@@ -13,7 +13,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPositio
 
 public interface Movable {
 
-    void playRound();           //call move, direction
+    //void playRound();           //call move, direction
     Direction chooseDirection();
     void move(Direction direction);
 

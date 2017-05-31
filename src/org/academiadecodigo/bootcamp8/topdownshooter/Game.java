@@ -1,8 +1,11 @@
 package org.academiadecodigo.bootcamp8.topdownshooter;
 
+import org.academiadecodigo.bootcamp8.topdownshooter.Menu.Menu;
+import org.academiadecodigo.bootcamp8.topdownshooter.Menu.State;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldFactory;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldType;
+import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObjectFactory;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.bonus.Bonus;
@@ -31,47 +34,73 @@ public class Game {
     //Game field
     private Field field;
 
-    //GameObjects list
-    private LinkedList<GameObject> gameObjectList;                           //subject to change
-
     //Game delay
-    public int DELAY;
+    private final int DELAY;
 
-    //Testing
-    private Player playerOne;
+    //Bonus properties
     private final int BONUS_CHANCE = 2;
-    private final int BONUS_DURATION;
-    private ArrayList<Bonus> bonusList = new ArrayList<>();
+    private final int BONUS_DURATION = 2000;        //TEST
+
+    //Enemy properties
+    private LinkedList<Bonus> bonusList = new LinkedList<>();
     private ArrayList<Enemy> enemyArrayList = new ArrayList<>();
-    private int maxEnemiesPerLevel = 1;
+    private int maxEnemiesPerLevel = 10;                            // ?????
+
+    private Player playerOne;
+
+    private Menu menu;
+    private State state;
 
     //Constructor
     public Game(int rows, int columns, int delay, FieldType fieldType) {
 
         field = FieldFactory.getNewField(fieldType, rows, columns);
         DELAY = delay;
-        BONUS_DURATION = 500 * DELAY;
+        //BONUS_DURATION = 500 * DELAY;
+        state = State.MENU;
 
     }
 
+    public void menu() throws InterruptedException {
+
+
+        menu = new Menu(field);
+
+        while (state == State.MENU) {       //while state != quit
+            state = menu.getState();
+
+            if (state == State.GAME) {
+                menu.getFieldPosition().hide();
+                setup();
+            }
+
+            //if story
+
+            Thread.sleep(50);
+        }
+    }
+
     //Game setup
-    public void setup() {
+    public void setup() throws InterruptedException {
 
         field.setup();
 
-        //Test
-        //reg1 = GameObjectFactory.getNewEnemy(field);
+        playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
 
-        playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1, DELAY);
+        Enemy reg1 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
 
-        //reg1 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
-        //reg2 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
-        //reg1= GameObjectFactory.getNewRegularEnemy(field);
-        //reg2= GameObjectFactory.getNewRegularEnemy(field);
+
+
+        //playerOne.getFieldPosition().hide();
+        reg1.getPosition().hide();
+        gameLoop();
+
     }
 
     //Game Loop
     public void gameLoop() throws InterruptedException {
+
+        //playerOne.getFieldPosition().show();
 
         while (!playerOne.isDead()) {                                                      //maybe change to playerAlive OR lastBoss dead
 
@@ -80,6 +109,10 @@ public class Game {
             gameRound();
 
         }
+
+        //gameOver ---------------
+
+        System.exit(1);             //Close the program when player die
 
     }
 
@@ -110,25 +143,40 @@ public class Game {
         }
         // _______________________________________________________________________________________________
 
-        //checkPlayerBonusInteraction();
+        checkPlayerBonusInteraction();
 
     }
 
     private void bonusRound() {
         //Chance per image update
-        final int CHANCE_PER_TURN = 100 * DELAY;
+        final int CHANCE_PER_TURN = 250;
 
         //Chance to create bonus
         if (BONUS_CHANCE > (int) (Math.random() * CHANCE_PER_TURN)) {
-            bonusList.add(GameObjectFactory.createNewBonus(field, DELAY));
+            bonusList.add(GameObjectFactory.createNewBonus(field/*, DELAY*/));
         }
 
+        Iterator<Bonus> iterator = bonusList.iterator();
 
-        for (Bonus b : bonusList) {
+        while (iterator.hasNext()) {
+            Bonus b = iterator.next();
             if (b.isActive()) {
                 b.playRound();
             }
         }
+
+        while (iterator.hasNext()) {
+            Bonus b = iterator.next();
+            if (!b.isActive()) {
+                iterator.remove();
+            }
+        }
+
+       /* for (Bonus b : bonusList) {
+            if (b.isActive()) {
+                b.playRound();
+            }
+        } */
     }
 
     private void projectileRound() {
@@ -158,11 +206,29 @@ public class Game {
                 collided = true;
 
                 if (enemy.isDead()) {
+                    playerOne.addPoints();
                     enemyArrayList.remove(enemy);
                 }
             }
         }
 
         return collided;
+    }
+
+    private void checkPlayerBonusInteraction() {
+
+        Iterator<Bonus> iterator = bonusList.iterator();
+
+        FieldPosition playerPosition = playerOne.getFieldPosition();
+
+        while (iterator.hasNext()) {
+            Bonus b = iterator.next();
+
+            if (playerPosition.isColliding(b.getFieldPosition())) {
+                playerOne.powerUp(b.getBonusType());
+                b.getFieldPosition().hide();
+
+            }
+        }
     }
 }

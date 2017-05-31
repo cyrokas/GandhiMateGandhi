@@ -142,7 +142,7 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
     @Override
     public void move(Direction direction) {
         for (int i = 0; i < speed; i++) {
-            position.moveInDirection(chooseDirection());
+            position.moveInDirection(chooseDirection(), this);
             if (position.isColliding(playerPosition)) {
                 direction = Direction.STOPPED;
                 //hit(enemyDamage);
@@ -154,7 +154,7 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
 
     public void moverecoil() {
         for (int i = 0; i < recoilSpeed; i++) {
-            position.moveInDirection(chooseDirection().opposite());
+            position.moveInDirection(chooseDirection().opposite(), this);
         }
     }
 

@@ -22,8 +22,7 @@ public class Main {
         int delay = 18;
 
         Game game = new Game(rows, columns, delay, FieldType.SIMPLE_GFX);
-        game.setup();
-        game.gameLoop();
+        game.menu();
 
     }
 }
