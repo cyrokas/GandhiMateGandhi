@@ -1,4 +1,4 @@
-package org.academiadecodigo.bootcamp8.topdownshooter.Menu;
+package org.academiadecodigo.bootcamp8.topdownshooter.state;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;
@@ -45,6 +45,11 @@ public class Menu {
             pressStory.setKey(KeyboardEvent.KEY_X);
             pressStory.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
             k.addEventListener(pressStory);
+
+            KeyboardEvent pressQuit = new KeyboardEvent();
+            pressQuit.setKey(KeyboardEvent.KEY_Q);
+            pressQuit.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+            k.addEventListener(pressQuit);
         }
 
         @Override
@@ -57,6 +62,9 @@ public class Menu {
             if (e.getKey() == KeyboardEvent.KEY_X) {
                 state = State.STORY;
             }
+            if (e.getKey() == KeyboardEvent.KEY_Q) {
+                System.exit(1);
+            }
 
         }
 
@@ -65,9 +73,7 @@ public class Menu {
 
         }
 
-        public State getState() {
-            return state;
-        }
+
     }
 
     public State getState() {
