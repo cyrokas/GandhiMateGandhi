@@ -14,12 +14,10 @@ public enum PlayerType {
     private String image;
 
     PlayerType(String image) {
-
         this.image = image;
     }
 
     public String getImage() {
-
         return image;
     }
 

@@ -24,38 +24,30 @@ public enum PlayerNumber {
     }
 
     public PlayerType getPlayerType() {
-
         return playerType;
     }
 
     public int getUp() {
-
         return keys[0];
     }
 
     public int getDown() {
-
         return keys[1];
     }
 
     public int getLeft() {
-
         return keys[2];
     }
 
     public int getRight() {
-
         return keys[3];
     }
 
     public int getShootFront() {
-
         return keys[4];
     }
 
     public int getShootBack() {
-
         return keys[5];
     }
-
 }

@@ -24,10 +24,10 @@ public class SimpleGFXPosition extends AbstractPosition {
     private final int HEIGHT;
     private final int WIDTH;
 
-    private PlayerImage playerImage;
-    private EnemyImage enemyImage;
+    private PlayerImage playerImage = new PlayerImage();
+    private EnemyImage enemyImage = new EnemyImage();
 
-    private int imageCount;
+    private int imageCount = 1;
 
     public SimpleGFXPosition(String image, SimpleGFXField field, boolean edge) {
 
@@ -49,47 +49,26 @@ public class SimpleGFXPosition extends AbstractPosition {
         HEIGHT = picture.getHeight();
         WIDTH = picture.getWidth();
 
-        fixPosition(row, column);
+        //fix image to fit field
+        fixEdgePosition(row, column);
 
         show();
-
-        playerImage = new PlayerImage();
-        enemyImage = new EnemyImage();
-
-        imageCount = 0;
-
     }
 
-    public SimpleGFXPosition(int row, int columns, String image, SimpleGFXField field) {
+    public SimpleGFXPosition(int row, int column, String image, SimpleGFXField field) {
 
-        super(row, columns, field);
+        super(row, column, field);
 
         simpleGFXField = field;
 
-        picture = new Picture(field.columnToX(columns), field.rowToY(row), image);
+        picture = new Picture(field.columnToX(column), field.rowToY(row), image);
         HEIGHT = picture.getHeight();
         WIDTH = picture.getWidth();
 
-        int dx = 0;
-        int dy = 0;
-
-        if (field.rowToY(row) + HEIGHT > field.rowToY(field.getRows() - 1)) {
-            dy = field.rowToY(field.getRows() - 1) - HEIGHT - field.rowToY(row);
-            row = field.getRows() - 1 - Math.round(HEIGHT / field.getCellSize());
-        }
-        if (field.columnToX(columns) + WIDTH > field.columnToX(field.getColumns() - 1)) {
-            dx = field.columnToX(field.getColumns() - 1) - WIDTH - field.columnToX(columns);
-            columns = field.getColumns() - 1 - Math.round(WIDTH / field.getCellSize());
-        }
-
-        setPosition(row, columns);
-
-        picture.translate(dx, dy);
+        //fix image to fit field
+        fixEdgePosition(row, column);
 
         show();
-
-        playerImage = new PlayerImage();
-        imageCount = 0;
     }
 
 
@@ -144,7 +123,7 @@ public class SimpleGFXPosition extends AbstractPosition {
         return getColumn() == rightEdge || getRow() == lowerEdge || getColumn() == 1 || getRow() == 1;
     }
 
-    private void fixPosition(int row, int column) {
+    private void fixEdgePosition(int row, int column) {
         int dx = 0;
         int dy = 0;
 
@@ -182,11 +161,9 @@ public class SimpleGFXPosition extends AbstractPosition {
 
             } else if (imageCount == 120) {
 
-                imageCount = 0;
+                imageCount = 1;
             }
-        }
-
-        if (gameObject instanceof Enemy) {
+        } else if (gameObject instanceof Enemy) {
 
             if (imageCount % 15 == 0 && imageCount < 120) {
 
@@ -194,7 +171,7 @@ public class SimpleGFXPosition extends AbstractPosition {
 
             } else if (imageCount == 120) {
 
-                imageCount = 0;
+                imageCount = 1;
             }
         }
 

@@ -17,11 +17,10 @@ public class Stats {
     private FieldStats fieldStats;
 
     //Constructor
-    public Stats(Field field) {
+    public Stats(Field field, int hitpoints) {
 
         points = 0;
-        this.fieldStats = field.createRepresentationStats(points);
-
+        this.fieldStats = field.createRepresentationStats(points, hitpoints);
     }
 
     public void addPoints() {
@@ -35,9 +34,7 @@ public class Stats {
 
         fieldStats.hide();
         fieldStats.showHitPoints(playerHitPoints);
-
     }
-
 
     //Getters
     //Getter to get points if needed

@@ -10,19 +10,17 @@ package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile;
 public enum ProjectileType {
 
     FIRE("images/powers/fire.png"),
-    ROCK("images/powers/rock.png"),
+    EARTH("images/powers/rock.png"),
     WATER("images/powers/water.png"),
     WIND("images/powers/wind.png");
 
     private String image;
 
     ProjectileType(String image) {
-
         this.image = image;
     }
 
     public String getImage() {
-
         return image;
     }
 }

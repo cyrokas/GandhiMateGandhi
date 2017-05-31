@@ -16,40 +16,42 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
 
 public class Projectile extends GameObject implements Movable {
 
-    private int projectileSpeed;
-    private boolean active = true;
-    private ProjectileType projectileType;
     private FieldPosition fieldPosition;
     private Field field;
     private final int HEIGHT;
     private final int WIDTH;
+
+    private int projectileSpeed;
+    private boolean active = true;
+
+    private ProjectileType projectileType;
     private Direction direction;
-    private int projectileDamage=10;
-    private FieldPosition playerPosition;
+    private int projectileDamage;
 
     public Projectile(Player player, ProjectileType projectileType, boolean kiting) {
 
         field = player.getField();
         this.projectileType = projectileType;
-        fieldPosition = field.createRepresentation(player.getFieldPosition().getRow() + player.getFieldPosition().getHeight() / 2,
-                                                    player.getFieldPosition().getColumn() + player.getFieldPosition().getWidth() / 2,
-                                                    projectileType.getImage());
 
-        playerPosition= player.getFieldPosition();
-
-        HEIGHT = fieldPosition.getHeight();
-        WIDTH = fieldPosition.getWidth();
+        int row = player.getFieldPosition().getRow() + player.getFieldPosition().getHeight() / 4;
+        int column = player.getFieldPosition().getColumn() + player.getFieldPosition().getWidth() / 4;
 
         if (kiting) {
             direction = player.getFacingDirection().opposite();
         }
         else {
             direction = player.getFacingDirection();
+
         }
 
-        projectileSpeed = player.getPlayerSpeed() * 2;
-    }
+        fieldPosition = field.createRepresentation(row, column, projectileType.getImage());
 
+        HEIGHT = fieldPosition.getHeight();
+        WIDTH = fieldPosition.getWidth();
+
+        projectileDamage = player.getPlayerDamage();
+        projectileSpeed = player.getPlayerSpeed();
+    }
 
     public FieldPosition getFieldPosition(){
         return fieldPosition;
@@ -61,13 +63,11 @@ public class Projectile extends GameObject implements Movable {
 
     @Override
     public void playRound() {
-
         move(chooseDirection());
     }
 
     @Override
     public Direction chooseDirection() {
-
        return direction;
     }
 
@@ -87,12 +87,6 @@ public class Projectile extends GameObject implements Movable {
     }
 
     public boolean isActive() {
-
         return active;
-    }
-
-    public void use() {
-        fieldPosition.hide();
-        active = false;
     }
 }

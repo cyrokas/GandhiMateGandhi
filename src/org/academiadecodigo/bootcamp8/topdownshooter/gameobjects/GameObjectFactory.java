@@ -23,37 +23,21 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.PlayerNu
 
 public class GameObjectFactory {
 
-    /*
-    public static Enemy getNewEnemy(Field field){
-        return new RegularEnemy(field.createRepresentation("/Users/codecadet/Desktop/TopDownShooter/src/org/academiadecodigo/bootcamp8/topdownshooter/gameobjects/player/1571779_k_152.jpg"));
-    }
-
-   */
     public static Player createNewPlayer(Field field, PlayerNumber playerNumber) {
-
         return new Player(field, playerNumber);
     }
 
     public static Enemy getNewRegularEnemy(Field field, FieldPosition playerpos) {
-        /*
-        int row=-1;
-        int col=-1;
-        while (!(col == 0 || col==field.getColumns()-1 || row==0 || row==field.getRows()-1)){
-           row = (int) (Math.random() * field.getRows());
-           col = (int) (Math.random() * field.getColumns());
-        }
-        */
-        AbstractPosition pos = field.createRepresentation("images/player/down1.png", true);
+
+        AbstractPosition pos = field.createRepresentation("images/soldier_enemy/front1.png", true);
         return new RegularEnemy(pos, playerpos);
     }
 
-    public static Bonus createNewBonus(Field field, int DELAY) {
+    public static Bonus createNewBonus(Field field) {
 
-        return new Bonus(field, DELAY);
+        return new Bonus(field);
 
     }
-
-
 
     public static Enemy getNewShellazar(Field field, FieldPosition playerpos) {
         AbstractPosition pos = field.createRepresentation(0, Math.round(field.getColumns() / 2),

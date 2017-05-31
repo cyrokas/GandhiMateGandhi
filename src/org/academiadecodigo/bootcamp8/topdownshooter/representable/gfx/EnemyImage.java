@@ -17,31 +17,31 @@ public class EnemyImage {
 
         if (imageCount == 15) {
 
-            imagePath = imageSet(direction, ImagesPlayer.MOV1);
+            imagePath = imageSet(direction, ImagesEnemy.MOV1);
 
         } else if (imageCount == 30) {
 
-            imagePath = imageSet(direction, ImagesPlayer.MOV2);
+            imagePath = imageSet(direction, ImagesEnemy.MOV2);
 
         } else if (imageCount == 45) {
 
-            imagePath = imageSet(direction, ImagesPlayer.MOV3);
+            imagePath = imageSet(direction, ImagesEnemy.MOV3);
 
         } else if (imageCount == 60) {
 
-            imagePath = imageSet(direction, ImagesPlayer.MOV4);
+            imagePath = imageSet(direction, ImagesEnemy.MOV4);
 
         } else if (imageCount == 75) {
 
-            imagePath = imageSet(direction, ImagesPlayer.MOV5);
+            imagePath = imageSet(direction, ImagesEnemy.MOV5);
 
         } else if (imageCount == 90) {
 
-            imagePath = imageSet(direction, ImagesPlayer.MOV6);
+            imagePath = imageSet(direction, ImagesEnemy.MOV6);
 
         } else if (imageCount == 105) {
 
-            imagePath = imageSet(direction, ImagesPlayer.MOV7);
+            imagePath = imageSet(direction, ImagesEnemy.MOV7);
 
         }
 
@@ -49,25 +49,25 @@ public class EnemyImage {
     }
 
     //Select direction of image
-    private String imageSet(Direction direction, ImagesPlayer imagesPlayer) {
+    private String imageSet(Direction direction, ImagesEnemy imagesEnemy) {
 
         if (direction == Direction.DOWN || direction == Direction.DOWN_LEFT ||
                 direction == Direction.DOWN_RIGHT) {
 
-            path = imagesPlayer.getDown();
+            path = imagesEnemy.getDown();
 
         } else if (direction == Direction.UP || direction == Direction.UP_LEFT ||
                 direction == Direction.UP_RIGHT) {
 
-            path = imagesPlayer.getUp();
+            path = imagesEnemy.getUp();
 
         } else if (direction == Direction.RIGHT) {
 
-            path = imagesPlayer.getRight();
+            path = imagesEnemy.getRight();
 
         } else {
 
-            path = imagesPlayer.getLeft();
+            path = imagesEnemy.getLeft();
 
         }
 
@@ -75,7 +75,7 @@ public class EnemyImage {
     }
 
     //Enum of images for the player
-    public enum ImagesPlayer {
+    public enum ImagesEnemy {
         MOV1("images/soldier_enemy/back1.png", "images/soldier_enemy/front1.png",
                 "images/soldier_enemy/left1.png", "images/soldier_enemy/right1.png"),
 
@@ -104,7 +104,7 @@ public class EnemyImage {
         private String right;
 
 
-        ImagesPlayer(String up, String down, String left, String right) {
+        ImagesEnemy(String up, String down, String left, String right) {
 
             this.up = up;
             this.down = down;

@@ -8,7 +8,7 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
 /**
  * Developed @ <Academia de Código_>
- * <p>
+ *
  * Created by
  * <Code Cadet> Filipe Santos Sá
  */
@@ -194,23 +194,18 @@ public class KeyboardController implements KeyboardHandler {
     }
 
     public Direction getDirection() {
-
         return direction;
     }
 
     public boolean isMoving() {
-
         return moving;
     }
 
     public boolean isShooting() {
-
         return shooting;
     }
 
     public boolean isKiting() {
-
         return backShot;
     }
-
 }

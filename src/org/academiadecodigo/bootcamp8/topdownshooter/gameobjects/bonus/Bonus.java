@@ -11,24 +11,25 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
  * <Code Cadet> Tiago Santos
  * <Code Cadet> Filipe Santos Sá
  */
+
 public class Bonus extends GameObject {
 
     private Field field;
     private FieldPosition fieldPosition;
+
     private boolean active = false;
     private BonusType bonusType;
+
     private int duration;
     private final int BONUS_DURATION;
-    private final int DELAY;
 
-
-    public Bonus (Field field, int delay) {
+    public Bonus (Field field) {
 
         this.field = field;
-        this.DELAY = delay;
         duration = 0;
         initialBonus();
-        BONUS_DURATION = bonusType.getDuration() * delay;
+        BONUS_DURATION = getBonusType().getDuration();
+
         this.fieldPosition = field.createRepresentation(bonusType.getImage(), false);
         active = true;
     }
@@ -38,7 +39,6 @@ public class Bonus extends GameObject {
         BonusType[] bonusTypes = BonusType.values();                //Array that contains all bonus types
         int random = (int) (Math.random() * bonusTypes.length);     //Generate random bonus type from array
         bonusType = bonusTypes[random];                             //Attribute random direction
-
     }
 
     public void playRound() {
@@ -51,8 +51,19 @@ public class Bonus extends GameObject {
         }
     }
 
+    public void consume() {
+        active = false;
+    }
+
     public boolean isActive() {
         return active;
     }
 
+    public FieldPosition getFieldPosition() {
+        return fieldPosition;
+    }
+
+    public BonusType getBonusType() {
+        return bonusType;
+    }
 }
