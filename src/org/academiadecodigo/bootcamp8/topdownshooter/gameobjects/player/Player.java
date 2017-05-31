@@ -9,7 +9,8 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.Movable;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.Projectile;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.ProjectileType;
 
-import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  * Developed @ <Academia de Código_>
@@ -19,15 +20,17 @@ import java.util.ArrayList;
  * <Code Cadet> Tiago Santos
  */
 
-public class Player extends GameObject implements Movable, Hittable {
+public class Player extends GameObject implements Movable, Hittable, Iterable<Projectile> {
 
     private int playerSpeed = 5;
     private int playerHitpoints = 100;
     private int playerDamage = 1;
 
     private final int MAX_PROJECTILES = 10;
-    private ArrayList<Projectile> projectileList = new ArrayList<>();                       //Projectile list
+    private LinkedList<Projectile> projectileList = new LinkedList<>();                       //Projectile list
     private ProjectileType projectileType = ProjectileType.FIRE;
+    private int roundCounter;
+    private int cooldown = 4;
 
     private PlayerNumber playerNumber;
     private final int HEIGHT;
@@ -37,16 +40,19 @@ public class Player extends GameObject implements Movable, Hittable {
     private Direction facingDirection;                                                       //Direction player is facing
     private Field field;
     private FieldPosition fieldPosition;
-
     private KeyboardController keyboardController;
 
     //Constructor
-    public Player(Field field, PlayerNumber playerNumber) {
+    public Player(Field field, PlayerNumber playerNumber, int delay) {
 
+        //cooldown = delay / 10; -------------------
         this.field = field;
 
+        int fieldCenterRow = field.getRows() / 2;
+        int fieldCenterColumn = field.getColumns() / 2;
+
         //Instantiate representation centered in the field
-        this.fieldPosition = field.createRepresentation(field.getRows() / 2, field.getColumns() / 2, playerNumber.getPlayerType().getImage());
+        this.fieldPosition = field.createRepresentation(fieldCenterRow, fieldCenterColumn, playerNumber.getPlayerType().getImage());
 
         HEIGHT = fieldPosition.getHeight();
         WIDTH = fieldPosition.getWidth();
@@ -86,21 +92,21 @@ public class Player extends GameObject implements Movable, Hittable {
             playerHitpoints--;
 
             if (playerHitpoints <= 0) {
-                //fieldPosition.hide();
                 return;
             }
         }
-
     }
 
     @Override
     public boolean isDead() {
-
         return playerHitpoints <= 0;
     }
 
     @Override
     public void playRound() {
+
+        //Reloads projectiles
+        reload();
 
         //Move
         if (keyboardController.isMoving()) {
@@ -108,17 +114,19 @@ public class Player extends GameObject implements Movable, Hittable {
         }
 
         //Shoot
-        if (keyboardController.isShooting() && projectileList.size() < MAX_PROJECTILES) {
-
-            //Shoot while moving backwards
-            if (keyboardController.isKiting()) {
-                projectileList.add(new Projectile(this, projectileType, true));
-            }
-            //Shoot while moving forward
-            else {
-                projectileList.add(new Projectile(this, projectileType, false));
-            }
+        if (keyboardController.isShooting() && hasProjectiles() && notOnCooldown()) {
+            projectileList.add(new Projectile(this, projectileType, keyboardController.isKiting()));
         }
+
+        roundCounter++;
+    }
+
+    private boolean hasProjectiles() {
+        return projectileList.size() < MAX_PROJECTILES;
+    }
+
+    private boolean notOnCooldown() {
+        return roundCounter % cooldown == 0;
     }
 
     @Override
@@ -142,37 +150,37 @@ public class Player extends GameObject implements Movable, Hittable {
 
         for (int i = 0; i < playerSpeed; i++) {
             fieldPosition.moveInDirection(newDirection);
-            //if (colisionDetector)
         }
     }
 
-    public void reload() {
+    private void reload() {
+        Iterator<Projectile> it = iterator();
 
-        projectileList.clear();
+        while (it.hasNext()) {
+            Projectile p = it.next();
+            if (!p.isActive()) {
+                it.remove();
+            }
+        }
     }
 
     public Field getField() {
-
         return field;
     }
 
     public Direction getFacingDirection() {
-
         return facingDirection;
     }
 
     public int getPlayerSpeed() {
-
         return playerSpeed;
     }
 
     public FieldPosition getFieldPosition() {
-
         return fieldPosition;
     }
 
-    public ArrayList<Projectile> getProjectileList() {
-
+    public LinkedList<Projectile> getProjectileList() {
         return projectileList;
     }
 
@@ -180,5 +188,9 @@ public class Player extends GameObject implements Movable, Hittable {
         return playerDamage;
     }
 
+    @Override
+    public Iterator<Projectile> iterator() {
+        return projectileList.iterator();
+    }
 }
 

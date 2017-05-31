@@ -8,7 +8,7 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
 /**
  * Developed @ <Academia de Código_>
- * <p>
+ *
  * Created by
  * <Code Cadet> Filipe Santos Sá
  */

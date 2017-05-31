@@ -4,8 +4,13 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.Direction;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;
 
 /**
- * Created by codecadet on 24/05/17.
+ * Developed @ <Academia de Código_>
+ *
+ * Created by
+ * <Code Cadet> Filipe Santos Sá
+ * <Code Cadet> Cyrille Feijó
  */
+
 public interface Movable {
 
     void playRound();           //call move, direction

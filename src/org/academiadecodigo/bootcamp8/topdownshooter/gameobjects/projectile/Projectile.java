@@ -24,30 +24,33 @@ public class Projectile implements Movable {
     private final int WIDTH;
     private Direction direction;
     private int projectileDamage;
-    private FieldPosition playerPosition;
+    //private FieldPosition playerPosition;
 
     public Projectile(Player player, ProjectileType projectileType, boolean kiting) {
 
         field = player.getField();
         this.projectileType = projectileType;
-        fieldPosition = field.createRepresentation(player.getFieldPosition().getRow() + player.getFieldPosition().getHeight() / 2,
-                                                    player.getFieldPosition().getColumn() + player.getFieldPosition().getWidth() / 2,
-                                                    projectileType.getImage());
 
-        playerPosition= player.getFieldPosition();
-
-        HEIGHT = fieldPosition.getHeight();
-        WIDTH = fieldPosition.getWidth();
+        int row = player.getFieldPosition().getRow() + player.getFieldPosition().getHeight() / 2;
+        int column = player.getFieldPosition().getColumn() + player.getFieldPosition().getWidth() / 2;
 
         if (kiting) {
             direction = player.getFacingDirection().opposite();
         }
         else {
             direction = player.getFacingDirection();
+
         }
 
+        fieldPosition = field.createRepresentation(row, column, projectileType.getImage());
+
+        //playerPosition= player.getFieldPosition();
+
+        HEIGHT = fieldPosition.getHeight();
+        WIDTH = fieldPosition.getWidth();
+
         projectileDamage = player.getPlayerDamage();
-        projectileSpeed = player.getPlayerSpeed() * 2;
+        projectileSpeed = player.getPlayerSpeed();
     }
 
 
@@ -61,13 +64,11 @@ public class Projectile implements Movable {
 
     @Override
     public void playRound() {
-
         move(chooseDirection());
     }
 
     @Override
     public Direction chooseDirection() {
-
        return direction;
     }
 
@@ -87,11 +88,6 @@ public class Projectile implements Movable {
     }
 
     public boolean isActive() {
-
         return active;
-    }
-
-    public void use() {
-        active = false;
     }
 }

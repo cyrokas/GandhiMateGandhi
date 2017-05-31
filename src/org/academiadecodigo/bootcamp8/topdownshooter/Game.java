@@ -12,6 +12,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.PlayerNu
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.projectile.Projectile;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -34,14 +35,10 @@ public class Game {
     private LinkedList<GameObject> gameObjectList;                           //subject to change
 
     //Game delay
-    private final int DELAY;
+    public int DELAY;
 
     //Testing
     private Player playerOne;
-    private Enemy reg1;
-    private Enemy reg2;
-    private Projectile p1;
-    private Bonus bonus;
     private final int BONUS_CHANCE = 2;
     private final int BONUS_DURATION;
     private ArrayList<Bonus> bonusList = new ArrayList<>();
@@ -65,7 +62,7 @@ public class Game {
         //Test
         //reg1 = GameObjectFactory.getNewEnemy(field);
 
-        playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
+        playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1, DELAY);
 
         //reg1 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
         //reg2 = GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition());
@@ -91,13 +88,9 @@ public class Game {
 
         bonusRound();
 
-        int activeProjectiles = 0;
-
         playerOne.playRound();
 
-        activeProjectiles = projectileRound();
-
-
+        projectileRound();
 
 
         //REFACTOR THIS --------------------------------------------------------------------------------
@@ -119,11 +112,6 @@ public class Game {
 
         //checkPlayerBonusInteraction();
 
-
-        if (activeProjectiles == 0) {
-            playerOne.reload();
-        }
-
     }
 
     private void bonusRound() {
@@ -143,30 +131,18 @@ public class Game {
         }
     }
 
-    private int projectileRound() {
+    private void projectileRound() {
 
-        int activeProjectiles = 0;
+        Iterator<Projectile> it = playerOne.iterator();
 
-        for (Projectile p : playerOne.getProjectileList()) {
-
-            if (p.isActive()) {
-                boolean collided;
-                activeProjectiles++;
-                p.playRound();
-
-                collided = checkProjectileEnemyCollision(p);
-
-                if (collided) {
-                    p.use();
-                }
+        while (it.hasNext()) {
+            Projectile p = it.next();
+            p.playRound();
+            if (checkProjectileEnemyCollision(p)) {
+                it.remove();
             }
         }
-
-        return activeProjectiles;
     }
-
-
-
 
     //REFACTOR THIS
     private boolean checkProjectileEnemyCollision(Projectile p) {

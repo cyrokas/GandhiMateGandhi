@@ -29,9 +29,9 @@ public class GameObjectFactory {
     }
 
    */
-    public static Player createNewPlayer(Field field, PlayerNumber playerNumber) {
+    public static Player createNewPlayer(Field field, PlayerNumber playerNumber, int delay) {
 
-        return new Player(field, playerNumber);
+        return new Player(field, playerNumber, delay);
     }
 
     public static Enemy getNewRegularEnemy(Field field, FieldPosition playerpos) {
