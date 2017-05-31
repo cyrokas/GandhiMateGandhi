@@ -2,7 +2,6 @@ package org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.AbstractPosition;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 /**
@@ -96,11 +95,11 @@ public int getHeight() {
     }
 
 
-    /*@Override
+    @Override
     public SimpleGFXStats createRepresentationStats(int points) {
 
         return new SimpleGFXStats(points);
-    }*/
+    }
 
 
 }
