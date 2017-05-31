@@ -7,7 +7,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 /**
  * Developed @ <Academia de Código_>
- *
+ * <p>
  * Created by
  * <Code Cadet> Filipe Santos Sá
  * <Code Cadet> Cyrille Feijó
@@ -32,7 +32,7 @@ public class SimpleGFXField implements Field {
     public void setup() {
 
         //field = new Rectangle(PADDING, PADDING, columns * CELL_SIZE, rows * CELL_SIZE);
-        field = new Picture(PADDING,PADDING,"resources/images/Floor.png");
+        field = new Picture(PADDING, PADDING, "resources/images/Floor.png");
         field.draw();
     }
 

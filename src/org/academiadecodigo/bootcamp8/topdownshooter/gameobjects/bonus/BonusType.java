@@ -12,7 +12,7 @@ public enum BonusType {
 
     FIRE("images/Bonus/bonusfire.png", 1, 5), //turns powers to fire
     WATER("images/Bonus/bonuswater.png", 2, 5), //turns powers to water, slower enemy
-    EARTH("Images/Bonus/earth.jpg", 2, 5), //turns powers to earth, damage up, speed down
+    EARTH("images/Bonus/bonuswater.png", 2, 5), //turns powers to earth, damage up, speed down
     WIND("images/Bonus/bonuswind.png", 2, 5), //turns powers to wind, speed up
     HEALTH("images/Bonus/bonushealth.png", 2, 5); //gives health
 

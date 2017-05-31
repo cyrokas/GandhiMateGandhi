@@ -25,8 +25,8 @@ public class SimpleGFXStats implements FieldStats {
 
         this.points = points;
 
-        textPoints.grow(10,5);
-        textHitPoints.grow(10,5);
+        textPoints.grow(10, 5);
+        textHitPoints.grow(10, 5);
 
         showPoints(points);                 //Show Points
         showHitPoints(100);                 //Show HitPoints 100 is just for testing
@@ -46,7 +46,6 @@ public class SimpleGFXStats implements FieldStats {
 
         textHitPoints.setText("Player Health: " + hitPoints);
         textHitPoints.draw();
-        System.out.println("Draw health");
 
     }
 

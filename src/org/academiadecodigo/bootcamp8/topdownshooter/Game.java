@@ -134,6 +134,8 @@ public class Game {
 
         }
 
+        System.exit(1);             //Close the program when player die
+
     }
 
     //Game Round

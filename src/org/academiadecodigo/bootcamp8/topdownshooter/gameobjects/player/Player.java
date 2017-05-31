@@ -147,7 +147,7 @@ public class Player extends GameObject implements Movable, Hittable {
         playerDirection = newDirection;
 
         for (int i = 0; i < playerSpeed; i++) {
-            fieldPosition.moveInDirection(newDirection);
+            fieldPosition.moveInDirection(newDirection, this);
             //if (colisionDetector)
         }
     }
@@ -184,11 +184,13 @@ public class Player extends GameObject implements Movable, Hittable {
 
     //Getter to addPoints when enemys died
     public void addPoints(){
+
         stats.addPoints();
     }
 
     //Getter of points to creating highscore
     public int getPoints(){
+
         return stats.getPoints();
     }
 }
