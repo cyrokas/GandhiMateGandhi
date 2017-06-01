@@ -14,19 +14,31 @@ public class SimpleGFXStats implements FieldStats {
     //Proprieties
     private Text textPoints;                        // Text to show points
     private Text textHitPoints;                    // Text to show HitPoints
+    private Text textSpeed;                        //Text to show Speed
+    private Text textDamage;                        // Text to show Damage
+    private Text textProjectiles;                   //Text to show Projectiels
 
     //NOTE FIX Position of SCORE
     //Constructor
-    public SimpleGFXStats(int points, int hitPoints) {
+    public SimpleGFXStats(int points, int hitPoints, int maxHitPoints, int speed, int damage, int projectile) {
 
-        textPoints = new Text(40, 10, "");             // X = 20 && Y = 0
-        textHitPoints = new Text(740, 10, "");        // X = 10 && Y = 750
+        textPoints = new Text(40, 10, "");
+        textHitPoints = new Text(740, 10, "");
+        textSpeed = new Text(620,10,"");
+        textDamage = new Text(500, 10, "");
+        textProjectiles = new Text(350, 10 ,"");
 
         textPoints.grow(10, 5);
         textHitPoints.grow(10, 5);
+        textSpeed.grow(10, 5);
+        textDamage.grow(10, 5);
+        textProjectiles.grow(10, 5);
 
         showPoints(points);                 //Show Points
-        showHitPoints(hitPoints);                 //Show HitPoints 100 is just for testing
+        showHitPoints(hitPoints, maxHitPoints);//Show HitPoints
+        showSpeed(speed);                      //Show Speed
+        showDamage(damage);                    //Show damage
+        showProjectiles(projectile);            //show projectiles
 
     }
 
@@ -39,10 +51,34 @@ public class SimpleGFXStats implements FieldStats {
     }
 
     @Override
-    public void showHitPoints(int hitPoints) {
+    public void showHitPoints(int hitPoints, int maxHitpoints) {
 
-        textHitPoints.setText("Player Health: " + hitPoints);
+        textHitPoints.setText("Player Health: " + hitPoints + " | " + maxHitpoints);
         textHitPoints.draw();
+
+    }
+
+    @Override
+    public void showSpeed(int speed) {
+
+        textSpeed.setText("Player speed: " + speed);
+        textSpeed.draw();
+
+    }
+
+    @Override
+    public void showDamage(int damage) {
+
+        textDamage.setText("Player damage: " + damage);
+        textDamage.draw();
+
+    }
+
+    @Override
+    public void showProjectiles(int projectile) {
+
+        textProjectiles.setText("Player projectiles: " + projectile);
+        textProjectiles.draw();
 
     }
 

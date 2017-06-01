@@ -1,7 +1,8 @@
 package org.academiadecodigo.bootcamp8.topdownshooter;
 
-import org.academiadecodigo.bootcamp8.topdownshooter.state.Menu;
-import org.academiadecodigo.bootcamp8.topdownshooter.state.State;
+import org.academiadecodigo.bootcamp8.topdownshooter.Menu.Menu;
+import org.academiadecodigo.bootcamp8.topdownshooter.Menu.State;
+import org.academiadecodigo.bootcamp8.topdownshooter.SFX.Sound;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldFactory;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldType;
@@ -44,7 +45,7 @@ public class Game {
     //Enemy properties
     private LinkedList<Bonus> bonusList = new LinkedList<>();
     private ArrayList<Enemy> enemyArrayList = new ArrayList<>();
-    private int maxEnemiesPerLevel = 5;                            // ?????
+    private int maxEnemiesPerLevel = 0;                            // ?????
 
     private Player playerOne;
 
@@ -102,7 +103,6 @@ public class Game {
 
         //playerOne.getFieldPosition().show();
 
-
         while (!playerOne.isDead()) {                                                      //maybe change to playerAlive OR lastBoss dead
 
             Thread.sleep(DELAY);
@@ -119,8 +119,6 @@ public class Game {
 
     //Game Round
     public void gameRound() {
-
-        //TESTING
 
         bonusRound();
 
@@ -231,8 +229,9 @@ public class Game {
                 Enemy e = enemyIterator.next();
 
                 if(b.getFieldPosition().isColliding(e.getPosition())) {
-                    b.consume();
+                    bonusIterator.remove();
                     b.getFieldPosition().hide();
+
                 }
             }
 
@@ -252,9 +251,8 @@ public class Game {
 
             if (playerPosition.isColliding(b.getFieldPosition())) {
                 playerOne.powerUp(b.getBonusType());
-                b.consume();
+                iterator.remove();
                 b.getFieldPosition().hide();
-
             }
         }
     }
