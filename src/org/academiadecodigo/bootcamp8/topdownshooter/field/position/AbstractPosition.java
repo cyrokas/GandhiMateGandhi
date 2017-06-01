@@ -64,7 +64,6 @@ public abstract class AbstractPosition implements FieldPosition {
                 break;
             case STOPPED:
                break;
-
         }
 
         show();
@@ -73,19 +72,35 @@ public abstract class AbstractPosition implements FieldPosition {
     @Override
     public boolean isColliding(FieldPosition position) {
 
-        if(getRow() <= position.getMaxRow() && getMaxRow() >= position.getRow()) {
-
-            return getMaxColumn() + 1 >= position.getColumn() && getColumn() + 1 <= position.getMaxColumn();
+        if(horizontalAlignement(position)) {
+            return isHorizontalCollision(position);
         }
 
-        if(getColumn() <= position.getMaxColumn() && getMaxColumn() >= position.getColumn()) {
-
-            return getMaxRow() + 1 >= position.getRow() && getRow() + 1 <= position.getMaxRow();
+        if(verticalAlignement(position)) {
+            return isVerticalCollision(position);
         }
 
         return false;
 
     }
+
+    private boolean horizontalAlignement(FieldPosition position) {
+        return getRow() <= position.getMaxRow() && getMaxRow() >= position.getRow();
+    }
+
+    private boolean verticalAlignement(FieldPosition position) {
+        return getColumn() <= position.getMaxColumn() && getMaxColumn() >= position.getColumn();
+    }
+
+    private boolean isHorizontalCollision(FieldPosition position) {
+        return getMaxColumn() + 1 >= position.getColumn() && getColumn() + 1 <= position.getMaxColumn();
+    }
+
+    private boolean isVerticalCollision(FieldPosition position) {
+        return getMaxRow() + 1 >= position.getRow() && getRow() + 1 <= position.getMaxRow();
+    }
+
+
 
     private void moveDownRight() {
 

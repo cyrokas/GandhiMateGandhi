@@ -112,6 +112,7 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
         } else if (playerPosition.getRow() < position.getRow()) {
             vertical = Direction.UP;
         }
+
         if (horiz == Direction.STOPPED) {
             return vertical;
         }
@@ -134,6 +135,9 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
                     return Direction.UP_LEFT;
                 }
         }
+
+        System.out.println(horiz);
+        System.out.println(vertical);
         return null;
     }
 

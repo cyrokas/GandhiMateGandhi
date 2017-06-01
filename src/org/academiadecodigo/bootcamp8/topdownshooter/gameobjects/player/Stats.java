@@ -54,6 +54,10 @@ public class Stats {
         fieldStats.showProjectiles(projectiles);
     }
 
+    public FieldStats getFieldStats() {
+        return fieldStats;
+    }
+
     //Getters
     //Getter to get points if needed
     public int getPoints() {

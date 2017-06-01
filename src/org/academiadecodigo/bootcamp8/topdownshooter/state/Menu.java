@@ -20,7 +20,7 @@ public class Menu {
     public Menu(Field field) {
         this.field = field;
         keyboardController = new KeyboardControl();
-        fieldPosition = field.createRepresentation(0, 0, "Ghandi-First-Blood-Rambo.jpg");
+        fieldPosition = field.createRepresentation(-20, 0, "images/menu/menu.png");
         state = State.MENU;
     }
 

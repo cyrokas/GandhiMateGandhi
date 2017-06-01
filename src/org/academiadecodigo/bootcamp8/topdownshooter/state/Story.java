@@ -18,10 +18,10 @@ public class Story {
     private KeyboardControll keyboardControler;
 
 
-    public Story(Field field){
+    public Story(Field field) {
         this.field = field;
         keyboardControler = new KeyboardControll();
-        fieldPosition = field.createRepresentation(0,0 ,"");
+        fieldPosition = field.createRepresentation(-20, 0, "");
     }
 
     private class KeyboardControll implements KeyboardHandler {
@@ -37,7 +37,7 @@ public class Story {
         private void keyMap() {
 
             KeyboardEvent pressNextPage = new KeyboardEvent();
-            pressNextPage.setKey(KeyboardEvent.KEY_SPACE);
+            pressNextPage.setKey(KeyboardEvent.KEY_X);
             pressNextPage.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
             k.addEventListener(pressNextPage);
 
@@ -51,11 +51,10 @@ public class Story {
 
         @Override
         public void keyReleased(KeyboardEvent keyboardEvent) {
-
         }
 
 
-        public State getState(){
+        public State getState() {
             return state;
 
         }

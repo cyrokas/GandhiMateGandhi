@@ -122,7 +122,7 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
 
     @Override
     public boolean isDead() {
-        return playerHitpoints == 0;
+        return playerHitpoints <= 0;
     }
 
     @Override
@@ -259,11 +259,8 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
     }
 
 
-    //Getter of points to creating highscore
-    public int getPoints() {
-
-        return playerStats.getPoints();
-
+    public Stats getPlayerStats() {
+        return playerStats;
     }
 
     public void updateStats() {

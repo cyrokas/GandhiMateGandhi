@@ -2,6 +2,7 @@ package org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldStats;
 import org.academiadecodigo.simplegraphics.graphics.Text;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 /**
  * Developed @ <Academia de Código_>
@@ -17,11 +18,13 @@ public class SimpleGFXStats implements FieldStats {
     private Text textSpeed;                        //Text to show Speed
     private Text textDamage;                        // Text to show Damage
     private Text textProjectiles;                   //Text to show Projectiels
+    private Picture hitpointsPicture = new Picture(480, 0, "images/stats/health icon.png");
 
     //NOTE FIX Position of SCORE
     //Constructor
     public SimpleGFXStats(int points, int hitPoints, int maxHitPoints, int speed, int damage, int projectile) {
 
+        hitpointsPicture.draw();
         textPoints = new Text(40, 10, "");
         textHitPoints = new Text(650, 10, "");
         textSpeed = new Text(500,10,"");
@@ -84,6 +87,11 @@ public class SimpleGFXStats implements FieldStats {
 
     @Override
     public void hide() {
-        //text.delete();
+      textDamage.delete();
+      textHitPoints.delete();
+      textPoints.delete();
+      textProjectiles.delete();
+      textSpeed.delete();
+      hitpointsPicture.delete();
     }
 }
