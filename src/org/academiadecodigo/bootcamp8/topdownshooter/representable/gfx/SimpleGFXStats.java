@@ -23,9 +23,9 @@ public class SimpleGFXStats implements FieldStats {
     public SimpleGFXStats(int points, int hitPoints, int maxHitPoints, int speed, int damage, int projectile) {
 
         textPoints = new Text(40, 10, "");
-        textHitPoints = new Text(740, 10, "");
-        textSpeed = new Text(620,10,"");
-        textDamage = new Text(500, 10, "");
+        textHitPoints = new Text(650, 10, "");
+        textSpeed = new Text(500,10,"");
+        textDamage = new Text(450, 10, "");
         textProjectiles = new Text(350, 10 ,"");
 
         textPoints.grow(10, 5);
@@ -45,7 +45,7 @@ public class SimpleGFXStats implements FieldStats {
     @Override
     public void showPoints(int points) {
 
-        textPoints.setText("Player points: " + points);
+        textPoints.setText("Kills: " + points);
         textPoints.draw();
 
     }
@@ -53,7 +53,7 @@ public class SimpleGFXStats implements FieldStats {
     @Override
     public void showHitPoints(int hitPoints, int maxHitpoints) {
 
-        textHitPoints.setText("Player Health: " + hitPoints + " | " + maxHitpoints);
+        textHitPoints.setText("HP: " + hitPoints + " | " + maxHitpoints);
         textHitPoints.draw();
 
     }
@@ -61,7 +61,7 @@ public class SimpleGFXStats implements FieldStats {
     @Override
     public void showSpeed(int speed) {
 
-        textSpeed.setText("Player speed: " + speed);
+        textSpeed.setText("SPD: " + speed);
         textSpeed.draw();
 
     }
@@ -69,7 +69,7 @@ public class SimpleGFXStats implements FieldStats {
     @Override
     public void showDamage(int damage) {
 
-        textDamage.setText("Player damage: " + damage);
+        textDamage.setText("ATK: " + damage);
         textDamage.draw();
 
     }
@@ -77,7 +77,7 @@ public class SimpleGFXStats implements FieldStats {
     @Override
     public void showProjectiles(int projectile) {
 
-        textProjectiles.setText("Player projectiles: " + projectile);
+        textProjectiles.setText("PROJ: " + projectile);
         textProjectiles.draw();
 
     }

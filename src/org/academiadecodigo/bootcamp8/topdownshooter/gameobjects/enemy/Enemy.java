@@ -15,7 +15,6 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPositio
  * <Code Cadet> João Portela
  * <Code Cadet> Cyrille Feijó
  * <Code Cadet> Robin Opinião
- * <Code Cadet> Filipe Santos Sá
  */
 
 public abstract class Enemy extends GameObject implements Movable, Hittable {
@@ -26,7 +25,7 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
     private Field field;
     private int speed;
     private FieldPosition playerPosition;
-    private int enemyDamage = 5;
+    private int enemyDamage = 2;
     private int recoilSpeed;
 
     public Enemy(int health, AbstractPosition position, int speed, FieldPosition playerPosition) {

@@ -192,7 +192,7 @@ public class Game {
 
     //REFACTOR THIS
     private boolean checkProjectileEnemyCollision(Projectile p) {
-        
+
         boolean collided = false;
 
         for (int i = 0; i < enemyArrayList.size(); i++) {

@@ -15,7 +15,8 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class SimpleGFXField implements Field {
 
-    private final int PADDING = 20;
+    private final int PADDING_LEFT = 20;
+    private final int PADDING_TOP = 10;
     private int columns;
     private int rows;
     //private Rectangle field;
@@ -32,7 +33,7 @@ public class SimpleGFXField implements Field {
     public void setup() {
 
         //field = new Rectangle(PADDING, PADDING, columns * CELL_SIZE, rows * CELL_SIZE);
-        field = new Picture(PADDING, PADDING, "images/padding.png");
+        field = new Picture(PADDING_TOP, PADDING_LEFT, "images/padding.png");
         field.draw();
     }
 
@@ -75,12 +76,12 @@ public int getHeight() {
 
     public int columnToX(int col) {
 
-        return PADDING + col * CELL_SIZE;
+        return PADDING_LEFT + col * CELL_SIZE;
     }
 
     public int rowToY(int row) {
 
-        return PADDING + row * CELL_SIZE;
+        return PADDING_TOP + row * CELL_SIZE;
     }
 
     @Override
