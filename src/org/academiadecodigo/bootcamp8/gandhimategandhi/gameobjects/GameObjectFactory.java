@@ -12,7 +12,6 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.player.Player
 
 /**
  * Developed @ <Academia de Código_>
- *
  * Created by
  * <Code Cadet> Filipe Santos Sá
  * <Code Cadet> Tiago Santos
@@ -39,14 +38,13 @@ public class GameObjectFactory {
     }
 
     public static Boss getNewBoss(Field field, FieldPosition playerpos) {
-        int toggleboss=(int)(Math.random()*2);
+
         AbstractPosition pos;
-        if(toggleboss==0){
-            //one out of two possible boss pictures appears on top row, center column
+
+
         pos = field.createRepresentation(0, Math.round(field.getColumns() / 2),
-                "images/player/down1.png");}
-                else{pos = field.createRepresentation(0, Math.round(field.getColumns() / 2),
-                "images/player/down1.png");}
+                "images/boss/front1.png");
+
         return new Boss(pos, playerpos, field);
     }
 }

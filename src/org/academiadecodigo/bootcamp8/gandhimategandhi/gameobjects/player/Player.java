@@ -15,7 +15,6 @@ import java.util.LinkedList;
 
 /**
  * Developed @ <Academia de Código_>
- * <p>
  * Created by
  * <Code Cadet> Filipe Santos Sá
  * <Code Cadet> Tiago Santos
@@ -72,7 +71,7 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
         maxHitpoints = playerHitpoints;
         playerDamage = INITIAL_DAMAGE;
         playerSpeed = INITIAL_SPEED;
-        maxProjectiles = 10;
+        maxProjectiles = 5;
 
         this.playerNumber = playerNumber;
         //Choose random direction

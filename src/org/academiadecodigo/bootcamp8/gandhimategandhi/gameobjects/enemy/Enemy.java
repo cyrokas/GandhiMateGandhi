@@ -9,7 +9,6 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.field.position.FieldPosit
 
 /**
  * <Academia de Código_>
- *
  * Created by
  * <Code Cadet> João Portela
  * <Code Cadet> Cyrille Feijó
@@ -26,6 +25,8 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
     protected FieldPosition playerPosition;
     protected int enemyDamage = 1;
     protected int recoilSpeed;
+    private final int COOLDOWN = 30;
+    private int roundsAfterLastHit;
 
     public Enemy(int health, AbstractPosition position, int speed, FieldPosition playerPosition) {
 
@@ -36,20 +37,12 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
         this.playerPosition = playerPosition;
         recoilSpeed = speed * 40;
         currentDirection = Direction.values()[(int) (Math.random() * Direction.values().length)];
-
-        //test
-        //System.out.println(currentDirection.toString());
-        //System.out.println("health "+health);
+        roundsAfterLastHit = COOLDOWN;
     }
-
 
     //getters
     public int getHealth() {
         return health;
-    }
-
-    public Direction getCurrentDirection() {
-        return currentDirection;
     }
 
     public AbstractPosition getPosition() {
@@ -62,6 +55,18 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
 
     public int getEnemyDamage() {
         return enemyDamage;
+    }
+
+    public int getRoundsAfterLastHit() {
+        return roundsAfterLastHit;
+    }
+
+    public void enterCooldownPhase() {
+        roundsAfterLastHit = 0;
+    }
+
+    public int getCOOLDOWN() {
+        return COOLDOWN;
     }
 
 
@@ -77,6 +82,7 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
         } else if (position.isColliding(playerPosition)) {
             moverecoil();
         }
+        roundsAfterLastHit++;
     }
 
     @Override
@@ -145,7 +151,6 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
             position.moveInDirection(chooseDirection(), this);
             if (position.isColliding(playerPosition)) {
                 direction = Direction.STOPPED;
-                //hit(enemyDamage);
 
                 return;
             }

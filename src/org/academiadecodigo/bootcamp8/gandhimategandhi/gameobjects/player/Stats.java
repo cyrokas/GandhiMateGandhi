@@ -6,10 +6,10 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.field.FieldStats;
 
 /**
  * Developed @ <Academia de Código_>
- * <p>
  * Created by
  * <Code Cadet> Cyrille Feijó
  */
+
 public class Stats {
 
     //Proprieties
@@ -36,22 +36,23 @@ public class Stats {
 
     }
 
-    public void showSpeed(int speed){
+    public void showSpeed(int speed) {
 
         fieldStats.showSpeed(speed);
 
     }
 
-    public void showDamage(int damage){
+    public void showDamage(int damage) {
 
         fieldStats.showDamage(damage);
 
     }
-    
 
-    public void showProjectiles(int projectiles){
+
+    public void showProjectiles(int projectiles) {
 
         fieldStats.showProjectiles(projectiles);
+
     }
 
     public FieldStats getFieldStats() {
@@ -59,7 +60,6 @@ public class Stats {
     }
 
     //Getters
-    //Getter to get points if needed
     public int getPoints() {
         return points;
     }

@@ -6,7 +6,6 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.GameObject;
 
 /**
  * Developed @ <Academia de Código_>
- *
  * Created by
  * <Code Cadet> Filipe Santos Sá
  * <Code Cadet> Tiago Santos
@@ -63,7 +62,7 @@ public abstract class AbstractPosition implements FieldPosition {
                 moveUpLeft();
                 break;
             case STOPPED:
-               break;
+                break;
         }
 
         show();
@@ -72,11 +71,11 @@ public abstract class AbstractPosition implements FieldPosition {
     @Override
     public boolean isColliding(FieldPosition position) {
 
-        if(horizontalAlignement(position)) {
+        if (horizontalAlignement(position)) {
             return isHorizontalCollision(position);
         }
 
-        if(verticalAlignement(position)) {
+        if (verticalAlignement(position)) {
             return isVerticalCollision(position);
         }
 
@@ -99,7 +98,6 @@ public abstract class AbstractPosition implements FieldPosition {
     private boolean isVerticalCollision(FieldPosition position) {
         return getMaxRow() + 1 >= position.getRow() && getRow() + 1 <= position.getMaxRow();
     }
-
 
 
     private void moveDownRight() {
@@ -166,20 +164,17 @@ public abstract class AbstractPosition implements FieldPosition {
                 row == 1 || row == field.getRows() - 1;
     }
 
-    public Field getField()
-    {
+    public Field getField() {
         return field;
     }
 
     @Override
-    public int getColumn()
-    {
+    public int getColumn() {
         return column;
     }
 
     @Override
-    public int getRow()
-    {
+    public int getRow() {
         return row;
     }
 

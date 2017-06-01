@@ -4,9 +4,13 @@ package org.academiadecodigo.bootcamp8.gandhimategandhi.representable.gfx;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.Direction;
 
 /**
- * Created by Cyrille on 01/06/17.
+ * Developed @ <Academia de Código_>
+ * Created by
+ * <Code Cadet> Cyrille Feijó
  */
+
 public class BossImage {
+
     //Properties
     private String imagePath;           //Return to simpleGFXPosition the image path
     private String path;
@@ -74,7 +78,7 @@ public class BossImage {
         return path;
     }
 
-    //Enum of images for the player
+    //Enum of images for the Boss
     public enum ImagesBoss {
         MOV1("images/boss/back1.png", "images/boss/front1.png",
                 "images/boss/left1.png", "images/boss/right1.png"),

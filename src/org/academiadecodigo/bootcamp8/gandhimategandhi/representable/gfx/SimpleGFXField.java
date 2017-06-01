@@ -6,7 +6,6 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 /**
  * Developed @ <Academia de Código_>
- * <p>
  * Created by
  * <Code Cadet> Filipe Santos Sá
  * <Code Cadet> Cyrille Feijó
@@ -72,7 +71,7 @@ public class SimpleGFXField implements Field {
     }
 
     @Override
-    public SimpleGFXStats createRepresentationStats(int points, int hitPoints,int maxHitpoints, int speed, int damage, int projectile) {
-        return new SimpleGFXStats(points, hitPoints, maxHitpoints , speed, damage, projectile);
+    public SimpleGFXStats createRepresentationStats(int points, int hitPoints, int maxHitpoints, int speed, int damage, int projectile) {
+        return new SimpleGFXStats(points, hitPoints, maxHitpoints, speed, damage, projectile);
     }
 }

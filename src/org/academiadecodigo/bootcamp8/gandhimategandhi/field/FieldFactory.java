@@ -4,7 +4,6 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.representable.gfx.SimpleG
 
 /**
  * Developed @ <Academia de Código_>
- *
  * Created by
  * <Code Cadet> Cyrille Feijó
  * <Code Cadet> Filipe Santos Sá

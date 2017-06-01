@@ -10,7 +10,6 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 /**
  * Developed @ <Academia de Código_>
- * <p>
  * Created by
  * <Code Cadet> Filipe Santos Sá
  * <Code Cadet> Cyrille Feijó
@@ -227,8 +226,6 @@ public class SimpleGFXPosition extends AbstractPosition {
         }
 
     }
-
-
 
 
 }

@@ -5,9 +5,8 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.field.position.FieldPosit
 
 /**
  * Developed @ <Academia de Código_>
- *
  * Created by
- * <Code Cadet> Cyrille Feijó
+ * <Code Cadet> Robin Opinião
  * <Code Cadet> João Portela
  */
 

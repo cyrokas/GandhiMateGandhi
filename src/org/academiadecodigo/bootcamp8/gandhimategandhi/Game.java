@@ -45,10 +45,13 @@ public class Game {
     //Enemy properties
     private ArrayList<Enemy> enemyArrayList = new ArrayList<>();
     private int maxEnemiesOnScreen = 10;
+    private double enemyOddPerRound = 0.015;
+    private int enemiesBetweenBoss = 10;
+
+    //Boss properties
     private boolean bossStage = false;
     private Boss boss;
-    private int enemiesBetweenBoss = 20;
-    private double enemyOddPerRound = 0.015;
+    private final int BOSS_POINTS = 5;
 
     private Player playerOne;
 
@@ -88,10 +91,6 @@ public class Game {
                 System.exit(1);
             }
         }
-
-        //menu = null;
-        //start();
-
 
         Thread.sleep(50);
     }
@@ -135,6 +134,7 @@ public class Game {
         bossStage = false;
 
         if (boss != null) {
+            boss.getField().getPicture().delete();
             boss = null;
         }
 
@@ -151,7 +151,6 @@ public class Game {
 
         projectileRound(true);
 
-        //REFACTOR THIS --------------------------------------------------------------------------------
         if (!bossStage) {
             double enemyodds = Math.random();
             if (enemyArrayList.size() < maxEnemiesOnScreen) {
@@ -164,12 +163,14 @@ public class Game {
                 Enemy e = enemyArrayList.get(i);
                 e.playRound();
                 if (e.getPosition().isColliding(playerOne.getFieldPosition())) {
-                    playerOne.hit(e.getEnemyDamage());
-                    continue;
+                    if (e.getRoundsAfterLastHit() >= e.getCOOLDOWN()) {
+                        playerOne.hit(e.getEnemyDamage());
+                        e.enterCooldownPhase();
+                        continue;
+                    }
                 }
             }
         }
-        // _______________________________________________________________________________________________
 
         checkEnemyBonusInteraction();
         checkPlayerBonusInteraction();
@@ -197,7 +198,7 @@ public class Game {
 
         //Chance to create bonus
         if (BONUS_CHANCE > (int) (Math.random() * CHANCE_PER_TURN)) {
-            bonusList.add(GameObjectFactory.createNewBonus(field/*, DELAY*/));
+            bonusList.add(GameObjectFactory.createNewBonus(field));
         }
 
         //Play round of active bonuses
@@ -240,20 +241,17 @@ public class Game {
                     if (bossStage) {
                         return;
                     }
-                } else {
-                    if (checkProjectileBossCollision(p)) {
-                        it.remove();
-                    }
-                }
-            } else {
-                if (checkProjectilePlayerCollision(p)) {
+                } else if (checkProjectileBossCollision(p)) {
                     it.remove();
+
                 }
+            } else if (checkProjectilePlayerCollision(p)) {
+                it.remove();
             }
         }
     }
 
-    //REFACTOR THIS
+
     private boolean checkProjectileEnemyCollision(Projectile p) {
 
         boolean collided = false;
@@ -292,7 +290,13 @@ public class Game {
             collided = true;
 
             if (boss.isDead()) {
-                playerOne.addPoints();
+                for (int i = 0; i < BOSS_POINTS; i++) {
+                    playerOne.addPoints();
+                }
+                //Increase difficulty
+                maxEnemiesOnScreen++;
+                enemiesBetweenBoss++;
+
                 bossStage = false;
                 boss.getPosition().hide();
                 boss.clearProjectileList();
@@ -323,7 +327,7 @@ public class Game {
                 Enemy e = enemyIterator.next();
 
                 if (b.getFieldPosition().isColliding(e.getPosition())) {
-                    //bonusIterator.remove();
+
                     b.getFieldPosition().hide();
                 }
             }

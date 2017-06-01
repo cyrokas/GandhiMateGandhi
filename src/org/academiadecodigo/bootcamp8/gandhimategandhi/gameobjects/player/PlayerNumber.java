@@ -4,7 +4,6 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 
 /**
  * Developed @ <Academia de Código_>
- *
  * Created by
  * <Code Cadet> Filipe Santos Sá
  */
@@ -20,7 +19,7 @@ public enum PlayerNumber {
     PlayerNumber(PlayerType carType, int up, int down, int left, int right, int shootFront, int shootBack) {
 
         this.playerType = carType;
-        keys = new int[] {up, down, left, right, shootFront, shootBack};
+        keys = new int[]{up, down, left, right, shootFront, shootBack};
     }
 
     public PlayerType getPlayerType() {

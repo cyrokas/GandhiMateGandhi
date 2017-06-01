@@ -1,8 +1,11 @@
 package org.academiadecodigo.bootcamp8.gandhimategandhi.state;
 
 /**
- * Created by codecadet on 29/05/17.
+ * Developed @ <Academia de Código_>
+ * Created by
+ * <Code Cadet> Robin Opinião
  */
+
 public enum State {
 
     MENU,

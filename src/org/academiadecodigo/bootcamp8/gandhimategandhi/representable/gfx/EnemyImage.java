@@ -3,8 +3,11 @@ package org.academiadecodigo.bootcamp8.gandhimategandhi.representable.gfx;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.Direction;
 
 /**
- * Created by Cyrille on 31/05/17.
+ * Developed @ <Academia de Código_>
+ * Created by
+ * <Code Cadet> Cyrille Feijó
  */
+
 public class EnemyImage {
 
     //Properties
@@ -74,7 +77,7 @@ public class EnemyImage {
         return path;
     }
 
-    //Enum of images for the player
+    //Enum of images for the Enemy
     public enum ImagesEnemy {
         MOV1("images/soldier_enemy/back1.png", "images/soldier_enemy/front1.png",
                 "images/soldier_enemy/left1.png", "images/soldier_enemy/right1.png"),

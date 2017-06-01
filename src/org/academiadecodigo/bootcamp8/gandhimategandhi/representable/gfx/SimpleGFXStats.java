@@ -6,7 +6,6 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 /**
  * Developed @ <Academia de Código_>
- * <p>
  * Created by
  * <Code Cadet> Cyrille Feijó
  */
@@ -18,6 +17,7 @@ public class SimpleGFXStats implements FieldStats {
     private Text textSpeed;                        //Text to show Speed
     private Text textDamage;                        // Text to show Damage
     private Text textProjectiles;                   //Text to show Projectiels
+
     private Picture hitpointsPicture = new Picture(720, 10, "images/stats/health.png");
     private Picture damagePicture = new Picture(620, 10, "images/stats/gladius.png");
     private Picture speedPicture = new Picture(520, 10, "images/stats/boot.png");
@@ -32,13 +32,13 @@ public class SimpleGFXStats implements FieldStats {
         damagePicture.draw();
         speedPicture.draw();
         pointsPicture.draw();
-
         projectilesPicture.draw();
+
         textPoints = new Text(35, 15, "");
         textHitPoints = new Text(750, 15, "");
-        textSpeed = new Text(550,15,"");
+        textSpeed = new Text(550, 15, "");
         textDamage = new Text(650, 15, "");
-        textProjectiles = new Text(450, 15 ,"");
+        textProjectiles = new Text(450, 15, "");
 
         textPoints.grow(5, 5);
         textHitPoints.grow(10, 5);
@@ -46,7 +46,7 @@ public class SimpleGFXStats implements FieldStats {
         textDamage.grow(5, 5);
         textProjectiles.grow(5, 5);
 
-        showPoints(points);                 //Show Points
+        showPoints(points);                     //Show Points
         showHitPoints(hitPoints, maxHitPoints);//Show HitPoints
         showSpeed(speed);                      //Show Speed
         showDamage(damage);                    //Show damage
@@ -89,22 +89,24 @@ public class SimpleGFXStats implements FieldStats {
     @Override
     public void showProjectiles(int projectile) {
 
-        textProjectiles.setText("" + projectile);
+        textProjectiles.setText(" " + projectile);
         textProjectiles.draw();
 
     }
 
     @Override
     public void hide() {
-      textDamage.delete();
-      textHitPoints.delete();
-      textPoints.delete();
-      textProjectiles.delete();
-      textSpeed.delete();
-      hitpointsPicture.delete();
-      damagePicture.delete();
-      speedPicture.delete();
-      projectilesPicture.delete();
-      pointsPicture.delete();
+
+        textDamage.delete();
+        textHitPoints.delete();
+        textPoints.delete();
+        textProjectiles.delete();
+        textSpeed.delete();
+
+        hitpointsPicture.delete();
+        damagePicture.delete();
+        speedPicture.delete();
+        projectilesPicture.delete();
+        pointsPicture.delete();
     }
 }

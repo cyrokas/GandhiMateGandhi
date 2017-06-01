@@ -4,7 +4,6 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.field.FieldType;
 
 /**
  * Developed @ <Academia de Código_>
- *
  * Created by
  * <Code Cadet> Filipe Santos Sá
  * <Code Cadet> Cyrille Feijó

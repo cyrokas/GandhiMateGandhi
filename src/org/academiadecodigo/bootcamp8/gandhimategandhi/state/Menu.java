@@ -8,8 +8,11 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
 /**
- * Created by codecadet on 29/05/17.
+ * Developed @ <Academia de Código_>
+ * Created by
+ * <Code Cadet> Robin Opinião
  */
+
 public class Menu {
 
     private State state;
@@ -73,7 +76,7 @@ public class Menu {
         return state;
     }
 
-    public  void removeKeyboard() {
+    public void removeKeyboard() {
         keyboardController = null;
     }
 

@@ -10,9 +10,9 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.player.Player
 
 /**
  * Developed @ <Academia de Código_>
- *
  * Created by
  * <Code Cadet> Filipe Santos Sá
+ * <Code Cadet> João Portela
  */
 
 public class Projectile extends GameObject implements Movable {
@@ -39,8 +39,7 @@ public class Projectile extends GameObject implements Movable {
 
         if (kiting) {
             direction = player.getFacingDirection().opposite();
-        }
-        else {
+        } else {
             direction = player.getFacingDirection();
 
         }
@@ -54,7 +53,7 @@ public class Projectile extends GameObject implements Movable {
         projectileSpeed = player.getPlayerSpeed();
     }
 
-    public Projectile(Boss s, ProjectileType projectileType){
+    public Projectile(Boss s, ProjectileType projectileType) {
         field = s.getField();
         this.projectileType = projectileType;
 
@@ -68,15 +67,15 @@ public class Projectile extends GameObject implements Movable {
         HEIGHT = fieldPosition.getHeight();
         WIDTH = fieldPosition.getWidth();
 
-        projectileDamage = s.getEnemyDamage()/2;
-        projectileSpeed = s.getSpeed()*3;
+        projectileDamage = (s.getEnemyDamage() / 3);
+        projectileSpeed = s.getSpeed() * 2;
     }
 
-    public FieldPosition getFieldPosition(){
+    public FieldPosition getFieldPosition() {
         return fieldPosition;
     }
 
-    public int getProjectileDamage(){
+    public int getProjectileDamage() {
         return projectileDamage;
     }
 
@@ -87,7 +86,7 @@ public class Projectile extends GameObject implements Movable {
 
     @Override
     public Direction chooseDirection() {
-       return direction;
+        return direction;
     }
 
     @Override
@@ -101,7 +100,7 @@ public class Projectile extends GameObject implements Movable {
                 return;
             }
 
-            fieldPosition.moveInDirection(direction, this );
+            fieldPosition.moveInDirection(direction, this);
         }
     }
 

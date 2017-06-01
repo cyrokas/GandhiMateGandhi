@@ -6,7 +6,6 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.GameObject;
 
 /**
  * Developed @ <Academia de Código_>
- *
  * Created by
  * <Code Cadet> Tiago Santos
  * <Code Cadet> Filipe Santos Sá
@@ -23,7 +22,7 @@ public class Bonus extends GameObject {
     private int duration;
     private final int BONUS_DURATION;
 
-    public Bonus (Field field) {
+    public Bonus(Field field) {
 
         this.field = field;
         duration = 0;

@@ -4,8 +4,11 @@ package org.academiadecodigo.bootcamp8.gandhimategandhi.representable.gfx;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.Direction;
 
 /**
- * Created by Cyrille on 31/05/17.
+ * Developed @ <Academia de Código_>
+ * Created by
+ * <Code Cadet> Cyrille Feijó
  */
+
 public class PlayerImage {
 
     //Properties
@@ -77,7 +80,7 @@ public class PlayerImage {
 
 
     //Enum of images for the player
-    public enum ImagesPlayer{
+    public enum ImagesPlayer {
         MOV1("images/player/up1.png", "images/player/down1.png",
                 "images/player/left1.png", "images/player/right1.png"),
 

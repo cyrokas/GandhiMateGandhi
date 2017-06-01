@@ -12,7 +12,6 @@ import java.util.LinkedList;
 
 /**
  * Developed @ <Academia de Código_>
- * <p>
  * Created by
  * <Code Cadet> João Portela
  * <Code Cadet> Robin Opinião
@@ -28,12 +27,12 @@ public class Boss extends Enemy {
 
     public Boss(AbstractPosition pos, FieldPosition playerpos, Field field) {
         super(100, pos, 2, playerpos); //health=100, speed=2
-        enemyDamage = getEnemyDamage()*2;
-        recoilSpeed = getSpeed() * 100;
+        enemyDamage = getEnemyDamage() * 2;
+        recoilSpeed = getSpeed() * 50;
         maxProjectiles = 2;
         initHealth = getHealth();
         this.field = field;
-        criticalHealth=initHealth*0.3;
+        criticalHealth = initHealth * 0.5;
     }
 
 
@@ -71,7 +70,6 @@ public class Boss extends Enemy {
             position.moveInDirection(chooseDirection(), this);
             if (position.isColliding(playerPosition)) {
                 direction = Direction.STOPPED;
-                //hit(enemyDamage);
 
                 return;
             }
