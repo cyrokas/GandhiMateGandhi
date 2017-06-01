@@ -10,11 +10,11 @@ package org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.bonus;
 
 public enum BonusType {
 
-    FIRE("images/bonus/fire.png", 1, 250), //bonus maximum projectiles
-    WATER("images/bonus/water.png", 1, 250), //bonus hitpoints
-    EARTH("images/bonus/earth.png", 1, 250), //bonus damage, reduced speed
-    WIND("images/bonus/wind.png", 1, 250), //bonus speed
-    HEALTH("images/bonus/health.png", 5, 250); //gives health
+    FIRE("images/bonus/fire.png", 1, 300), //bonus maximum projectiles
+    WATER("images/bonus/water.png", 5, 300), //bonus hitpoints
+    EARTH("images/bonus/earth.png", 1, 300), //bonus damage, reduced speed
+    WIND("images/bonus/wind.png", 1, 300), //bonus speed
+    HEALTH("images/bonus/health.png", 10, 500); //gives health
 
     private int multiplier;
     private String image;

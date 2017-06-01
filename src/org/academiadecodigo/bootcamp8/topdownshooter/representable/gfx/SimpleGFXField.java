@@ -97,9 +97,9 @@ public int getHeight() {
 
 
     @Override
-    public SimpleGFXStats createRepresentationStats(int points, int hitPoints) {
+    public SimpleGFXStats createRepresentationStats(int points, int hitPoints,int maxHitpoints, int speed, int damage, int projectile) {
 
-        return new SimpleGFXStats(points, hitPoints);
+        return new SimpleGFXStats(points, hitPoints, maxHitpoints , speed, damage, projectile);
     }
 
 

@@ -27,6 +27,7 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
     private final int INITIAL_SPEED = 2;
     private final int INITIAL_DAMAGE = 1;
     private final int MAX_SPEED = 5;
+    private final int MIN_SPEED = 1;
 
     private int playerSpeed;
     private int playerHitpoints;
@@ -82,7 +83,7 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
 
         keyboardControllerConfiguration();
 
-        playerStats = new Stats(field, playerHitpoints);                           //Creating Score
+        playerStats = new Stats(field, playerHitpoints, maxHitpoints, playerSpeed, playerDamage, maxProjectiles);                           //Creating Score
     }
 
     private void initialDirection() {
@@ -109,7 +110,7 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
 
         for (int i = 0; i < damage; i++) {
             playerHitpoints--;
-            playerStats.removeHitPoints(playerHitpoints);
+            //playerStats.removeHitPoints(playerHitpoints, maxHitpoints);
 
             if (playerHitpoints <= 0) {
                 return;
@@ -171,7 +172,7 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
         playerDirection = newDirection;
 
         for (int i = 0; i < playerSpeed; i++) {
-            fieldPosition.moveInDirection(newDirection, this);
+            fieldPosition.moveInDirection(newDirection, this, keyboardController.isKiting());
         }
     }
 
@@ -229,15 +230,14 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
                         playerSpeed = MAX_SPEED;
                         break;
                     }
-                    System.out.println(playerSpeed);
                 }
                 projectileType = ProjectileType.WIND;
                 break;
             case EARTH:
                 playerDamage += bonusType.getMultiplier();
                 playerSpeed -= bonusType.getMultiplier();
-                if (playerSpeed < 1) {
-                    playerSpeed = 1;
+                if (playerSpeed < MIN_SPEED) {
+                    playerSpeed = MIN_SPEED;
                 }
                 projectileType = ProjectileType.EARTH;
                 break;
@@ -248,7 +248,9 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
             case HEALTH:
                 for (int i = 0; i < bonusType.getMultiplier(); i++) {
                     playerHitpoints++;
-                    if (playerHitpoints == maxHitpoints) {
+
+                    if (playerHitpoints > maxHitpoints) {
+                        playerHitpoints = maxHitpoints;
                         break;
                     }
                 }
@@ -261,6 +263,14 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
     public int getPoints() {
 
         return playerStats.getPoints();
+
+    }
+
+    public void updateStats() {
+        playerStats.showHitPoints(playerHitpoints, maxHitpoints);
+        playerStats.showDamage(playerDamage);
+        playerStats.showSpeed(playerSpeed);
+        playerStats.showProjectiles(maxProjectiles);
     }
 
     @Override

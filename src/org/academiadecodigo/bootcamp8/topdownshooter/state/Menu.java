@@ -70,7 +70,6 @@ public class Menu {
 
         @Override
         public void keyReleased(KeyboardEvent keyboardEvent) {
-
         }
 
 

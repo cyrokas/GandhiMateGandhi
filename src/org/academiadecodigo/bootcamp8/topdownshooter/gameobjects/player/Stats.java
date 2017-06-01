@@ -17,36 +17,41 @@ public class Stats {
     private FieldStats fieldStats;
 
     //Constructor
-    public Stats(Field field, int hitpoints) {
+    public Stats(Field field, int hitPoints, int maxHitPoints, int speed, int damage, int projectile) {
 
         points = 0;
-        this.fieldStats = field.createRepresentationStats(points, hitpoints);
+        this.fieldStats = field.createRepresentationStats(points, hitPoints, maxHitPoints, speed, damage, projectile);
     }
 
     public void addPoints() {
 
-        fieldStats.hide();
         points++;
         fieldStats.showPoints(points);
+
     }
 
-    public void removeHitPoints(int playerHitPoints) {
+    public void showHitPoints(int playerHitPoints, int maxHitPoints) {
 
-        fieldStats.hide();
-        fieldStats.showHitPoints(playerHitPoints);
+        fieldStats.showHitPoints(playerHitPoints, maxHitPoints);
+
     }
 
     public void showSpeed(int speed){
+
+        fieldStats.showSpeed(speed);
 
     }
 
     public void showDamage(int damage){
 
+        fieldStats.showDamage(damage);
 
     }
     
 
-    public void showProjectiels(int projectiels){
+    public void showProjectiles(int projectiles){
+
+        fieldStats.showProjectiles(projectiles);
     }
 
     //Getters

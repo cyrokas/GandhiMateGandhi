@@ -104,7 +104,7 @@ public class EnemyImage {
         private String right;
 
 
-        ImagesEnemy(String up, String down, String left, String right) {
+        ImagesEnemy(String down, String up, String right, String left) {
 
             this.up = up;
             this.down = down;

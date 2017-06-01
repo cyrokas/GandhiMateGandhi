@@ -15,6 +15,6 @@ public class RegularEnemy extends Enemy {
 
     public RegularEnemy(AbstractPosition pos, FieldPosition playerpos)
     {
-        super(20, pos, 1, playerpos);
+        super(10, pos, 1, playerpos);
     }
 }

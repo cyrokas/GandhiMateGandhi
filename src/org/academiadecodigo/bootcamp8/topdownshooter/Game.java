@@ -1,12 +1,12 @@
 package org.academiadecodigo.bootcamp8.topdownshooter;
 
+
 import org.academiadecodigo.bootcamp8.topdownshooter.state.Menu;
 import org.academiadecodigo.bootcamp8.topdownshooter.state.State;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldFactory;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldType;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;
-import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObjectFactory;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.bonus.Bonus;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.Enemy;
@@ -38,7 +38,7 @@ public class Game {
     private final int DELAY;
 
     //Bonus properties
-    private final int BONUS_CHANCE = 2;
+    private final int BONUS_CHANCE = 1;
     private final int BONUS_DURATION = 2000;        //TEST
 
     //Enemy properties
@@ -58,13 +58,11 @@ public class Game {
         DELAY = delay;
         //BONUS_DURATION = 500 * DELAY;
         state = State.MENU;
-
+        menu = new Menu(field);
     }
 
     public void menu() throws InterruptedException {
 
-
-        menu = new Menu(field);
 
         while (state == State.MENU) {       //while state != quit
             state = menu.getState();
@@ -102,7 +100,6 @@ public class Game {
 
         //playerOne.getFieldPosition().show();
 
-
         while (!playerOne.isDead()) {                                                      //maybe change to playerAlive OR lastBoss dead
 
             Thread.sleep(DELAY);
@@ -110,6 +107,10 @@ public class Game {
             gameRound();
 
         }
+
+        Thread.sleep(1000);
+
+        menu();
 
         //gameOver ---------------
 
@@ -119,8 +120,6 @@ public class Game {
 
     //Game Round
     public void gameRound() {
-
-        //TESTING
 
         bonusRound();
 
@@ -148,6 +147,7 @@ public class Game {
 
         checkEnemyBonusInteraction();
         checkPlayerBonusInteraction();
+        playerOne.updateStats();
 
     }
 
@@ -175,12 +175,6 @@ public class Game {
                 iterator.remove();
             }
         }
-
-       /* for (Bonus b : bonusList) {
-            if (b.isActive()) {
-                b.playRound();
-            }
-        } */
     }
 
     private void projectileRound() {
@@ -198,6 +192,7 @@ public class Game {
 
     //REFACTOR THIS
     private boolean checkProjectileEnemyCollision(Projectile p) {
+        
         boolean collided = false;
 
         for (int i = 0; i < enemyArrayList.size(); i++) {
@@ -231,7 +226,7 @@ public class Game {
                 Enemy e = enemyIterator.next();
 
                 if(b.getFieldPosition().isColliding(e.getPosition())) {
-                    b.consume();
+                    bonusIterator.remove();
                     b.getFieldPosition().hide();
                 }
             }
@@ -252,9 +247,8 @@ public class Game {
 
             if (playerPosition.isColliding(b.getFieldPosition())) {
                 playerOne.powerUp(b.getBonusType());
-                b.consume();
+                iterator.remove();
                 b.getFieldPosition().hide();
-
             }
         }
     }
