@@ -229,8 +229,9 @@ public class Game {
                 Enemy e = enemyIterator.next();
 
                 if(b.getFieldPosition().isColliding(e.getPosition())) {
-                    b.consume();
+                    bonusIterator.remove();
                     b.getFieldPosition().hide();
+
                 }
             }
 
@@ -250,9 +251,8 @@ public class Game {
 
             if (playerPosition.isColliding(b.getFieldPosition())) {
                 playerOne.powerUp(b.getBonusType());
-                b.consume();
+                iterator.remove();
                 b.getFieldPosition().hide();
-
             }
         }
     }

@@ -51,10 +51,6 @@ public class Bonus extends GameObject {
         }
     }
 
-    public void consume() {
-        active = false;
-    }
-
     public boolean isActive() {
         return active;
     }
