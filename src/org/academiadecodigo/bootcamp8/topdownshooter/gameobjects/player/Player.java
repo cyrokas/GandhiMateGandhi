@@ -110,14 +110,12 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
 
         for (int i = 0; i < damage; i++) {
             playerHitpoints--;
-            //playerStats.removeHitPoints(playerHitpoints, maxHitpoints);
 
-            if (playerHitpoints <= 0) {
+            if (playerHitpoints == 0) {
                 return;
             }
         }
 
-        System.out.println(playerHitpoints);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx;
 
+
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Direction;
 
 /**
@@ -49,25 +50,25 @@ public class PlayerImage {
     }
 
     //Select direction of image
-    private String imageSet(Direction direction, ImagesPlayer imagesPlayer) {
+    public String imageSet(Direction direction, ImagesPlayer images) {
 
         if (direction == Direction.DOWN || direction == Direction.DOWN_LEFT ||
                 direction == Direction.DOWN_RIGHT) {
 
-            path = imagesPlayer.getDown();
+            path = images.getDown();
 
         } else if (direction == Direction.UP || direction == Direction.UP_LEFT ||
                 direction == Direction.UP_RIGHT) {
 
-            path = imagesPlayer.getUp();
+            path = images.getUp();
 
         } else if (direction == Direction.RIGHT) {
 
-            path = imagesPlayer.getRight();
+            path = images.getRight();
 
         } else {
 
-            path = imagesPlayer.getLeft();
+            path = images.getLeft();
 
         }
 
@@ -76,19 +77,25 @@ public class PlayerImage {
 
 
     //Enum of images for the player
-    public enum ImagesPlayer {
+    public enum ImagesPlayer{
         MOV1("images/player/up1.png", "images/player/down1.png",
                 "images/player/left1.png", "images/player/right1.png"),
+
         MOV2("images/player/up2.png", "images/player/down2.png",
                 "images/player/left2.png", "images/player/right2.png"),
+
         MOV3("images/player/up3.png", "images/player/down3.png",
                 "images/player/left3.png", "images/player/right3.png"),
+
         MOV4("images/player/up4.png", "images/player/down4.png",
                 "images/player/left4.png", "images/player/right4.png"),
+
         MOV5("images/player/up5.png", "images/player/down5.png",
                 "images/player/left5.png", "images/player/right5.png"),
+
         MOV6("images/player/up6.png", "images/player/down6.png",
                 "images/player/left6.png", "images/player/right4.png"),
+
         MOV7("images/player/up7.png", "images/player/down7.png",
                 "images/player/left7.png", "images/player/right7.png");
 

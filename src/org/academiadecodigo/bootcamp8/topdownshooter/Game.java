@@ -1,5 +1,6 @@
 package org.academiadecodigo.bootcamp8.topdownshooter;
 
+import org.academiadecodigo.bootcamp8.topdownshooter.SFX.Sound;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.Boss;
 import org.academiadecodigo.bootcamp8.topdownshooter.state.Menu;
 import org.academiadecodigo.bootcamp8.topdownshooter.state.State;
@@ -54,6 +55,7 @@ public class Game {
 
     private Menu menu;
     private State state;
+    private Sound sound;
 
     //Constructor
     public Game(int rows, int columns, int delay, FieldType fieldType) {
@@ -61,6 +63,7 @@ public class Game {
         field = FieldFactory.getNewField(fieldType, rows, columns);
         DELAY = delay;
         state = State.MENU;
+        sound = new Sound("/resources/sound/DoomOST.wav");
 
     }
 
@@ -76,6 +79,7 @@ public class Game {
             if (state == State.GAME) {
                 menu.getFieldPosition().hide();
                 setup();
+                sound.setLoop(10);
             }
 
             //if story
@@ -93,6 +97,8 @@ public class Game {
 
     //Game Loop
     public void gameLoop() throws InterruptedException {
+
+        sound.play(true);
 
         while (!playerOne.isDead()) {
 

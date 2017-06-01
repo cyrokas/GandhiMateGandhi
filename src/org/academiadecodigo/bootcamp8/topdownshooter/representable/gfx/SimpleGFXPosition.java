@@ -29,8 +29,12 @@ public class SimpleGFXPosition extends AbstractPosition {
 
     private PlayerImage playerImage = new PlayerImage();
     private EnemyImage enemyImage = new EnemyImage();
+    private BossImage bossImage = new BossImage();
 
-    private int imageCount = 1;
+    private int imageCount = 1;                         // Counter to change image
+    private int imageChangeCount = 15;                       //When images change
+    private int maxCount = 119;                         //Max count to change images
+
 
     public SimpleGFXPosition(String image, SimpleGFXField field, boolean edge) {
 
@@ -100,7 +104,7 @@ public class SimpleGFXPosition extends AbstractPosition {
 
         picture.translate(finalColumn - initialColumn, finalRow - initialRow);
 
-        if (kitting && gameObject instanceof Player){
+        if (kitting && gameObject instanceof Player) {
 
             if (direction == Direction.STOPPED) {
                 direction = ((Player) gameObject).getFacingDirection();
@@ -130,9 +134,9 @@ public class SimpleGFXPosition extends AbstractPosition {
         int finalRow = simpleGFXField.rowToY(super.getRow());
 
         picture.translate(finalColumn - initialColumn, finalRow - initialRow);
-            direction = direction.opposite();
-            changePicture(gameObject, direction);
-            imageCount++;
+        direction = direction.opposite();
+        changePicture(gameObject, direction);
+        imageCount++;
 
     }
 
@@ -190,30 +194,43 @@ public class SimpleGFXPosition extends AbstractPosition {
 
         if (gameObject instanceof Player) {
 
-            if (imageCount % 15 == 0 && imageCount < 106) {
+            if (imageCount % imageChangeCount == 0) {
 
-                picture.load(playerImage.imageChange(direction, imageCount));    //Set images with movement
+                picture.load(playerImage.imageChange(direction, imageCount));
 
-            } else if (imageCount == 120) {
+            } else if (imageCount == maxCount) {
 
-                imageCount = 1;
+                imageCount = 0;
             }
+
         } else if (gameObject instanceof Boss) {
 
+            if (imageCount % imageChangeCount == 0) {
+
+                picture.load(bossImage.imageChange(direction, imageCount));
+
+            } else if (imageCount == maxCount) {
+
+                imageCount = 0;
+            }
 
         } else if (gameObject instanceof Enemy) {
 
-            if (imageCount % 15 == 0 && imageCount < 106) {
+            if (imageCount % imageChangeCount == 0) {
 
-                picture.load(enemyImage.imageChange(direction, imageCount));    //Set images with movement
+                picture.load(enemyImage.imageChange(direction, imageCount));
 
-            } else if (imageCount == 120) {
+            } else if (imageCount == maxCount) {
 
-                imageCount = 1;
+                imageCount = 0;
             }
         }
 
     }
+
+
+
+
 }
 
 

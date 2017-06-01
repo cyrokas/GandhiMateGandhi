@@ -49,7 +49,7 @@ public class EnemyImage {
     }
 
     //Select direction of image
-    private String imageSet(Direction direction, ImagesEnemy imagesEnemy) {
+    public String imageSet(Direction direction, ImagesEnemy imagesEnemy) {
 
         if (direction == Direction.DOWN || direction == Direction.DOWN_LEFT ||
                 direction == Direction.DOWN_RIGHT) {

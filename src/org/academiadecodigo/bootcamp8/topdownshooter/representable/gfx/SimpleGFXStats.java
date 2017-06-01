@@ -18,24 +18,33 @@ public class SimpleGFXStats implements FieldStats {
     private Text textSpeed;                        //Text to show Speed
     private Text textDamage;                        // Text to show Damage
     private Text textProjectiles;                   //Text to show Projectiels
-    private Picture hitpointsPicture = new Picture(480, 0, "images/stats/health icon.png");
+    private Picture hitpointsPicture = new Picture(720, 10, "images/stats/health.png");
+    private Picture damagePicture = new Picture(620, 10, "images/stats/gladius.png");
+    private Picture speedPicture = new Picture(520, 10, "images/stats/boot.png");
+    private Picture projectilesPicture = new Picture(420, 10, "images/stats/projectiles.png");
+    private Picture pointsPicture = new Picture(12, 10, "images/stats/skull.png");
 
     //NOTE FIX Position of SCORE
     //Constructor
     public SimpleGFXStats(int points, int hitPoints, int maxHitPoints, int speed, int damage, int projectile) {
 
         hitpointsPicture.draw();
-        textPoints = new Text(40, 10, "");
-        textHitPoints = new Text(650, 10, "");
-        textSpeed = new Text(500,10,"");
-        textDamage = new Text(450, 10, "");
-        textProjectiles = new Text(350, 10 ,"");
+        damagePicture.draw();
+        speedPicture.draw();
+        pointsPicture.draw();
 
-        textPoints.grow(10, 5);
+        projectilesPicture.draw();
+        textPoints = new Text(35, 15, "");
+        textHitPoints = new Text(750, 15, "");
+        textSpeed = new Text(550,15,"");
+        textDamage = new Text(650, 15, "");
+        textProjectiles = new Text(450, 15 ,"");
+
+        textPoints.grow(5, 5);
         textHitPoints.grow(10, 5);
-        textSpeed.grow(10, 5);
-        textDamage.grow(10, 5);
-        textProjectiles.grow(10, 5);
+        textSpeed.grow(5, 5);
+        textDamage.grow(5, 5);
+        textProjectiles.grow(5, 5);
 
         showPoints(points);                 //Show Points
         showHitPoints(hitPoints, maxHitPoints);//Show HitPoints
@@ -48,7 +57,7 @@ public class SimpleGFXStats implements FieldStats {
     @Override
     public void showPoints(int points) {
 
-        textPoints.setText("Kills: " + points);
+        textPoints.setText(" " + points);
         textPoints.draw();
 
     }
@@ -56,7 +65,7 @@ public class SimpleGFXStats implements FieldStats {
     @Override
     public void showHitPoints(int hitPoints, int maxHitpoints) {
 
-        textHitPoints.setText("HP: " + hitPoints + " | " + maxHitpoints);
+        textHitPoints.setText(hitPoints + " | " + maxHitpoints);
         textHitPoints.draw();
 
     }
@@ -64,7 +73,7 @@ public class SimpleGFXStats implements FieldStats {
     @Override
     public void showSpeed(int speed) {
 
-        textSpeed.setText("SPD: " + speed);
+        textSpeed.setText(" " + speed);
         textSpeed.draw();
 
     }
@@ -72,7 +81,7 @@ public class SimpleGFXStats implements FieldStats {
     @Override
     public void showDamage(int damage) {
 
-        textDamage.setText("ATK: " + damage);
+        textDamage.setText(" " + damage);
         textDamage.draw();
 
     }
@@ -80,7 +89,7 @@ public class SimpleGFXStats implements FieldStats {
     @Override
     public void showProjectiles(int projectile) {
 
-        textProjectiles.setText("PROJ: " + projectile);
+        textProjectiles.setText("" + projectile);
         textProjectiles.draw();
 
     }
@@ -93,5 +102,9 @@ public class SimpleGFXStats implements FieldStats {
       textProjectiles.delete();
       textSpeed.delete();
       hitpointsPicture.delete();
+      damagePicture.delete();
+      speedPicture.delete();
+      projectilesPicture.delete();
+      pointsPicture.delete();
     }
 }
