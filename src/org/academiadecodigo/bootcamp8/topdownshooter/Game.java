@@ -2,6 +2,7 @@ package org.academiadecodigo.bootcamp8.topdownshooter;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.Menu.Menu;
 import org.academiadecodigo.bootcamp8.topdownshooter.Menu.State;
+import org.academiadecodigo.bootcamp8.topdownshooter.SFX.Sound;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldFactory;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.FieldType;
@@ -44,7 +45,7 @@ public class Game {
     //Enemy properties
     private LinkedList<Bonus> bonusList = new LinkedList<>();
     private ArrayList<Enemy> enemyArrayList = new ArrayList<>();
-    private int maxEnemiesPerLevel = 5;                            // ?????
+    private int maxEnemiesPerLevel = 0;                            // ?????
 
     private Player playerOne;
 
@@ -118,8 +119,6 @@ public class Game {
 
     //Game Round
     public void gameRound() {
-
-        //TESTING
 
         bonusRound();
 

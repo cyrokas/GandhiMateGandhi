@@ -22,6 +22,8 @@ public interface FieldPosition {
 
     void moveInDirection(Direction direction, GameObject gameObject);
 
+    void moveInDirection(Direction direction, GameObject gameObject, boolean kitting);
+
     void show();
 
     void hide();

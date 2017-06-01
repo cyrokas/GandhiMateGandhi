@@ -23,5 +23,5 @@ public interface Field {
 
     AbstractPosition createRepresentation(int x, int y, String image);
 
-    SimpleGFXStats createRepresentationStats(int points, int hitPoints);
+    SimpleGFXStats createRepresentationStats(int points, int hitPoints,int maxHitPoints, int speed, int damage, int projectile);
 }

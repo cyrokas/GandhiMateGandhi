@@ -82,7 +82,7 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
 
         keyboardControllerConfiguration();
 
-        playerStats = new Stats(field, playerHitpoints);                           //Creating Score
+        playerStats = new Stats(field, playerHitpoints, maxHitpoints, playerSpeed, playerDamage, maxProjectiles);                           //Creating Score
     }
 
     private void initialDirection() {
@@ -109,7 +109,7 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
 
         for (int i = 0; i < damage; i++) {
             playerHitpoints--;
-            playerStats.removeHitPoints(playerHitpoints);
+            //playerStats.removeHitPoints(playerHitpoints, maxHitpoints);
 
             if (playerHitpoints <= 0) {
                 return;
@@ -139,7 +139,10 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
         if (keyboardController.isShooting() && hasProjectiles() && notOnCooldown()) {
             projectileList.add(new Projectile(this, projectileType, keyboardController.isKiting()));
         }
-
+        playerStats.showHitPoints(playerHitpoints, maxHitpoints);
+        playerStats.showDamage(playerDamage);
+        playerStats.showSpeed(playerSpeed);
+        playerStats.showProjectiles(maxProjectiles);
         roundCounter++;
     }
 
@@ -171,7 +174,7 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
         playerDirection = newDirection;
 
         for (int i = 0; i < playerSpeed; i++) {
-            fieldPosition.moveInDirection(newDirection, this);
+            fieldPosition.moveInDirection(newDirection, this, keyboardController.isKiting());
         }
     }
 
@@ -248,6 +251,7 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
             case HEALTH:
                 for (int i = 0; i < bonusType.getMultiplier(); i++) {
                     playerHitpoints++;
+
                     if (playerHitpoints == maxHitpoints) {
                         break;
                     }
@@ -261,6 +265,7 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
     public int getPoints() {
 
         return playerStats.getPoints();
+
     }
 
     @Override

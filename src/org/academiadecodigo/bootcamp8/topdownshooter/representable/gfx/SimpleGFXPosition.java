@@ -24,6 +24,8 @@ public class SimpleGFXPosition extends AbstractPosition {
     private final int HEIGHT;
     private final int WIDTH;
 
+    private Direction direction;
+
     private PlayerImage playerImage = new PlayerImage();
     private EnemyImage enemyImage = new EnemyImage();
 
@@ -85,6 +87,30 @@ public class SimpleGFXPosition extends AbstractPosition {
     }
 
     @Override
+    public void moveInDirection(Direction direction, GameObject gameObject, boolean kitting) {
+
+        int initialColumn = simpleGFXField.columnToX(super.getColumn());
+        int initialRow = simpleGFXField.rowToY(super.getRow());
+
+        super.moveInDirection(direction, gameObject);
+
+        int finalColumn = simpleGFXField.columnToX(super.getColumn());
+        int finalRow = simpleGFXField.rowToY(super.getRow());
+
+        picture.translate(finalColumn - initialColumn, finalRow - initialRow);
+        if (kitting == true){
+            direction = direction.opposite();
+            changePicture(gameObject, direction);
+            imageCount++;
+        } else {
+            changePicture(gameObject, direction);
+            imageCount++;
+        }
+
+
+    }
+
+    @Override
     public void moveInDirection(Direction direction, GameObject gameObject) {
 
         int initialColumn = simpleGFXField.columnToX(super.getColumn());
@@ -96,8 +122,9 @@ public class SimpleGFXPosition extends AbstractPosition {
         int finalRow = simpleGFXField.rowToY(super.getRow());
 
         picture.translate(finalColumn - initialColumn, finalRow - initialRow);
-        changePicture(gameObject, direction);
-        imageCount++;
+            direction = direction.opposite();
+            changePicture(gameObject, direction);
+            imageCount++;
 
     }
 
@@ -155,7 +182,7 @@ public class SimpleGFXPosition extends AbstractPosition {
 
         if (gameObject instanceof Player) {
 
-            if (imageCount % 15 == 0 && imageCount < 120) {
+            if (imageCount % 15 == 0 && imageCount < 106) {
 
                 picture.load(playerImage.imageChange(direction, imageCount));    //Set images with movement
 
@@ -165,7 +192,7 @@ public class SimpleGFXPosition extends AbstractPosition {
             }
         } else if (gameObject instanceof Enemy) {
 
-            if (imageCount % 15 == 0 && imageCount < 120) {
+            if (imageCount % 15 == 0 && imageCount < 106) {
 
                 picture.load(enemyImage.imageChange(direction, imageCount));    //Set images with movement
 

@@ -8,7 +8,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.Direction;
 public class PlayerImage {
 
     //Properties
-    private String imagePath;           //Return to simpleGFXPosition the image path
+    private String imagePath;          //Return to simpleGFXPosition the image path
     private String path;
 
 
@@ -73,6 +73,7 @@ public class PlayerImage {
 
         return path;
     }
+
 
     //Enum of images for the player
     public enum ImagesPlayer {
