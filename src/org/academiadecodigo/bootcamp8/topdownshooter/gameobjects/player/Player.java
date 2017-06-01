@@ -24,9 +24,9 @@ import java.util.LinkedList;
 public class Player extends GameObject implements Movable, Hittable, Iterable<Projectile> {
 
     private final int INITIAL_HITPOINTS = 50;
-    private final int INITIAL_SPEED = 2;
+    private final int INITIAL_SPEED = 5;
     private final int INITIAL_DAMAGE = 1;
-    private final int MAX_SPEED = 5;
+    private final int MAX_SPEED = 10;
 
     private int playerSpeed;
     private int playerHitpoints;

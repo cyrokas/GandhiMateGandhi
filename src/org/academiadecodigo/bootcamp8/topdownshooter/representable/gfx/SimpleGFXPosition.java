@@ -4,6 +4,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.Direction;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.AbstractPosition;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.Enemy;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.Boss;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -163,6 +164,9 @@ public class SimpleGFXPosition extends AbstractPosition {
 
                 imageCount = 1;
             }
+        } else if (gameObject instanceof Boss) {
+
+
         } else if (gameObject instanceof Enemy) {
 
             if (imageCount % 15 == 0 && imageCount < 120) {

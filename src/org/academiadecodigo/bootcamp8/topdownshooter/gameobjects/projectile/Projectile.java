@@ -5,6 +5,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.GameObject;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.Movable;
+import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.enemy.Boss;
 import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.player.Player;
 
 /**
@@ -51,6 +52,24 @@ public class Projectile extends GameObject implements Movable {
 
         projectileDamage = player.getPlayerDamage();
         projectileSpeed = player.getPlayerSpeed();
+    }
+
+    public Projectile(Boss s, ProjectileType projectileType){
+        field = s.getField();
+        this.projectileType = projectileType;
+
+        int row = s.getPosition().getRow() + s.getPosition().getHeight() / 4;
+        int column = s.getPosition().getColumn() + s.getPosition().getWidth() / 4;
+
+        direction = s.chooseDirection();
+
+        fieldPosition = field.createRepresentation(row, column, projectileType.getImage());
+
+        HEIGHT = fieldPosition.getHeight();
+        WIDTH = fieldPosition.getWidth();
+
+        projectileDamage = s.getEnemyDamage()/2;
+        projectileSpeed = s.getSpeed()*3;
     }
 
     public FieldPosition getFieldPosition(){

@@ -5,7 +5,7 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPositio
 
 /**
  * Developed @ <Academia de Código_>
- *
+ * <p>
  * Created by
  * <Code Cadet> Cyrille Feijó
  * <Code Cadet> João Portela
@@ -13,8 +13,8 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPositio
 
 public class RegularEnemy extends Enemy {
 
-    public RegularEnemy(AbstractPosition pos, FieldPosition playerpos)
-    {
-        super(20, pos, 1, playerpos);
+    public RegularEnemy(AbstractPosition pos, FieldPosition playerpos) {
+
+        super(10, pos, 2, playerpos); // health=10, speed=2
     }
 }
