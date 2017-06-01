@@ -270,6 +270,10 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
         playerStats.showProjectiles(maxProjectiles);
     }
 
+    public int getPoints() {
+        return playerStats.getPoints();
+    }
+
     @Override
     public Iterator<Projectile> iterator() {
         return projectileList.iterator();

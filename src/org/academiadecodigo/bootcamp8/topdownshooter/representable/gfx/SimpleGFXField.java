@@ -2,7 +2,6 @@ package org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.AbstractPosition;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 /**
@@ -19,7 +18,7 @@ public class SimpleGFXField implements Field {
     private final int PADDING_TOP = 30;
     private int columns;
     private int rows;
-    private Picture field;
+    private Picture picture;
     private final int CELL_SIZE = 1;
 
     public SimpleGFXField(int rows, int columns) {
@@ -31,8 +30,8 @@ public class SimpleGFXField implements Field {
     @Override
     public void setup() {
 
-        field = new Picture(PADDING, PADDING_TOP, "images/padding.png");
-        field.draw();
+        picture = new Picture(PADDING, PADDING_TOP, "images/padding.png");
+        picture.draw();
     }
 
     @Override
@@ -55,6 +54,11 @@ public class SimpleGFXField implements Field {
 
     public int rowToY(int row) {
         return PADDING_TOP + row * CELL_SIZE;
+    }
+
+    @Override
+    public Picture getPicture() {
+        return picture;
     }
 
     @Override

@@ -2,6 +2,7 @@ package org.academiadecodigo.bootcamp8.topdownshooter.field;
 
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.AbstractPosition;
 import org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx.SimpleGFXStats;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 /**
  * Developed @ <Academia de Código_>
@@ -12,6 +13,8 @@ import org.academiadecodigo.bootcamp8.topdownshooter.representable.gfx.SimpleGFX
  */
 
 public interface Field {
+
+    Picture getPicture();
 
     void setup();
 

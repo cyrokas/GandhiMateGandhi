@@ -28,7 +28,7 @@ public interface FieldPosition {
 
     void hide();
 
-    boolean isColliding(FieldPosition position);                             //What's this?
+    boolean isColliding(FieldPosition position);
 
     boolean isEdge();
 

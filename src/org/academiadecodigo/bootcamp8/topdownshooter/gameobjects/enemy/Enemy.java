@@ -8,6 +8,8 @@ import org.academiadecodigo.bootcamp8.topdownshooter.gameobjects.Movable;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.Field;
 import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPosition;
 
+import java.io.FileNotFoundException;
+
 /**
  * <Academia de Código_>
  *
@@ -15,18 +17,18 @@ import org.academiadecodigo.bootcamp8.topdownshooter.field.position.FieldPositio
  * <Code Cadet> João Portela
  * <Code Cadet> Cyrille Feijó
  * <Code Cadet> Robin Opinião
+ * <Code Cadet> Filipe Santos Sá
  */
 
 public abstract class Enemy extends GameObject implements Movable, Hittable {
     private int health;
     private boolean dead;
     private Direction currentDirection;
-    private AbstractPosition position;
-    private Field field;
-    private int speed;
-    private FieldPosition playerPosition;
-    private int enemyDamage = 2;
-    private int recoilSpeed;
+    protected AbstractPosition position;
+    protected int speed;
+    protected FieldPosition playerPosition;
+    protected int enemyDamage = 1;
+    protected int recoilSpeed;
 
     public Enemy(int health, AbstractPosition position, int speed, FieldPosition playerPosition) {
 
@@ -64,6 +66,7 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
     public int getEnemyDamage() {
         return enemyDamage;
     }
+
 
     @Override
     public boolean isDead() {
@@ -106,13 +109,13 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
         } else if (playerPosition.getColumn() < position.getColumn()) {
             horiz = Direction.LEFT;
         }
+
         if (playerPosition.getRow() > position.getRow()) {
             vertical = Direction.DOWN;
 
         } else if (playerPosition.getRow() < position.getRow()) {
             vertical = Direction.UP;
         }
-
         if (horiz == Direction.STOPPED) {
             return vertical;
         }
@@ -135,9 +138,6 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
                     return Direction.UP_LEFT;
                 }
         }
-
-        System.out.println(horiz);
-        System.out.println(vertical);
         return null;
     }
 
