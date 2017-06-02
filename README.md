@@ -1,7 +1,7 @@
 # Gandhi Mate, Gandhi
 
 Developed @ <Academia de Código_>
-Created by <Code Cadets>
+Created by <Code Cadets_>
 Filipe Santos Sá
 Cyrille Feijó
 João Portela
