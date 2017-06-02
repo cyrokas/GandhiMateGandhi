@@ -27,7 +27,7 @@ public class GameObjectFactory {
 
     public static Enemy getNewRegularEnemy(Field field, FieldPosition playerpos) {
 
-        AbstractPosition pos = field.createRepresentation("images/soldier_enemy/front1.png", true);
+        AbstractPosition pos = field.createRepresentation("resources/images/soldier_enemy/front1.png", true);
         return new RegularEnemy(pos, playerpos);
     }
 
@@ -43,7 +43,7 @@ public class GameObjectFactory {
 
 
         pos = field.createRepresentation(0, Math.round(field.getColumns() / 2),
-                "images/boss/front1.png");
+                "resources/images/boss/front1.png");
 
         return new Boss(pos, playerpos, field);
     }

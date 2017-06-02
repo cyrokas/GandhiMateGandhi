@@ -29,7 +29,7 @@ public class SimpleGFXField implements Field {
     @Override
     public void setup() {
 
-        picture = new Picture(PADDING, PADDING_TOP, "images/padding.png");
+        picture = new Picture(PADDING, PADDING_TOP, "resources/images/padding.png");
         picture.draw();
     }
 

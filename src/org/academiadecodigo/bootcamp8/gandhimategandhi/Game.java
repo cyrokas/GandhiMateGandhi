@@ -233,6 +233,7 @@ public class Game {
         while (it.hasNext()) {
             Projectile p = it.next();
             p.playRound();
+
             if (playerorboss) {
                 if (!bossStage) {
                     if (checkProjectileEnemyCollision(p)) {
@@ -245,7 +246,9 @@ public class Game {
                     it.remove();
 
                 }
-            } else if (checkProjectilePlayerCollision(p)) {
+            }
+
+            else if (checkProjectilePlayerCollision(p)) {
                 it.remove();
             }
         }
@@ -283,6 +286,7 @@ public class Game {
     }
 
     private boolean checkProjectileBossCollision(Projectile p) {
+
         boolean collided = false;
         if (p.getFieldPosition().isColliding(boss.getPosition())) {
             boss.hit(p.getProjectileDamage());
@@ -327,7 +331,6 @@ public class Game {
                 Enemy e = enemyIterator.next();
 
                 if (b.getFieldPosition().isColliding(e.getPosition())) {
-
                     b.getFieldPosition().hide();
                 }
             }

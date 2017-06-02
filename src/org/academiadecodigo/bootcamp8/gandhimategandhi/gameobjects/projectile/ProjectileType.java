@@ -8,10 +8,10 @@ package org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.projectile;
 
 public enum ProjectileType {
 
-    FIRE("images/projectiles/fire.png"),
-    EARTH("images/projectiles/rock.png"),
-    WATER("images/projectiles/water.png"),
-    WIND("images/projectiles/wind.png");
+    FIRE("resources/images/projectiles/fire.png"),
+    EARTH("resources/images/projectiles/rock.png"),
+    WATER("resources/images/projectiles/water.png"),
+    WIND("resources/images/projectiles/wind.png");
 
     private String image;
 

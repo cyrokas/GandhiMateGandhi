@@ -79,26 +79,26 @@ public class EnemyImage {
 
     //Enum of images for the Enemy
     public enum ImagesEnemy {
-        MOV1("images/soldier_enemy/back1.png", "images/soldier_enemy/front1.png",
-                "images/soldier_enemy/left1.png", "images/soldier_enemy/right1.png"),
+        MOV1("resources/images/soldier_enemy/back1.png", "resources/images/soldier_enemy/front1.png",
+                "resources/images/soldier_enemy/left1.png", "resources/images/soldier_enemy/right1.png"),
 
-        MOV2("images/soldier_enemy/back2.png", "images/soldier_enemy/front2.png",
-                "images/soldier_enemy/left2.png", "images/soldier_enemy/right2.png"),
+        MOV2("resources/images/soldier_enemy/back2.png", "resources/images/soldier_enemy/front2.png",
+                "resources/images/soldier_enemy/left2.png", "resources/images/soldier_enemy/right2.png"),
 
-        MOV3("images/soldier_enemy/back3.png", "images/soldier_enemy/front3.png",
-                "images/soldier_enemy/left3.png", "images/soldier_enemy/right3.png"),
+        MOV3("resources/images/soldier_enemy/back3.png", "resources/images/soldier_enemy/front3.png",
+                "resources/images/soldier_enemy/left3.png", "resources/images/soldier_enemy/right3.png"),
 
-        MOV4("images/soldier_enemy/back4.png", "images/soldier_enemy/front4.png",
-                "images/soldier_enemy/left4.png", "images/soldier_enemy/right4.png"),
+        MOV4("resources/images/soldier_enemy/back4.png", "resources/images/soldier_enemy/front4.png",
+                "resources/images/soldier_enemy/left4.png", "resources/images/soldier_enemy/right4.png"),
 
-        MOV5("images/soldier_enemy/back5.png", "images/soldier_enemy/front5.png",
-                "images/soldier_enemy/left5.png", "images/soldier_enemy/right5.png"),
+        MOV5("resources/images/soldier_enemy/back5.png", "resources/images/soldier_enemy/front5.png",
+                "resources/images/soldier_enemy/left5.png", "resources/images/soldier_enemy/right5.png"),
 
-        MOV6("images/soldier_enemy/back6.png", "images/soldier_enemy/front6.png",
-                "images/soldier_enemy/left6.png", "images/soldier_enemy/right6.png"),
+        MOV6("resources/images/soldier_enemy/back6.png", "resources/images/soldier_enemy/front6.png",
+                "resources/images/soldier_enemy/left6.png", "resources/images/soldier_enemy/right6.png"),
 
-        MOV7("images/soldier_enemy/back7.png", "images/soldier_enemy/front7.png",
-                "images/soldier_enemy/left7.png", "images/soldier_enemy/right7.png");
+        MOV7("resources/images/soldier_enemy/back7.png", "resources/images/soldier_enemy/front7.png",
+                "resources/images/soldier_enemy/left7.png", "resources/images/soldier_enemy/right7.png");
 
 
         private String up;

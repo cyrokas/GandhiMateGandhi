@@ -18,11 +18,11 @@ public class SimpleGFXStats implements FieldStats {
     private Text textDamage;                        // Text to show Damage
     private Text textProjectiles;                   //Text to show Projectiels
 
-    private Picture hitpointsPicture = new Picture(720, 10, "images/stats/health.png");
-    private Picture damagePicture = new Picture(620, 10, "images/stats/gladius.png");
-    private Picture speedPicture = new Picture(520, 10, "images/stats/boot.png");
-    private Picture projectilesPicture = new Picture(420, 10, "images/stats/projectiles.png");
-    private Picture pointsPicture = new Picture(12, 10, "images/stats/skull.png");
+    private Picture hitpointsPicture = new Picture(720, 10, "resources/images/stats/health.png");
+    private Picture damagePicture = new Picture(620, 10, "resources/images/stats/gladius.png");
+    private Picture speedPicture = new Picture(520, 10, "resources/images/stats/boot.png");
+    private Picture projectilesPicture = new Picture(420, 10, "resources/images/stats/projectiles.png");
+    private Picture pointsPicture = new Picture(12, 10, "resources/images/stats/skull.png");
 
     //NOTE FIX Position of SCORE
     //Constructor

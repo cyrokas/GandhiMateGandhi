@@ -80,26 +80,26 @@ public class BossImage {
 
     //Enum of images for the Boss
     public enum ImagesBoss {
-        MOV1("images/boss/back1.png", "images/boss/front1.png",
-                "images/boss/left1.png", "images/boss/right1.png"),
+        MOV1("resources/images/boss/back1.png", "resources/images/boss/front1.png",
+                "resources/images/boss/left1.png", "resources/images/boss/right1.png"),
 
-        MOV2("images/boss/back2.png", "images/boss/front2.png",
-                "images/boss/left2.png", "images/boss/right2.png"),
+        MOV2("resources/images/boss/back2.png", "resources/images/boss/front2.png",
+                "resources/images/boss/left2.png", "resources/images/boss/right2.png"),
 
-        MOV3("images/boss/back3.png", "images/boss/front3.png",
-                "images/boss/left3.png", "images/boss/right3.png"),
+        MOV3("resources/images/boss/back3.png", "resources/images/boss/front3.png",
+                "resources/images/boss/left3.png", "resources/images/boss/right3.png"),
 
-        MOV4("images/boss/back4.png", "images/boss/front4.png",
-                "images/boss/left4.png", "images/boss/right4.png"),
+        MOV4("resources/images/boss/back4.png", "resources/images/boss/front4.png",
+                "resources/images/boss/left4.png", "resources/images/boss/right4.png"),
 
-        MOV5("images/boss/back5.png", "images/boss/front5.png",
-                "images/boss/left5.png", "images/boss/right5.png"),
+        MOV5("resources/images/boss/back5.png", "resources/images/boss/front5.png",
+                "resources/images/boss/left5.png", "resources/images/boss/right5.png"),
 
-        MOV6("images/boss/back6.png", "images/boss/front6.png",
-                "images/boss/left6.png", "images/boss/right6.png"),
+        MOV6("resources/images/boss/back6.png", "resources/images/boss/front6.png",
+                "resources/images/boss/left6.png", "resources/images/boss/right6.png"),
 
-        MOV7("images/boss/back7.png", "images/boss/front7.png",
-                "images/boss/left7.png", "images/boss/right7.png");
+        MOV7("resources/images/boss/back7.png", "resources/images/boss/front7.png",
+                "resources/images/boss/left7.png", "resources/images/boss/right7.png");
 
 
         private String up;

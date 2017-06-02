@@ -9,11 +9,11 @@ package org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.bonus;
 
 public enum BonusType {
 
-    FIRE("images/bonus/fire.png", 1, 300), //bonus maximum projectiles
-    WATER("images/bonus/water.png", 5, 300), //bonus hitpoints
-    EARTH("images/bonus/earth.png", 1, 300), //bonus damage, reduced speed
-    WIND("images/bonus/wind.png", 1, 300), //bonus speed
-    HEALTH("images/bonus/health.png", 10, 500); //gives health
+    FIRE("resources/images/bonus/fire.png", 1, 300), //bonus maximum projectiles
+    WATER("resources/images/bonus/water.png", 5, 300), //bonus hitpoints
+    EARTH("resources/images/bonus/earth.png", 1, 300), //bonus damage, reduced speed
+    WIND("resources/images/bonus/wind.png", 1, 300), //bonus speed
+    HEALTH("resources/images/bonus/health.png", 10, 500); //gives health
 
     private int multiplier;
     private String image;

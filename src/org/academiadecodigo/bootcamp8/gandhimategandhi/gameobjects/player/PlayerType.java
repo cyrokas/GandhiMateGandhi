@@ -8,7 +8,7 @@ package org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.player;
 
 public enum PlayerType {
 
-    P1("images/player/down1.png");
+    P1("resources/images/player/down1.png");
 
     private String image;
 

@@ -81,26 +81,26 @@ public class PlayerImage {
 
     //Enum of images for the player
     public enum ImagesPlayer {
-        MOV1("images/player/up1.png", "images/player/down1.png",
-                "images/player/left1.png", "images/player/right1.png"),
+        MOV1("resources/images/player/up1.png", "resources/images/player/down1.png",
+                "resources/images/player/left1.png", "resources/images/player/right1.png"),
 
-        MOV2("images/player/up2.png", "images/player/down2.png",
-                "images/player/left2.png", "images/player/right2.png"),
+        MOV2("resources/images/player/up2.png", "resources/images/player/down2.png",
+                "resources/images/player/left2.png", "resources/images/player/right2.png"),
 
-        MOV3("images/player/up3.png", "images/player/down3.png",
-                "images/player/left3.png", "images/player/right3.png"),
+        MOV3("resources/images/player/up3.png", "resources/images/player/down3.png",
+                "resources/images/player/left3.png", "resources/images/player/right3.png"),
 
-        MOV4("images/player/up4.png", "images/player/down4.png",
-                "images/player/left4.png", "images/player/right4.png"),
+        MOV4("resources/images/player/up4.png", "resources/images/player/down4.png",
+                "resources/images/player/left4.png", "resources/images/player/right4.png"),
 
-        MOV5("images/player/up5.png", "images/player/down5.png",
-                "images/player/left5.png", "images/player/right5.png"),
+        MOV5("resources/images/player/up5.png", "resources/images/player/down5.png",
+                "resources/images/player/left5.png", "resources/images/player/right5.png"),
 
-        MOV6("images/player/up6.png", "images/player/down6.png",
-                "images/player/left6.png", "images/player/right4.png"),
+        MOV6("resources/images/player/up6.png", "resources/images/player/down6.png",
+                "resources/images/player/left6.png", "resources/images/player/right4.png"),
 
-        MOV7("images/player/up7.png", "images/player/down7.png",
-                "images/player/left7.png", "images/player/right7.png");
+        MOV7("resources/images/player/up7.png", "resources/images/player/down7.png",
+                "resources/images/player/left7.png", "resources/images/player/right7.png");
 
 
         private String up;
