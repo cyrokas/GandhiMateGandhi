@@ -1,25 +1,25 @@
 Developed @ Academia de Código
 
-Created by Code Cadet
-Filipe Santos Sá - @filipesantoss
-Cyrille Feijó - @cyrokas
-João Portela - @Fromcadettocaptain
-Tiago Santos - @ninetwofour
-Robin Opinião - @ToxicLord
+Created by Code Cadet<br>
+Filipe Santos Sá - @filipesantoss<br>
+Cyrille Feijó - @cyrokas<br>
+João Portela - @Fromcadettocaptain<br>
+Tiago Santos - @ninetwofour<br>
+Robin Opinião - @ToxicLord<br>
 
-Project developed during the 4th week of Academia de Código's 8th bootcamp.
+Project developed during the 4th week of Academia de Código's 8th bootcamp.<br>
 Concepts learned until now:
 
-Basic Java
-Java Build Process
-Basic OOP
-Composition
-Inheritance
-Polymorphism
-Interfaces
-Simple Graphics Library
-Containers
-Nested Classes
+Basic Java<br>
+Java Build Process<br>
+Basic OOP<br>
+Composition<br>
+Inheritance<br>
+Polymorphism<br>
+Interfaces<br>
+Simple Graphics Library<br>
+Containers<br>
+Nested Classes<br>
 
 
 
@@ -43,9 +43,9 @@ And so Gandhi focused all of his yoga power to travel to the future, so he could
 
 Play as  Gandhi, power up with multiple yoga powers and help Jesus fight Antonio Shellazar's army and the evil Adolf Bitler!
 
-Move using arrow keys, shoot using Z and X keys.
-Fire bonus will give you more energy balls;
-Water bonus will give you more maximum health;
-Earth bonus will give you more damage, but reduces your speed;
+Move using arrow keys, shoot using Z and X keys.<br>
+Fire bonus will give you more energy balls;<br>
+Water bonus will give you more maximum health;<br>
+Earth bonus will give you more damage, but reduces your speed;<br>
 Wind bonus will give you more speed.
 
