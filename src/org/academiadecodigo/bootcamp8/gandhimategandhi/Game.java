@@ -44,9 +44,11 @@ public class Game {
 
     //Enemy properties
     private ArrayList<Enemy> enemyArrayList = new ArrayList<>();
-    private int maxEnemiesOnScreen = 10;
+    private final int initialMaxEnemiesOnScreen=10;
+    private final int initialEnemiesBetweenBosses=15;
+    private int maxEnemiesOnScreen;
     private double enemyOddPerRound = 0.015;
-    private int enemiesBetweenBoss = 10;
+    private int enemiesBetweenBoss;
 
     //Boss properties
     private boolean bossStage = false;
@@ -84,7 +86,7 @@ public class Game {
                 menu.removeKeyboard();
                 menu.getFieldPosition().hide();
                 setup();
-                sound.setLoop(10);
+
             }
 
             if (state == State.QUIT) {
@@ -101,13 +103,15 @@ public class Game {
 
         field.setup();
         playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
+        sound.play(true);
+        sound.loopIndef();
+        maxEnemiesOnScreen=initialMaxEnemiesOnScreen;
+        enemiesBetweenBoss=initialEnemiesBetweenBosses;
         gameLoop();
     }
 
     //Game Loop
     public void gameLoop() throws InterruptedException {
-
-        sound.play(true);
 
         while (!playerOne.isDead()) {
 
@@ -140,6 +144,7 @@ public class Game {
 
         //Go back to Menu
         menu = null;
+        sound.stop();
         start();
     }
 

@@ -27,9 +27,9 @@ public class Boss extends Enemy {
 
     public Boss(AbstractPosition pos, FieldPosition playerpos, Field field) {
         super(100, pos, 2, playerpos); //health=100, speed=2
-        enemyDamage = getEnemyDamage() * 2;
+        enemyDamage = (getEnemyDamage()*2);
         recoilSpeed = getSpeed() * 50;
-        maxProjectiles = 2;
+        maxProjectiles = 1;
         initHealth = getHealth();
         this.field = field;
         criticalHealth = initHealth * 0.5;

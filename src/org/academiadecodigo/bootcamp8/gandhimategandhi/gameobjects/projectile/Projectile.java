@@ -67,7 +67,7 @@ public class Projectile extends GameObject implements Movable {
         HEIGHT = fieldPosition.getHeight();
         WIDTH = fieldPosition.getWidth();
 
-        projectileDamage = (s.getEnemyDamage() / 3);
+        projectileDamage = Math.round(s.getEnemyDamage()/2);
         projectileSpeed = s.getSpeed() * 2;
     }
 

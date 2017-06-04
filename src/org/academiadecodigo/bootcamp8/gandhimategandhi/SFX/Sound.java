@@ -36,8 +36,15 @@ public class Sound {
         clip.close();
     }
 
-    public void setLoop(int times) {
-        clip.loop(times);
+    public int getLength(){return clip.getFrameLength();}
+
+    public void loopIndef() {
+
+        //sets loop points at start and end of track
+        clip.setLoopPoints(0,(int)(getLength()*0.94));
+
+        //activates loop
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     public void reOpen() {
