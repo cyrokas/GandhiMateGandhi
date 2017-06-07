@@ -13,8 +13,7 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.GameObject;
 
 public class Bonus extends GameObject {
 
-    private Field field;
-    private FieldPosition fieldPosition;
+    private FieldPosition position;
 
     private boolean active = false;
     private BonusType bonusType;
@@ -24,17 +23,15 @@ public class Bonus extends GameObject {
 
     public Bonus(Field field) {
 
-        this.field = field;
         duration = 0;
         initialBonus();
         BONUS_DURATION = getBonusType().getDuration();
 
-        this.fieldPosition = field.createRepresentation(bonusType.getImage(), false);
+        this.position = field.createRepresentation(bonusType.getImage(), false);
         active = true;
     }
 
     public void initialBonus() {
-
         BonusType[] bonusTypes = BonusType.values();                //Array that contains all bonus types
         int random = (int) (Math.random() * bonusTypes.length);     //Generate random bonus type from array
         bonusType = bonusTypes[random];                             //Attribute random direction
@@ -44,9 +41,9 @@ public class Bonus extends GameObject {
 
         duration++;
 
-        if (duration > BONUS_DURATION) {
+        if (duration >= BONUS_DURATION) {
             active = false;
-            fieldPosition.hide();
+            position.hide();
         }
     }
 
@@ -54,8 +51,8 @@ public class Bonus extends GameObject {
         return active;
     }
 
-    public FieldPosition getFieldPosition() {
-        return fieldPosition;
+    public FieldPosition getPosition() {
+        return position;
     }
 
     public BonusType getBonusType() {

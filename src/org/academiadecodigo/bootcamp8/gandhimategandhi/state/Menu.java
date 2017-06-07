@@ -16,14 +16,11 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 public class Menu {
 
     private State state;
-    private Field field;
-    private KeyboardControl keyboardController;
-    private FieldPosition fieldPosition;
+    private FieldPosition position;
 
     public Menu(Field field) {
-        this.field = field;
-        keyboardController = new KeyboardControl();
-        fieldPosition = field.createRepresentation(-20, 0, "resources/images/menu/menu.png");
+        KeyboardControl keyboardControl = new KeyboardControl();
+        position = field.createRepresentation(-20, 0, "resources/images/menu/menu.png");
         state = State.MENU;
     }
 
@@ -31,12 +28,10 @@ public class Menu {
 
         private Keyboard k;
 
-
         public KeyboardControl() {
             k = new Keyboard(this);
             keyMap();
         }
-
 
         private void keyMap() {
             KeyboardEvent pressGame = new KeyboardEvent();
@@ -61,27 +56,18 @@ public class Menu {
                 state = State.QUIT;
 
             }
-
         }
 
         @Override
         public void keyReleased(KeyboardEvent keyboardEvent) {
         }
-
-
     }
 
     public State getState() {
-
         return state;
     }
 
-    public void removeKeyboard() {
-        keyboardController = null;
+    public FieldPosition getPosition() {
+        return position;
     }
-
-    public FieldPosition getFieldPosition() {
-        return fieldPosition;
-    }
-
 }

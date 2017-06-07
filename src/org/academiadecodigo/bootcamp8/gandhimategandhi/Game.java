@@ -1,6 +1,6 @@
 package org.academiadecodigo.bootcamp8.gandhimategandhi;
 
-import org.academiadecodigo.bootcamp8.gandhimategandhi.SFX.Sound;
+import org.academiadecodigo.bootcamp8.gandhimategandhi.sfx.Sound;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.enemy.Boss;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.state.Menu;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.state.State;
@@ -31,110 +31,91 @@ import java.util.LinkedList;
 
 public class Game {
 
-    //Game field
     private Field field;
-
-    //Game delay
     private final int DELAY;
 
-    //Bonus properties
-    private final int BONUS_CHANCE = 1;                         //Chance of 1
-    final int CHANCE_PER_TURN = 500;                            //Every 500 game rounds
-    private LinkedList<Bonus> bonusList = new LinkedList<>();
-
-    //Enemy properties
+    private LinkedList<Bonus> bonusList;
     private ArrayList<Enemy> enemyArrayList = new ArrayList<>();
-    private final int initialMaxEnemiesOnScreen=10;
-    private final int initialEnemiesBetweenBosses=15;
     private int maxEnemiesOnScreen;
-    private double enemyOddPerRound = 0.015;
     private int enemiesBetweenBoss;
 
-    //Boss properties
     private boolean bossStage = false;
     private Boss boss;
-    private final int BOSS_POINTS = 5;
-
     private Player playerOne;
 
     private Menu menu;
     private State state;
     private Sound sound;
 
-    //Constructor
     public Game(int rows, int columns, int delay, FieldType fieldType) {
 
         field = FieldFactory.getNewField(fieldType, rows, columns);
         DELAY = delay;
-        state = State.MENU;
         sound = new Sound("/resources/sound/DoomOST.wav");
-
+        bonusList = new LinkedList<>();
     }
 
     public void start() throws InterruptedException {
-
 
         state = State.MENU;
         menu = new Menu(field);
 
         while (state == State.MENU) {
-            menu.getFieldPosition().show();
-
+            menu.getPosition().show();
             state = menu.getState();
 
             if (state == State.GAME) {
-                menu.removeKeyboard();
-                menu.getFieldPosition().hide();
+                //menu.removeKeyboard();
+                menu.getPosition().hide();
                 setup();
-
             }
+
+            //State menu
 
             if (state == State.QUIT) {
                 System.exit(1);
             }
         }
-
         Thread.sleep(50);
     }
 
+    private void setup() throws InterruptedException {
 
-    //Game setup
-    public void setup() throws InterruptedException {
+        final int INITIAL_MAX_ENEMIES = 10;
+        final int INITIAL_ENEMIES_BETWEEN_BOSS = 5;
 
         field.setup();
-        playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
         sound.play(true);
         sound.loopIndef();
-        maxEnemiesOnScreen=initialMaxEnemiesOnScreen;
-        enemiesBetweenBoss=initialEnemiesBetweenBosses;
+
+        playerOne = GameObjectFactory.createNewPlayer(field, PlayerNumber.P1);
+        maxEnemiesOnScreen = INITIAL_MAX_ENEMIES;
+        enemiesBetweenBoss = INITIAL_ENEMIES_BETWEEN_BOSS;
+
         gameLoop();
     }
 
-    //Game Loop
-    public void gameLoop() throws InterruptedException {
+    private void gameLoop() throws InterruptedException {
 
         while (!playerOne.isDead()) {
-
             Thread.sleep(DELAY);
 
-            if (bossStage) {
+            if (bossStage) {    //--------------------------------------------------------------------------------------
                 bossRound();
             } else {
                 boss = null;
                 gameRound();
             }
-
         }
 
-        Thread.sleep(2000); //Sleep for 2 seconds, so player has a chance to see his score
+        Thread.sleep(2000);
 
-        //Reset game status
+        //Reset game status --------------------------------------------------------------------------------------------
         field.getPicture().delete();
         enemyArrayList.clear();
         bonusList.clear();
-        playerOne.getPlayerStats().getFieldStats().hide();
+        playerOne.getStats().getStats().hide();
         playerOne = null;
-
         bossStage = false;
 
         if (boss != null) {
@@ -148,46 +129,69 @@ public class Game {
         start();
     }
 
-    //Game Round
-    public void gameRound() {
+    private void gameRound() {
 
+        createBonus();
         bonusRound();
         playerOne.playRound();
-
         projectileRound(true);
 
         if (!bossStage) {
-            double enemyodds = Math.random();
-            if (enemyArrayList.size() < maxEnemiesOnScreen) {
-                if (enemyodds < enemyOddPerRound) {
-                    enemyArrayList.add(GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition()));
-                }
-            }
-
-            for (int i = 0; i < enemyArrayList.size(); i++) {
-                Enemy e = enemyArrayList.get(i);
-                e.playRound();
-                if (e.getPosition().isColliding(playerOne.getFieldPosition())) {
-                    if (e.getRoundsAfterLastHit() >= e.getCOOLDOWN()) {
-                        playerOne.hit(e.getEnemyDamage());
-                        e.enterCooldownPhase();
-                        continue;
-                    }
-                }
-            }
+            createSoldier();
+            soldierRound();
         }
 
-        checkEnemyBonusInteraction();
-        checkPlayerBonusInteraction();
+        soldierRound();
+        enemyBonusInteraction();
+        playerBonusInteraction();
         playerOne.updateStats();
 
     }
 
-    public void bossRound() {
-        enemyArrayList.clear();
+    private void createBonus() {
+
+        final int BONUS_CHANCE = 1;
+        final int CHANCE_PER_TURN = 500;
+
+        if (BONUS_CHANCE > (int) (Math.random() * CHANCE_PER_TURN)) {
+            bonusList.add(GameObjectFactory.createNewBonus(field));
+        }
+    }
+
+    private void soldierRound() {
+
+        for (Enemy e : enemyArrayList) {
+            e.playRound();
+            enemyPlayerCollision(e);
+        }
+    }
+
+    //COOLDOWN NOT WORKING ---------------------------------------------------------------------------------------------
+    private void enemyPlayerCollision(Enemy enemy) {
+
+        if (enemy.getPosition().isColliding(playerOne.getFieldPosition()) && enemy.getRoundsAfterLastHit() >= enemy.getCOOLDOWN()) {
+            playerOne.hit(enemy.getEnemyDamage());
+            enemy.enterCooldownPhase();
+        }
+    }
+
+    private void createSoldier() {
+
+        final double NEW_ENEMY_CHANCE = 0.015;
+        double newEnemyChance = Math.random();
+
+        if (enemyArrayList.size() < maxEnemiesOnScreen && newEnemyChance < NEW_ENEMY_CHANCE) {
+            enemyArrayList.add(GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition()));
+        }
+    }
+
+    //DISCUSS THIS -----------------------------------------------------------------------------------------------------
+    private void bossRound() {
+
         bonusRound();
         playerOne.playRound();
         projectileRound(true);
+
         if (!boss.isDead()) {
             boss.playRound();
             projectileRound(false);
@@ -195,114 +199,106 @@ public class Game {
                 playerOne.hit(boss.getEnemyDamage());
             }
         }
-        checkPlayerBonusInteraction();
+        playerBonusInteraction();
         playerOne.updateStats();
     }
 
     private void bonusRound() {
 
-        //Chance to create bonus
-        if (BONUS_CHANCE > (int) (Math.random() * CHANCE_PER_TURN)) {
-            bonusList.add(GameObjectFactory.createNewBonus(field));
-        }
-
-        //Play round of active bonuses
         Iterator<Bonus> iterator = bonusList.iterator();
 
         while (iterator.hasNext()) {
             Bonus b = iterator.next();
-            if (b.isActive()) {
-                b.playRound();
+            b.playRound();
+        }
+    }
+
+    private void projectileRound(boolean isPlayer) {
+
+        Iterator<Projectile> iterator;
+
+        if (isPlayer) {
+            iterator = playerOne.iterator();
+        } else {
+            iterator = boss.iterator();
+        }
+
+        while (iterator.hasNext()) {
+            Projectile p = iterator.next();
+            p.playRound();
+
+            if (isPlayer && !bossStage && projectileEnemyCollision(p)) {
+                iterator.remove();
+            }
+
+            if (isPlayer && bossStage && projectileBossCollision(p)) {
+                iterator.remove();
+            }
+
+            if (!isPlayer && projectilePlayerCollision(p)) {
+                iterator.remove();
             }
         }
 
-        //Remove inactive bonuses
+    }
+
+    private boolean projectileEnemyCollision(Projectile projectile) {
+
+        boolean collided = false;
+
+        Iterator<Enemy> iterator = enemyArrayList.iterator();
+
         while (iterator.hasNext()) {
-            Bonus b = iterator.next();
-            if (!b.isActive()) {
+            Enemy enemy = iterator.next();
+
+            if (projectile.getPosition().isColliding(enemy.getPosition())) {
+                collided = true;
+                enemy.hit(projectile.getDamage());
+                projectile.getPosition().hide();
+            }
+
+            if (enemy.isDead()) {
+                playerOne.addKill();
+                iterator.remove();
+            }
+        }
+
+        checkBossStage();
+        return collided;
+    }
+
+    //DISCUSS ----------------------------------------------------------------------------------------------------------
+    private void checkBossStage() {
+
+        if (playerOne.getPoints() % enemiesBetweenBoss == 0 && playerOne.getPoints() > 0) {
+            bossStage = true;
+            boss = GameObjectFactory.getNewBoss(field, playerOne.getFieldPosition());
+
+            Iterator<Enemy> iterator = enemyArrayList.iterator();
+            while (iterator.hasNext()) {
+                Enemy e = iterator.next();
+                e.getPosition().hide();
                 iterator.remove();
             }
         }
     }
 
-    private void projectileRound(boolean playerorboss) {
+    private boolean projectileBossCollision(Projectile projectile) {
 
-        Iterator<Projectile> it;
-
-        if (playerorboss) {
-            it = playerOne.iterator();
-        } else {
-            it = boss.iterator();
-        }
-
-        while (it.hasNext()) {
-            Projectile p = it.next();
-            p.playRound();
-
-            if (playerorboss) {
-                if (!bossStage) {
-                    if (checkProjectileEnemyCollision(p)) {
-                        it.remove();
-                    }
-                    if (bossStage) {
-                        return;
-                    }
-                } else if (checkProjectileBossCollision(p)) {
-                    it.remove();
-
-                }
-            }
-
-            else if (checkProjectilePlayerCollision(p)) {
-                it.remove();
-            }
-        }
-    }
-
-
-    private boolean checkProjectileEnemyCollision(Projectile p) {
-
+        final int BOSS_POINTS = 5;
         boolean collided = false;
 
-        for (int i = 0; i < enemyArrayList.size(); i++) {
-
-            Enemy enemy = enemyArrayList.get(i);
-
-            if (p.getFieldPosition().isColliding(enemy.getPosition())) {
-                enemy.hit(p.getProjectileDamage());
-                p.getFieldPosition().hide();
-                collided = true;
-
-                if (enemy.isDead()) {
-                    playerOne.addPoints();
-                    enemyArrayList.remove(enemy);
-                }
-            }
-            if (playerOne.getPoints() % enemiesBetweenBoss == 0 && playerOne.getPoints() > 0) {
-                bossStage = true;
-                for (Enemy e : enemyArrayList) {
-                    e.getPosition().hide();
-                }
-                boss = GameObjectFactory.getNewBoss(field, playerOne.getFieldPosition());
-                return collided;
-            }
-        }
-        return collided;
-    }
-
-    private boolean checkProjectileBossCollision(Projectile p) {
-
-        boolean collided = false;
-        if (p.getFieldPosition().isColliding(boss.getPosition())) {
-            boss.hit(p.getProjectileDamage());
-            p.getFieldPosition().hide();
+        if (projectile.getPosition().isColliding(boss.getPosition())) {
             collided = true;
+            boss.hit(projectile.getDamage());
+            projectile.getPosition().hide();
 
             if (boss.isDead()) {
+
                 for (int i = 0; i < BOSS_POINTS; i++) {
-                    playerOne.addPoints();
+                    playerOne.addKill();
                 }
-                //Increase difficulty
+
                 maxEnemiesOnScreen++;
                 enemiesBetweenBoss++;
 
@@ -314,17 +310,19 @@ public class Game {
         return collided;
     }
 
-    private boolean checkProjectilePlayerCollision(Projectile p) {
+    private boolean projectilePlayerCollision(Projectile p) {
+
         boolean collided = false;
-        if (p.getFieldPosition().isColliding(playerOne.getFieldPosition())) {
-            playerOne.hit(p.getProjectileDamage());
-            p.getFieldPosition().hide();
+
+        if (p.getPosition().isColliding(playerOne.getFieldPosition())) {
+            playerOne.hit(p.getDamage());
+            p.getPosition().hide();
             collided = true;
         }
         return collided;
     }
 
-    private void checkEnemyBonusInteraction() {
+    private void enemyBonusInteraction() {
 
         Iterator<Bonus> bonusIterator = bonusList.iterator();
         Iterator<Enemy> enemyIterator = enemyArrayList.iterator();
@@ -335,15 +333,14 @@ public class Game {
             while (enemyIterator.hasNext()) {
                 Enemy e = enemyIterator.next();
 
-                if (b.getFieldPosition().isColliding(e.getPosition())) {
-                    b.getFieldPosition().hide();
+                if (b.getPosition().isColliding(e.getPosition())) {
+                    b.getPosition().hide();
                 }
             }
         }
     }
 
-
-    private void checkPlayerBonusInteraction() {
+    private void playerBonusInteraction() {
 
         Iterator<Bonus> iterator = bonusList.iterator();
 
@@ -352,10 +349,10 @@ public class Game {
         while (iterator.hasNext()) {
             Bonus b = iterator.next();
 
-            if (playerPosition.isColliding(b.getFieldPosition())) {
+            if (playerPosition.isColliding(b.getPosition())) {
                 playerOne.powerUp(b.getBonusType());
                 iterator.remove();
-                b.getFieldPosition().hide();
+                b.getPosition().hide();
             }
         }
     }

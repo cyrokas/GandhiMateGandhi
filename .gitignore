@@ -6,7 +6,7 @@ reated by https://www.gitignore.io/api/java,macos,linux,windows,intellij
 
 
 **/.idea
-
+**/.iml
 
 # CMake
 cmake-build-debug/
@@ -21,6 +21,7 @@ cmake-build-debug/
 
 # IntelliJ
 /out/
+/build/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -40,7 +41,8 @@ fabric.properties
 ### Intellij Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 
-# *.iml
+# **/.iml
+*.iml
 # modules.xml
 # .idea/misc.xml
 # *.ipr

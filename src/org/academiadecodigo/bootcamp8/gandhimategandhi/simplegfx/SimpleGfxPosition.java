@@ -1,4 +1,4 @@
-package org.academiadecodigo.bootcamp8.gandhimategandhi.representable.gfx;
+package org.academiadecodigo.bootcamp8.gandhimategandhi.simplegfx;
 
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.Direction;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.position.AbstractPosition;
@@ -16,26 +16,22 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
  * <Code Cadet> João Portela
  */
 
-public class SimpleGFXPosition extends AbstractPosition {
+public class SimpleGfxPosition extends AbstractPosition {
 
-    private SimpleGFXField simpleGFXField;
+    private SimpleGfxField simpleGfxField;
     private Picture picture;
 
     private final int HEIGHT;
     private final int WIDTH;
 
-    private Direction direction;
-
     private PlayerImage playerImage = new PlayerImage();
-    private EnemyImage enemyImage = new EnemyImage();
-    private BossImage bossImage = new BossImage();
+    private EnemyImage enemyPicture = new EnemyImage();
+    private BossImage bossPicture = new BossImage();
 
-    private int imageCount = 1;                         // Counter to change image
-    private int imageChangeCount = 15;                       //When images change
-    private int maxCount = 119;                         //Max count to change images
+    private int imageCount = 1;
 
 
-    public SimpleGFXPosition(String image, SimpleGFXField field, boolean edge) {
+    public SimpleGfxPosition(String image, SimpleGfxField field, boolean edge) {
 
         super((int) (Math.random() * field.getRows()), (int) (Math.random() * field.getColumns()), field);
 
@@ -49,61 +45,56 @@ public class SimpleGFXPosition extends AbstractPosition {
             }
         }
 
-        simpleGFXField = field;
+        simpleGfxField = field;
         picture = new Picture(field.columnToX(column), field.rowToY(row), image);
 
         HEIGHT = picture.getHeight();
         WIDTH = picture.getWidth();
 
-        //fix image to fit field
         fixEdgePosition(row, column);
-
         show();
     }
 
-    public SimpleGFXPosition(int row, int column, String image, SimpleGFXField field) {
+    public SimpleGfxPosition(int row, int column, String image, SimpleGfxField field) {
 
         super(row, column, field);
 
-        simpleGFXField = field;
+        simpleGfxField = field;
 
         picture = new Picture(field.columnToX(column), field.rowToY(row), image);
         HEIGHT = picture.getHeight();
         WIDTH = picture.getWidth();
 
-        //fix image to fit field
         fixEdgePosition(row, column);
-
         show();
     }
 
 
     @Override
     public void show() {
-
         picture.draw();
     }
 
     @Override
     public void hide() {
-
         picture.delete();
     }
 
     @Override
-    public void moveInDirection(Direction direction, GameObject gameObject, boolean kitting) {
+    public void moveInDirection(Direction direction, GameObject gameObject, boolean kiting) {
 
-        int initialColumn = simpleGFXField.columnToX(super.getColumn());
-        int initialRow = simpleGFXField.rowToY(super.getRow());
+        int initialColumn = simpleGfxField.columnToX(super.getColumn());
+        int initialRow = simpleGfxField.rowToY(super.getRow());
 
         super.moveInDirection(direction, gameObject);
 
-        int finalColumn = simpleGFXField.columnToX(super.getColumn());
-        int finalRow = simpleGFXField.rowToY(super.getRow());
+        int finalColumn = simpleGfxField.columnToX(super.getColumn());
+        int finalRow = simpleGfxField.rowToY(super.getRow());
 
         picture.translate(finalColumn - initialColumn, finalRow - initialRow);
 
-        if (kitting && gameObject instanceof Player) {
+        //DISCUSS ------------------------------------------------------------------------------------------------------
+        if (kiting && gameObject instanceof Player) {
 
             if (direction == Direction.STOPPED) {
                 direction = ((Player) gameObject).getFacingDirection();
@@ -111,67 +102,63 @@ public class SimpleGFXPosition extends AbstractPosition {
 
             direction = direction.opposite();
             changePicture(gameObject, direction);
-
             imageCount++;
-        } else {
-            changePicture(gameObject, direction);
-            imageCount++;
+            return;
         }
 
-
+        changePicture(gameObject, direction);
+        imageCount++;
     }
 
     @Override
     public void moveInDirection(Direction direction, GameObject gameObject) {
 
-        int initialColumn = simpleGFXField.columnToX(super.getColumn());
-        int initialRow = simpleGFXField.rowToY(super.getRow());
+        int initialColumn = simpleGfxField.columnToX(super.getColumn());
+        int initialRow = simpleGfxField.rowToY(super.getRow());
 
         super.moveInDirection(direction, gameObject);
 
-        int finalColumn = simpleGFXField.columnToX(super.getColumn());
-        int finalRow = simpleGFXField.rowToY(super.getRow());
+        int finalColumn = simpleGfxField.columnToX(super.getColumn());
+        int finalRow = simpleGfxField.rowToY(super.getRow());
 
         picture.translate(finalColumn - initialColumn, finalRow - initialRow);
         direction = direction.opposite();
         changePicture(gameObject, direction);
         imageCount++;
-
     }
 
     @Override
     public int getHeight() {
-
         return HEIGHT;
     }
 
     @Override
     public int getWidth() {
-
         return WIDTH;
     }
 
     @Override
     public boolean isEdge() {
 
-        int rightEdge = simpleGFXField.getColumns() - 1 - Math.round(WIDTH / simpleGFXField.getCellSize());
-
-        int lowerEdge = simpleGFXField.getRows() - 1 - Math.round(HEIGHT / simpleGFXField.getCellSize());
+        int rightEdge = simpleGfxField.getColumns() - 1 - Math.round(WIDTH / simpleGfxField.getCellSize());
+        int lowerEdge = simpleGfxField.getRows() - 1 - Math.round(HEIGHT / simpleGfxField.getCellSize());
 
         return getColumn() == rightEdge || getRow() == lowerEdge || getColumn() == 1 || getRow() == 1;
     }
 
     private void fixEdgePosition(int row, int column) {
+
         int dx = 0;
         int dy = 0;
 
-        if (simpleGFXField.rowToY(row) + HEIGHT > simpleGFXField.rowToY(simpleGFXField.getRows() - 1)) {
-            dy = simpleGFXField.rowToY(simpleGFXField.getRows() - 1) - HEIGHT - simpleGFXField.rowToY(row);
-            row = simpleGFXField.getRows() - 1 - Math.round(HEIGHT / simpleGFXField.getCellSize());
+        if (simpleGfxField.rowToY(row) + HEIGHT > simpleGfxField.rowToY(simpleGfxField.getRows() - 1)) {
+            dy = simpleGfxField.rowToY(simpleGfxField.getRows() - 1) - HEIGHT - simpleGfxField.rowToY(row);
+            row = simpleGfxField.getRows() - 1 - Math.round(HEIGHT / simpleGfxField.getCellSize());
         }
-        if (simpleGFXField.columnToX(column) + WIDTH > simpleGFXField.columnToX(simpleGFXField.getColumns() - 1)) {
-            dx = simpleGFXField.columnToX(simpleGFXField.getColumns() - 1) - WIDTH - simpleGFXField.columnToX(column);
-            column = simpleGFXField.getColumns() - 1 - Math.round(WIDTH / simpleGFXField.getCellSize());
+
+        if (simpleGfxField.columnToX(column) + WIDTH > simpleGfxField.columnToX(simpleGfxField.getColumns() - 1)) {
+            dx = simpleGfxField.columnToX(simpleGfxField.getColumns() - 1) - WIDTH - simpleGfxField.columnToX(column);
+            column = simpleGfxField.getColumns() - 1 - Math.round(WIDTH / simpleGfxField.getCellSize());
         }
         setPosition(row, column);
 
@@ -191,13 +178,16 @@ public class SimpleGFXPosition extends AbstractPosition {
 
     private void changePicture(GameObject gameObject, Direction direction) {
 
+        int imageChangeCount = 15;                       //When images change
+        final int MAX_COUNT = 119;                         //Max count to change images
+
         if (gameObject instanceof Player) {
 
             if (imageCount % imageChangeCount == 0) {
 
                 picture.load(playerImage.imageChange(direction, imageCount));
 
-            } else if (imageCount == maxCount) {
+            } else if (imageCount == MAX_COUNT) {
 
                 imageCount = 0;
             }
@@ -206,9 +196,9 @@ public class SimpleGFXPosition extends AbstractPosition {
 
             if (imageCount % imageChangeCount == 0) {
 
-                picture.load(bossImage.imageChange(direction, imageCount));
+                picture.load(bossPicture.imageChange(direction, imageCount));
 
-            } else if (imageCount == maxCount) {
+            } else if (imageCount == MAX_COUNT) {
 
                 imageCount = 0;
             }
@@ -217,9 +207,9 @@ public class SimpleGFXPosition extends AbstractPosition {
 
             if (imageCount % imageChangeCount == 0) {
 
-                picture.load(enemyImage.imageChange(direction, imageCount));
+                picture.load(enemyPicture.imageChange(direction, imageCount));
 
-            } else if (imageCount == maxCount) {
+            } else if (imageCount == MAX_COUNT) {
 
                 imageCount = 0;
             }

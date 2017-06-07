@@ -15,9 +15,9 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 public class KeyboardController implements KeyboardHandler {
 
     private Direction direction;                            //Pressed direction
-    private boolean moving = false;                         //Movement status
-    private boolean shooting = false;                       //Shoot status
-    private boolean backShot = false;
+    private boolean moving;                                 //Movement status
+    private boolean shooting;                               //Shoot status
+    private boolean backShot;
 
     private int[] keyMap;                                   //Available keys
     private boolean[] pressedKeys = new boolean[4];         //Key status - pressed or not
@@ -26,11 +26,12 @@ public class KeyboardController implements KeyboardHandler {
     public KeyboardController(Direction direction, int upKey, int downKey, int leftKey, int rightKey, int shootFront, int shootBack) {
 
         this.direction = direction;
+        moving = false;
+        shooting = false;
+        backShot = false;
 
-        //Instantiate keyboard
         k = new Keyboard(this);
 
-        //Define available keys
         keyMap = new int[]{upKey, downKey, leftKey, rightKey, shootFront, shootBack};
     }
 

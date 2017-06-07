@@ -1,4 +1,4 @@
-package org.academiadecodigo.bootcamp8.gandhimategandhi.SFX;
+package org.academiadecodigo.bootcamp8.gandhimategandhi.sfx;
 
 import javax.sound.sampled.*;
 import java.io.File;

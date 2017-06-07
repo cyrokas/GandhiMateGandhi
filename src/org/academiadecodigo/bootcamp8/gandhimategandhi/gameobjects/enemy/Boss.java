@@ -59,7 +59,7 @@ public class Boss extends Enemy {
 
     public void clearProjectileList() {
         for (Projectile p : projectileList) {
-            p.getFieldPosition().hide();
+            p.getPosition().hide();
         }
         projectileList.clear();
     }
