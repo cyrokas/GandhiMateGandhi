@@ -26,25 +26,17 @@ public class GameObjectFactory {
     }
 
     public static Enemy getNewRegularEnemy(Field field, FieldPosition playerpos) {
-
         AbstractPosition pos = field.createRepresentation("resources/images/soldier_enemy/front1.png", true);
         return new RegularEnemy(pos, playerpos);
     }
 
     public static Bonus createNewBonus(Field field) {
-
         return new Bonus(field);
-
     }
 
     public static Boss getNewBoss(Field field, FieldPosition playerpos) {
-
         AbstractPosition pos;
-
-
-        pos = field.createRepresentation(0, Math.round(field.getColumns() / 2),
-                "resources/images/boss/front1.png");
-
+        pos = field.createRepresentation(0, Math.round(field.getColumns() / 2), "resources/images/boss/front1.png");
         return new Boss(pos, playerpos, field);
     }
 }

@@ -1,6 +1,6 @@
 package org.academiadecodigo.bootcamp8.gandhimategandhi.field;
 
-import org.academiadecodigo.bootcamp8.gandhimategandhi.representable.gfx.SimpleGFXField;
+import org.academiadecodigo.bootcamp8.gandhimategandhi.simplegfx.SimpleGfxField;
 
 /**
  * Developed @ <Academia de Código_>
@@ -16,9 +16,9 @@ public class FieldFactory {
 
         switch (fieldType) {
             case SIMPLE_GFX:
-                return new SimpleGFXField(rows, columns);
+                return new SimpleGfxField(rows, columns);
             default:
-                return new SimpleGFXField(rows, columns);
+                return new SimpleGfxField(rows, columns);
         }
     }
 }

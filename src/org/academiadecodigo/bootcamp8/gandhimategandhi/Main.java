@@ -14,14 +14,18 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.field.FieldType;
 
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
-        int columns = 860;
-        int rows = 600;
-        int delay = 18;
+        final int COLUMNS = 860;
+        final int ROWS = 600;
+        final int DELAY = 18;
 
-        Game game = new Game(rows, columns, delay, FieldType.SIMPLE_GFX);
-        game.start();
+        Game game = new Game(ROWS, COLUMNS, DELAY, FieldType.SIMPLE_GFX);
 
+        try {
+            game.start();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

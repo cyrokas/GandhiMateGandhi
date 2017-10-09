@@ -1,4 +1,4 @@
-package org.academiadecodigo.bootcamp8.gandhimategandhi.representable.gfx;
+package org.academiadecodigo.bootcamp8.gandhimategandhi.simplegfx;
 
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.Direction;
 

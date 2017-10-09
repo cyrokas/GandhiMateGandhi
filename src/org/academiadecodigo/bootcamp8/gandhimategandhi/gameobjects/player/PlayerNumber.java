@@ -10,21 +10,24 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 
 public enum PlayerNumber {
 
-    P1(PlayerType.P1, KeyboardEvent.KEY_UP, KeyboardEvent.KEY_DOWN, KeyboardEvent.KEY_LEFT, KeyboardEvent.KEY_RIGHT, KeyboardEvent.KEY_Z, KeyboardEvent.KEY_X);
+    P1(PlayerType.P1, new int[]{KeyboardEvent.KEY_UP, KeyboardEvent.KEY_DOWN,
+            KeyboardEvent.KEY_LEFT, KeyboardEvent.KEY_RIGHT,
+            KeyboardEvent.KEY_Z, KeyboardEvent.KEY_X});
 
     private int[] keys;
 
     private PlayerType playerType;
 
-    PlayerNumber(PlayerType carType, int up, int down, int left, int right, int shootFront, int shootBack) {
+    PlayerNumber(PlayerType playerType, int[] keys) {
 
-        this.playerType = carType;
-        keys = new int[]{up, down, left, right, shootFront, shootBack};
+        this.playerType = playerType;
+        this.keys = keys;
     }
 
     public PlayerType getPlayerType() {
         return playerType;
     }
+
 
     public int getUp() {
         return keys[0];

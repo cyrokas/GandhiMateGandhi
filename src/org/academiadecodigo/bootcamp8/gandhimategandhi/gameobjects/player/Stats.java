@@ -13,55 +13,41 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.field.FieldStats;
 public class Stats {
 
     //Proprieties
-    private int points;                                                             //Points for each player
-    private FieldStats fieldStats;
+    private int killCount;                                                             //Points for each player
+    private FieldStats stats;
 
     //Constructor
     public Stats(Field field, int hitPoints, int maxHitPoints, int speed, int damage, int projectile) {
-
-        points = 0;
-        this.fieldStats = field.createRepresentationStats(points, hitPoints, maxHitPoints, speed, damage, projectile);
+        killCount = 0;
+        stats = field.createRepresentationStats(killCount, hitPoints, maxHitPoints, speed, damage, projectile);
     }
 
-    public void addPoints() {
-
-        points++;
-        fieldStats.showPoints(points);
-
+    public void addKill() {
+        killCount++;
+        stats.showPoints(killCount);
     }
 
     public void showHitPoints(int playerHitPoints, int maxHitPoints) {
-
-        fieldStats.showHitPoints(playerHitPoints, maxHitPoints);
-
+        stats.showHitPoints(playerHitPoints, maxHitPoints);
     }
 
     public void showSpeed(int speed) {
-
-        fieldStats.showSpeed(speed);
-
+        stats.showSpeed(speed);
     }
 
     public void showDamage(int damage) {
-
-        fieldStats.showDamage(damage);
-
+        stats.showDamage(damage);
     }
-
 
     public void showProjectiles(int projectiles) {
-
-        fieldStats.showProjectiles(projectiles);
-
+        stats.showProjectiles(projectiles);
     }
 
-    public FieldStats getFieldStats() {
-        return fieldStats;
+    public FieldStats getStats() {
+        return stats;
     }
 
-    //Getters
-    public int getPoints() {
-        return points;
+    public int getKillCount() {
+        return killCount;
     }
-
 }

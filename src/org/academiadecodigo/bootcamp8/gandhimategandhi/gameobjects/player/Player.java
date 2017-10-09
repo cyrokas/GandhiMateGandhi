@@ -23,34 +23,29 @@ import java.util.LinkedList;
 public class Player extends GameObject implements Movable, Hittable, Iterable<Projectile> {
 
     private final int INITIAL_HITPOINTS = 50;
-    private final int INITIAL_SPEED = 2;
+    private final int INITIAL_SPEED = 3;
     private final int INITIAL_DAMAGE = 1;
     private final int MAX_SPEED = 5;
     private final int MIN_SPEED = 1;
 
-    private int playerSpeed;
-    private int playerHitpoints;
+    private int speed;
+    private int hitpoints;
     private int maxHitpoints;
-    private int playerDamage;
+    private int damage;
 
     private final int COOLDOWN = 4;
     private int roundCounter = 0;
     private int maxProjectiles;
-    private Stats playerStats;
+    private Stats stats;
 
-    private LinkedList<Projectile> projectileList = new LinkedList<>();                       //Projectile list
-    private ProjectileType projectileType = ProjectileType.FIRE;
+    private LinkedList<Projectile> projectileList;
+    private ProjectileType projectileType;
 
-
-    private PlayerNumber playerNumber;
-    private Direction playerDirection;                                                       //Direction player is moving to
-    private Direction facingDirection;                                                       //Direction player is facing
+    private Direction playerDirection;
+    private Direction facingDirection;
 
     private Field field;
     private FieldPosition fieldPosition;
-    private final int HEIGHT;
-    private final int WIDTH;
-
     private KeyboardController keyboardController;
 
     //Constructor
@@ -61,79 +56,66 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
         int fieldCenterRow = field.getRows() / 2;
         int fieldCenterColumn = field.getColumns() / 2;
 
-        //Instantiate representation centered in the field
         this.fieldPosition = field.createRepresentation(fieldCenterRow, fieldCenterColumn, playerNumber.getPlayerType().getImage());
 
-        HEIGHT = fieldPosition.getHeight();
-        WIDTH = fieldPosition.getWidth();
+        projectileList = new LinkedList<>();
+        projectileType = ProjectileType.FIRE;
 
-        playerHitpoints = INITIAL_HITPOINTS;
-        maxHitpoints = playerHitpoints;
-        playerDamage = INITIAL_DAMAGE;
-        playerSpeed = INITIAL_SPEED;
+        hitpoints = INITIAL_HITPOINTS;
+        maxHitpoints = hitpoints;
+        damage = INITIAL_DAMAGE;
+        speed = INITIAL_SPEED;
         maxProjectiles = 5;
 
-        this.playerNumber = playerNumber;
-        //Choose random direction
         initialDirection();
-
         facingDirection = playerDirection;
-        playerHitpoints = INITIAL_HITPOINTS;
 
-        keyboardControllerConfiguration();
+        keyboardControllerConfiguration(playerNumber);
 
-        playerStats = new Stats(field, playerHitpoints, maxHitpoints, playerSpeed, playerDamage, maxProjectiles);                           //Creating Score
+        stats = new Stats(field, hitpoints, maxHitpoints, speed, damage, maxProjectiles);                           //Creating Score
     }
 
     private void initialDirection() {
-
-        Direction[] directions = Direction.values();                        //Array that contains all directions
-        int random = (int) (Math.random() * directions.length - 1);         //Choose random direction from array, except stopped
+        Direction[] directions = Direction.values();
+        int random = (int) (Math.random() * directions.length - 1);
         playerDirection = directions[random];
     }
 
-    private void keyboardControllerConfiguration() {
+    private void keyboardControllerConfiguration(PlayerNumber playerNumber) {
 
-        //Instantiate keyboardController
         keyboardController = new KeyboardController(playerDirection,
                 playerNumber.getUp(), playerNumber.getDown(),
                 playerNumber.getLeft(), playerNumber.getRight(),
                 playerNumber.getShootFront(), playerNumber.getShootBack());
 
-        //Configure keyboardController
         keyboardController.keyMapConfiguration();
     }
 
     @Override
     public void hit(int damage) {
-
         for (int i = 0; i < damage; i++) {
-            playerHitpoints--;
+            hitpoints--;
 
-            if (playerHitpoints == 0) {
+            if (hitpoints == 0) {
                 return;
             }
         }
-
     }
 
     @Override
     public boolean isDead() {
-        return playerHitpoints <= 0;
+        return hitpoints == 0;
     }
 
     @Override
     public void playRound() {
 
-        //Reloads projectiles
         reload();
 
-        //Move
         if (keyboardController.isMoving()) {
             move(chooseDirection());
         }
 
-        //Shoot
         if (keyboardController.isShooting() && hasProjectiles() && notOnCooldown()) {
             projectileList.add(new Projectile(this, projectileType, keyboardController.isKiting()));
         }
@@ -151,10 +133,8 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
 
     @Override
     public Direction chooseDirection() {
-
         Direction newDirection = keyboardController.getDirection();
 
-        //Update facing direction if player isn't stopped
         if (newDirection != Direction.STOPPED) {
             facingDirection = newDirection;
         }
@@ -165,11 +145,10 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
     @Override
     public void move(Direction direction) {
 
-        Direction newDirection = direction;
-        playerDirection = newDirection;
+        playerDirection = direction;
 
-        for (int i = 0; i < playerSpeed; i++) {
-            fieldPosition.moveInDirection(newDirection, this, keyboardController.isKiting());
+        for (int i = 0; i < speed; i++) {
+            fieldPosition.moveInDirection(direction, this, keyboardController.isKiting());
         }
     }
 
@@ -192,8 +171,8 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
         return facingDirection;
     }
 
-    public int getPlayerSpeed() {
-        return playerSpeed;
+    public int getSpeed() {
+        return speed;
     }
 
     public FieldPosition getFieldPosition() {
@@ -204,13 +183,12 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
         return projectileList;
     }
 
-    //Getter to addPoints when enemys died
-    public void addPoints() {
-        playerStats.addPoints();
+    public void addKill() {
+        stats.addKill();
     }
 
-    public int getPlayerDamage() {
-        return playerDamage;
+    public int getDamage() {
+        return damage;
     }
 
     public void powerUp(BonusType bonusType) {
@@ -222,19 +200,19 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
                 break;
             case WIND:
                 for (int i = 0; i < bonusType.getMultiplier(); i++) {
-                    playerSpeed++;
-                    if (playerSpeed > MAX_SPEED) {
-                        playerSpeed = MAX_SPEED;
+                    speed++;
+                    if (speed > MAX_SPEED) {
+                        speed = MAX_SPEED;
                         break;
                     }
                 }
                 projectileType = ProjectileType.WIND;
                 break;
             case EARTH:
-                playerDamage += bonusType.getMultiplier();
-                playerSpeed -= bonusType.getMultiplier();
-                if (playerSpeed < MIN_SPEED) {
-                    playerSpeed = MIN_SPEED;
+                damage += bonusType.getMultiplier();
+                speed -= bonusType.getMultiplier();
+                if (speed < MIN_SPEED) {
+                    speed = MIN_SPEED;
                 }
                 projectileType = ProjectileType.EARTH;
                 break;
@@ -244,10 +222,10 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
                 break;
             case HEALTH:
                 for (int i = 0; i < bonusType.getMultiplier(); i++) {
-                    playerHitpoints++;
+                    hitpoints++;
 
-                    if (playerHitpoints > maxHitpoints) {
-                        playerHitpoints = maxHitpoints;
+                    if (hitpoints > maxHitpoints) {
+                        hitpoints = maxHitpoints;
                         break;
                     }
                 }
@@ -255,20 +233,19 @@ public class Player extends GameObject implements Movable, Hittable, Iterable<Pr
         }
     }
 
-
-    public Stats getPlayerStats() {
-        return playerStats;
+    public Stats getStats() {
+        return stats;
     }
 
     public void updateStats() {
-        playerStats.showHitPoints(playerHitpoints, maxHitpoints);
-        playerStats.showDamage(playerDamage);
-        playerStats.showSpeed(playerSpeed);
-        playerStats.showProjectiles(maxProjectiles);
+        stats.showHitPoints(hitpoints, maxHitpoints);
+        stats.showDamage(damage);
+        stats.showSpeed(speed);
+        stats.showProjectiles(maxProjectiles);
     }
 
     public int getPoints() {
-        return playerStats.getPoints();
+        return stats.getKillCount();
     }
 
     @Override

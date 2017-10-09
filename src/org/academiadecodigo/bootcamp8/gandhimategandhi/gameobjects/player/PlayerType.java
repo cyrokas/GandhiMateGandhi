@@ -19,5 +19,4 @@ public enum PlayerType {
     public String getImage() {
         return image;
     }
-
 }

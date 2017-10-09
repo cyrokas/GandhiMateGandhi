@@ -1,4 +1,4 @@
-package org.academiadecodigo.bootcamp8.gandhimategandhi.representable.gfx;
+package org.academiadecodigo.bootcamp8.gandhimategandhi.simplegfx;
 
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.FieldStats;
 import org.academiadecodigo.simplegraphics.graphics.Text;
@@ -9,7 +9,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
  * Created by
  * <Code Cadet> Cyrille Feijó
  */
-public class SimpleGFXStats implements FieldStats {
+public class SimpleGfxStats implements FieldStats {
 
     //Proprieties
     private Text textPoints;                        // Text to show points
@@ -26,7 +26,7 @@ public class SimpleGFXStats implements FieldStats {
 
     //NOTE FIX Position of SCORE
     //Constructor
-    public SimpleGFXStats(int points, int hitPoints, int maxHitPoints, int speed, int damage, int projectile) {
+    public SimpleGfxStats(int points, int hitPoints, int maxHitPoints, int speed, int damage, int projectile) {
 
         hitpointsPicture.draw();
         damagePicture.draw();

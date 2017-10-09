@@ -16,29 +16,37 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 public class Menu {
 
     private State state;
-    private Field field;
-    private KeyboardControl keyboardController;
-    private FieldPosition fieldPosition;
+    private FieldPosition position;
 
     public Menu(Field field) {
-        this.field = field;
-        keyboardController = new KeyboardControl();
-        fieldPosition = field.createRepresentation(-20, 0, "resources/images/menu/menu.png");
+        new MenuController();
+        position = field.createRepresentation(-20, 0, "resources/images/menu/menu.png");
         state = State.MENU;
     }
 
-    private class KeyboardControl implements KeyboardHandler {
+    public State play() throws InterruptedException {
+
+        position.show();
+
+        while (state == State.MENU) {
+            Thread.sleep(50);
+        }
+
+        position.hide();
+        System.out.println(state);
+        return state;
+    }
+
+    private class MenuController implements KeyboardHandler {
 
         private Keyboard k;
 
-
-        public KeyboardControl() {
+        public MenuController() {
             k = new Keyboard(this);
-            keyMap();
+            mapKeys();
         }
 
-
-        private void keyMap() {
+        private void mapKeys() {
             KeyboardEvent pressGame = new KeyboardEvent();
             pressGame.setKey(KeyboardEvent.KEY_Z);
             pressGame.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
@@ -53,35 +61,20 @@ public class Menu {
         @Override
         public void keyPressed(KeyboardEvent e) {
 
-            if (e.getKey() == KeyboardEvent.KEY_Z) {
-                state = State.GAME;
+            switch (e.getKey()) {
+                case KeyboardEvent.KEY_Z:
+                    state = State.GAME;
+                    break;
+                case KeyboardEvent.KEY_Q:
+                    state = State.QUIT;
+                    break;
+                default:
+                    System.err.println("MENU KEYS NOT WORKING.");
             }
-
-            if (e.getKey() == KeyboardEvent.KEY_Q) {
-                state = State.QUIT;
-
-            }
-
         }
 
         @Override
         public void keyReleased(KeyboardEvent keyboardEvent) {
         }
-
-
     }
-
-    public State getState() {
-
-        return state;
-    }
-
-    public void removeKeyboard() {
-        keyboardController = null;
-    }
-
-    public FieldPosition getFieldPosition() {
-        return fieldPosition;
-    }
-
 }

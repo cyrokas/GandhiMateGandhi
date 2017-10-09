@@ -7,7 +7,6 @@ package org.academiadecodigo.bootcamp8.gandhimategandhi.state;
  */
 
 public enum State {
-
     MENU,
     GAME,
     QUIT
