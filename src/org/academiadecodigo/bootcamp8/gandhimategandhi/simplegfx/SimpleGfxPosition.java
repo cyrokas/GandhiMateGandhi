@@ -78,7 +78,6 @@ public class SimpleGfxPosition extends AbstractPosition {
     @Override
     public void hide() {
         picture.delete();
-        System.out.println("DELETE");
     }
 
     @Override

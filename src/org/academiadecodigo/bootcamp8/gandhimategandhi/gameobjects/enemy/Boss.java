@@ -4,6 +4,7 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.field.Direction;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.Field;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.position.AbstractPosition;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.position.FieldPosition;
+import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.player.Player;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.projectile.Projectile;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.projectile.ProjectileType;
 
@@ -18,6 +19,7 @@ import java.util.LinkedList;
  */
 
 public class Boss extends Enemy {
+
     private int maxProjectiles;
     private LinkedList<Projectile> projectileList = new LinkedList<>();                       //Projectile list
     private ProjectileType projectileType = ProjectileType.FIRE;
@@ -27,7 +29,7 @@ public class Boss extends Enemy {
 
     public Boss(AbstractPosition pos, FieldPosition playerpos, Field field) {
         super(100, pos, 2, playerpos); //health=100, speed=2
-        enemyDamage = (getEnemyDamage()*2);
+        enemyDamage = (getEnemyDamage() * 2);
         recoilSpeed = getSpeed() * 50;
         maxProjectiles = 1;
         initHealth = getHealth();
@@ -95,4 +97,9 @@ public class Boss extends Enemy {
         return field;
     }
 
+    public void collidingWith(Player player) {
+        if (position.isColliding(player.getFieldPosition())) {
+            player.hit(enemyDamage);
+        }
+    }
 }

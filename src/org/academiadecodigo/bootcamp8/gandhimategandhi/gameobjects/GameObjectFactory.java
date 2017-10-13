@@ -10,6 +10,9 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.enemy.Boss;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.player.Player;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.player.PlayerNumber;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 /**
  * Developed @ <Academia de Código_>
  * Created by
@@ -25,13 +28,22 @@ public class GameObjectFactory {
         return new Player(field, playerNumber);
     }
 
-    public static Enemy getNewRegularEnemy(Field field, FieldPosition playerpos) {
+    public static void getNewRegularEnemy(Field field, FieldPosition playerpos, ArrayList<Enemy> enemies) {
         AbstractPosition pos = field.createRepresentation("resources/images/soldier_enemy/front1.png", true);
-        return new RegularEnemy(pos, playerpos);
+
+        final double NEW_ENEMY_CHANCE = 0.015;
+
+        if (Math.random() < NEW_ENEMY_CHANCE) {
+            enemies.add(new RegularEnemy(pos, playerpos));
+        }
     }
 
-    public static Bonus createNewBonus(Field field) {
-        return new Bonus(field);
+    public static void createNewBonus(Field field, LinkedList<Bonus> bonuses) {
+        final double BONUS_CHANCE = 0.002d;
+
+        if (BONUS_CHANCE > Math.random()) {
+            bonuses.add(new Bonus(field));
+        }
     }
 
     public static Boss getNewBoss(Field field, FieldPosition playerpos) {

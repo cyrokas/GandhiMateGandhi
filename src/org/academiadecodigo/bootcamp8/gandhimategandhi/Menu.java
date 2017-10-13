@@ -1,5 +1,6 @@
-package org.academiadecodigo.bootcamp8.gandhimategandhi.state;
+package org.academiadecodigo.bootcamp8.gandhimategandhi;
 
+import org.academiadecodigo.bootcamp8.gandhimategandhi.Game;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.Field;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.position.FieldPosition;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
@@ -15,25 +16,24 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
 public class Menu {
 
-    private State state;
+    private Game.State state;
     private FieldPosition position;
 
     public Menu(Field field) {
         new MenuController();
         position = field.createRepresentation(-20, 0, "resources/images/menu/menu.png");
-        state = State.MENU;
+        state = Game.State.MENU;
     }
 
-    public State play() throws InterruptedException {
+    public Game.State play() throws InterruptedException {
 
         position.show();
 
-        while (state == State.MENU) {
+        while (state == Game.State.MENU) {
             Thread.sleep(50);
         }
 
         position.hide();
-        System.out.println(state);
         return state;
     }
 
@@ -63,10 +63,10 @@ public class Menu {
 
             switch (e.getKey()) {
                 case KeyboardEvent.KEY_Z:
-                    state = State.GAME;
+                    state = Game.State.GAME;
                     break;
                 case KeyboardEvent.KEY_Q:
-                    state = State.QUIT;
+                    state = Game.State.QUIT;
                     break;
                 default:
                     System.err.println("MENU KEYS NOT WORKING.");

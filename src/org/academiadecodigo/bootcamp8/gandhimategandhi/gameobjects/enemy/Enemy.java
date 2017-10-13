@@ -65,7 +65,7 @@ public abstract class Enemy extends GameObject implements Movable, Hittable {
         roundsAfterLastHit = 0;
     }
 
-    public int getCOOLDOWN() {
+    public int getCooldown() {
         return COOLDOWN;
     }
 

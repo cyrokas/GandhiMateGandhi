@@ -2,8 +2,6 @@ package org.academiadecodigo.bootcamp8.gandhimategandhi;
 
 import org.academiadecodigo.bootcamp8.gandhimategandhi.sfx.Sound;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.enemy.Boss;
-import org.academiadecodigo.bootcamp8.gandhimategandhi.state.Menu;
-import org.academiadecodigo.bootcamp8.gandhimategandhi.state.State;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.Field;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.FieldFactory;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.FieldType;
@@ -34,8 +32,8 @@ public class Game {
     private final Field field;
     private final int DELAY;
 
-    private LinkedList<Bonus> bonusList;
-    private ArrayList<Enemy> enemyArrayList;
+    private LinkedList<Bonus> bonuses;
+    private ArrayList<Enemy> enemies;
     private int maxEnemiesOnScreen;
     private int enemiesBetweenBoss;
 
@@ -51,17 +49,16 @@ public class Game {
 
         field = FieldFactory.getNewField(fieldType, rows, columns);
         DELAY = delay;
+        menu = new Menu(field);
         sound = new Sound("/resources/sound/DoomOST.wav");
-        bonusList = new LinkedList<>();
-        enemyArrayList = new ArrayList<>();
+        bonuses = new LinkedList<>();
+        enemies = new ArrayList<>();
         bossStage = false;
     }
 
     public void start() throws InterruptedException {
 
         state = State.MENU;
-        menu = new Menu(field);
-
         state = menu.play();
 
         if (state == State.QUIT) {
@@ -93,19 +90,10 @@ public class Game {
 
         while (!playerOne.isDead()) {
             Thread.sleep(DELAY);
-
-            //TODO
-
-            if (bossStage) {    //--------------------------------------------------------------------------------------
-                bossRound();
-            } else {
-                boss = null;
-                gameRound();
-            }
+            gameRound(bossStage);
         }
 
         Thread.sleep(2000);
-
         reset();
         start();
     }
@@ -115,8 +103,8 @@ public class Game {
     private void reset() {
         //Reset game status --------------------------------------------------------------------------------------------
         field.getPicture().delete();
-        enemyArrayList.clear();
-        bonusList.clear();
+        enemies.clear();
+        bonuses.clear();
         playerOne.getStats().getStats().hide();
         playerOne = null;
         bossStage = false;
@@ -126,52 +114,55 @@ public class Game {
             boss = null;
         }
 
-        //Go back to Menu
-        menu = null;
         sound.stop();
     }
 
-    private void gameRound() {
+    private void gameRound(boolean isBossRound) {
 
-        createBonus();
+        if (!isBossRound) {
+            GameObjectFactory.createNewBonus(field, bonuses);
+        }
+
         bonusRound();
         playerOne.playRound();
         projectileRound(true);
 
-        if (!bossStage) {
-            createSoldier();
-            soldierRound();
+        if (isBossRound) {
+            bossRound();
         }
 
-        soldierRound();
-        enemyBonusInteraction();
+        if (!isBossRound) {
+            createSoldier();
+            soldierRound();
+            enemyBonusInteraction();
+        }
+
         playerBonusInteraction();
         playerOne.updateStats();
-
     }
 
-    private void createBonus() {
+    private void bossRound() {
 
-        final int BONUS_CHANCE = 1;
-        final int CHANCE_PER_TURN = 500;
-
-        if (BONUS_CHANCE > (int) (Math.random() * CHANCE_PER_TURN)) {
-            bonusList.add(GameObjectFactory.createNewBonus(field));
+        if (!boss.isDead()) {
+            boss.playRound();
+            projectileRound(false);
+            boss.collidingWith(playerOne);
         }
     }
 
     private void soldierRound() {
 
-        for (Enemy e : enemyArrayList) {
+        for (Enemy e : enemies) {
             e.playRound();
             enemyPlayerCollision(e);
         }
     }
 
-    //COOLDOWN NOT WORKING ---------------------------------------------------------------------------------------------
+    //TODO
     private void enemyPlayerCollision(Enemy enemy) {
 
-        if (enemy.getPosition().isColliding(playerOne.getFieldPosition()) && enemy.getRoundsAfterLastHit() >= enemy.getCOOLDOWN()) {
+        if (enemy.getPosition().isColliding(playerOne.getFieldPosition()) &&
+                enemy.getRoundsAfterLastHit() >= enemy.getCooldown()) {
             playerOne.hit(enemy.getEnemyDamage());
             enemy.enterCooldownPhase();
         }
@@ -179,51 +170,24 @@ public class Game {
 
     private void createSoldier() {
 
-        final double NEW_ENEMY_CHANCE = 0.015;
-        double newEnemyChance = Math.random();
-
-        if (enemyArrayList.size() < maxEnemiesOnScreen && newEnemyChance < NEW_ENEMY_CHANCE) {
-            enemyArrayList.add(GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition()));
+        if (enemies.size() < maxEnemiesOnScreen) {
+            GameObjectFactory.getNewRegularEnemy(field, playerOne.getFieldPosition(), enemies);
         }
-    }
-
-    //DISCUSS THIS -----------------------------------------------------------------------------------------------------
-    private void bossRound() {
-
-        bonusRound();
-        playerOne.playRound();
-        projectileRound(true);
-
-        if (!boss.isDead()) {
-            boss.playRound();
-            projectileRound(false);
-            if (boss.getPosition().isColliding(playerOne.getFieldPosition())) {
-                playerOne.hit(boss.getEnemyDamage());
-            }
-        }
-        playerBonusInteraction();
-        playerOne.updateStats();
     }
 
     private void bonusRound() {
 
-        Iterator<Bonus> iterator = bonusList.iterator();
-
-        while (iterator.hasNext()) {
-            Bonus b = iterator.next();
+        for (Bonus b : bonuses) {
             b.playRound();
         }
     }
 
+    //TODO
     private void projectileRound(boolean isPlayer) {
 
         Iterator<Projectile> iterator;
 
-        if (isPlayer) {
-            iterator = playerOne.iterator();
-        } else {
-            iterator = boss.iterator();
-        }
+        iterator = isPlayer ? playerOne.iterator() : boss.iterator();
 
         while (iterator.hasNext()) {
             Projectile p = iterator.next();
@@ -241,22 +205,19 @@ public class Game {
                 iterator.remove();
             }
         }
-
     }
 
     private boolean projectileEnemyCollision(Projectile projectile) {
 
-        boolean collided = false;
-
-        Iterator<Enemy> iterator = enemyArrayList.iterator();
+        Iterator<Enemy> iterator = enemies.iterator();
 
         while (iterator.hasNext()) {
             Enemy enemy = iterator.next();
 
             if (projectile.getPosition().isColliding(enemy.getPosition())) {
-                collided = true;
                 enemy.hit(projectile.getDamage());
                 projectile.getPosition().hide();
+                return true;
             }
 
             if (enemy.isDead()) {
@@ -266,7 +227,7 @@ public class Game {
         }
 
         checkBossStage();
-        return collided;
+        return false;
     }
 
     //DISCUSS ----------------------------------------------------------------------------------------------------------
@@ -276,7 +237,7 @@ public class Game {
             bossStage = true;
             boss = GameObjectFactory.getNewBoss(field, playerOne.getFieldPosition());
 
-            Iterator<Enemy> iterator = enemyArrayList.iterator();
+            Iterator<Enemy> iterator = enemies.iterator();
             while (iterator.hasNext()) {
                 Enemy e = iterator.next();
                 e.getPosition().hide();
@@ -326,8 +287,8 @@ public class Game {
 
     private void enemyBonusInteraction() {
 
-        Iterator<Bonus> bonusIterator = bonusList.iterator();
-        Iterator<Enemy> enemyIterator = enemyArrayList.iterator();
+        Iterator<Bonus> bonusIterator = bonuses.iterator();
+        Iterator<Enemy> enemyIterator = enemies.iterator();
 
         while (bonusIterator.hasNext()) {
             Bonus b = bonusIterator.next();
@@ -344,7 +305,7 @@ public class Game {
 
     private void playerBonusInteraction() {
 
-        Iterator<Bonus> iterator = bonusList.iterator();
+        Iterator<Bonus> iterator = bonuses.iterator();
 
         FieldPosition playerPosition = playerOne.getFieldPosition();
 
@@ -357,5 +318,11 @@ public class Game {
                 b.getPosition().hide();
             }
         }
+    }
+
+    public static enum State {
+        MENU,
+        GAME,
+        QUIT
     }
 }
