@@ -4,13 +4,6 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.field.Field;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.position.AbstractPosition;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-/**
- * Developed @ <Academia de Código_>
- * Created by
- * <Code Cadet> Filipe Santos Sá
- * <Code Cadet> Cyrille Feijó
- */
-
 public class SimpleGfxField implements Field {
 
     private final int PADDING = 10;

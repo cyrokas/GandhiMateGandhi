@@ -7,15 +7,6 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.Hittable;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.Movable;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.position.FieldPosition;
 
-/**
- * <Academia de Código_>
- * Created by
- * <Code Cadet> João Portela
- * <Code Cadet> Cyrille Feijó
- * <Code Cadet> Robin Opinião
- * <Code Cadet> Filipe Santos Sá
- */
-
 public abstract class Enemy extends GameObject implements Movable, Hittable {
     private int health;
     private boolean dead;

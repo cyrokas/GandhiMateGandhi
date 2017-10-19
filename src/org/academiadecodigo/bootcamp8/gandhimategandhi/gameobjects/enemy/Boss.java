@@ -11,13 +11,6 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.projectile.Pr
 import java.util.Iterator;
 import java.util.LinkedList;
 
-/**
- * Developed @ <Academia de Código_>
- * Created by
- * <Code Cadet> João Portela
- * <Code Cadet> Robin Opinião
- */
-
 public class Boss extends Enemy {
 
     private int maxProjectiles;

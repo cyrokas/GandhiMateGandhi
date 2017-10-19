@@ -4,13 +4,6 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.field.Direction;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.Field;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.GameObject;
 
-/**
- * Developed @ <Academia de Código_>
- * Created by
- * <Code Cadet> Filipe Santos Sá
- * <Code Cadet> Tiago Santos
- */
-
 public abstract class AbstractPosition implements FieldPosition {
 
     private int column;                                     //Horizontal position

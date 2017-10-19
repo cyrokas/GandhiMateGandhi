@@ -2,12 +2,6 @@ package org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.player;
 
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 
-/**
- * Developed @ <Academia de Código_>
- * Created by
- * <Code Cadet> Filipe Santos Sá
- */
-
 public enum PlayerNumber {
 
     P1(PlayerType.P1, new int[]{KeyboardEvent.KEY_UP, KeyboardEvent.KEY_DOWN,

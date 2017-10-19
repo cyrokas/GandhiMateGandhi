@@ -1,11 +1,5 @@
 package org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.projectile;
 
-/**
- * Developed @ <Academia de Código_>
- * Created by
- * <Code Cadet> Filipe Santos Sá
- */
-
 public enum ProjectileType {
 
     FIRE("resources/images/projectiles/fire.png"),

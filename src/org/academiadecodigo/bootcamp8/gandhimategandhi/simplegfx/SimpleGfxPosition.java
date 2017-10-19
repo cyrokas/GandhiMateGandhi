@@ -8,14 +8,6 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.enemy.Boss;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.player.Player;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-/**
- * Developed @ <Academia de Código_>
- * Created by
- * <Code Cadet> Filipe Santos Sá
- * <Code Cadet> Cyrille Feijó
- * <Code Cadet> João Portela
- */
-
 public class SimpleGfxPosition extends AbstractPosition {
 
     private SimpleGfxField simpleGfxField;

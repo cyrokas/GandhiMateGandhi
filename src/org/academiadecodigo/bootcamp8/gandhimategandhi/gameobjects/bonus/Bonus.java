@@ -4,13 +4,6 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.field.Field;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.position.FieldPosition;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.GameObject;
 
-/**
- * Developed @ <Academia de Código_>
- * Created by
- * <Code Cadet> Tiago Santos
- * <Code Cadet> Filipe Santos Sá
- */
-
 public class Bonus extends GameObject {
 
     private FieldPosition position;

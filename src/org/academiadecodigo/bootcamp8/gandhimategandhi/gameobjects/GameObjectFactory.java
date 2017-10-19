@@ -13,15 +13,6 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.player.Player
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-/**
- * Developed @ <Academia de Código_>
- * Created by
- * <Code Cadet> Filipe Santos Sá
- * <Code Cadet> Tiago Santos
- * <Code Cadet> João Portela>
- * <Code Cadet> Cyrille Feijó>
- */
-
 public class GameObjectFactory {
 
     public static Player createNewPlayer(Field field, PlayerNumber playerNumber) {

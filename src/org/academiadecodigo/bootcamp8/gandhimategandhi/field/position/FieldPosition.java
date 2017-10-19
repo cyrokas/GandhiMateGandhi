@@ -3,14 +3,6 @@ package org.academiadecodigo.bootcamp8.gandhimategandhi.field.position;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.Direction;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.GameObject;
 
-/**
- * Developed @ <Academia de Código_>
- * Created by
- * <Code Cadet> Filipe Santos Sá
- * <Code Cadet> Cyrille Feijó
- * <Code Cadet> João Portela
- */
-
 public interface FieldPosition {
 
     int getColumn();

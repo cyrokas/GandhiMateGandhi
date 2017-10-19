@@ -17,16 +17,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-/**
- * Developed @ <Academia de Código_>
- * Created by
- * <Code Cadet> Filipe Santos Sá
- * <Code Cadet> Cyrille Feijó
- * <Code Cadet> João Portela
- * <Code Cadet> Tiago Santos
- * <Code Cadet> Robin Opinião
- */
-
 public class Game {
 
     private final Field field;

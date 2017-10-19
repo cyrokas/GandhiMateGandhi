@@ -4,13 +4,6 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.field.position.AbstractPo
 import org.academiadecodigo.bootcamp8.gandhimategandhi.simplegfx.SimpleGfxStats;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-/**
- * Developed @ <Academia de Código_>
- * Created by
- * <Code Cadet> Filipe Santos Sá
- * <Code Cadet> Cyrille Feijó
- */
-
 public interface Field {
 
     Picture getPicture();

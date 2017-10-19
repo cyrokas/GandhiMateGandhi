@@ -2,12 +2,6 @@ package org.academiadecodigo.bootcamp8.gandhimategandhi.simplegfx;
 
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.Direction;
 
-/**
- * Developed @ <Academia de Código_>
- * Created by
- * <Code Cadet> Cyrille Feijó
- */
-
 public class EnemyImage {
 
     //Properties

@@ -1,18 +1,11 @@
 package org.academiadecodigo.bootcamp8.gandhimategandhi;
 
-import org.academiadecodigo.bootcamp8.gandhimategandhi.Game;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.Field;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.field.position.FieldPosition;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
-
-/**
- * Developed @ <Academia de Código_>
- * Created by
- * <Code Cadet> Robin Opinião
- */
 
 public class Menu {
 

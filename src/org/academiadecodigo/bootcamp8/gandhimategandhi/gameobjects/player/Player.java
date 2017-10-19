@@ -13,13 +13,6 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.projectile.Pr
 import java.util.Iterator;
 import java.util.LinkedList;
 
-/**
- * Developed @ <Academia de Código_>
- * Created by
- * <Code Cadet> Filipe Santos Sá
- * <Code Cadet> Tiago Santos
- */
-
 public class Player extends GameObject implements Movable, Hittable, Iterable<Projectile> {
 
     private final int INITIAL_HITPOINTS = 50;

@@ -8,13 +8,6 @@ import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.Movable;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.enemy.Boss;
 import org.academiadecodigo.bootcamp8.gandhimategandhi.gameobjects.player.Player;
 
-/**
- * Developed @ <Academia de Código_>
- * Created by
- * <Code Cadet> Filipe Santos Sá
- * <Code Cadet> João Portela
- */
-
 public class Projectile extends GameObject implements Movable {
 
     private FieldPosition position;

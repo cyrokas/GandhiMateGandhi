@@ -1,11 +1,5 @@
 package org.academiadecodigo.bootcamp8.gandhimategandhi.field;
 
-/**
- * Developed @ <Academia de Código_>
- * Created by
- * <Code Cadet> Filipe Santos Sá
- */
-
 public enum Direction {
 
     UP,
